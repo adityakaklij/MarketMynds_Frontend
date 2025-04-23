@@ -2,40 +2,88 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { Link, useLocation } from "react-router-dom";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+  const location = useLocation();
+
+  const navLinks = [
+    { label: "Features", href: "#features", isAnchor: true },
+    { label: "Preview", href: "#preview", isAnchor: true },
+    { label: "Testimonials", href: "#testimonials", isAnchor: true },
+    { label: "Pricing", href: "/pricing", isAnchor: false },
+    { label: "Contact", href: "/contact", isAnchor: false },
+  ];
+
   return (
     <nav className="fixed top-0 w-full z-50 backdrop-blur-lg bg-black/50 border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <span className="text-2xl font-bold text-white">Market<span className="text-finance-green">Whisper</span></span>
+              <Link to="/" className="text-2xl font-bold text-white">
+                Market<span className="text-finance-green">Mynds</span>
+              </Link>
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
-                <a href="#features" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Features</a>
-                <a href="#preview" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Preview</a>
-                <a href="#testimonials" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Testimonials</a>
-                <a href="#pricing" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Pricing</a>
+                {navLinks.map((link) =>
+                  link.isAnchor ? (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={link.label}
+                      to={link.href}
+                      className={cn(
+                        "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium",
+                        location.pathname === link.href && "underline text-white"
+                      )}
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                )}
+                <Link
+                  to="/privacy-policy"
+                  className={cn(
+                    "hidden text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  )}
+                >
+                  Privacy
+                </Link>
+                <Link
+                  to="/terms"
+                  className={cn(
+                    "hidden text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  )}
+                >
+                  Terms
+                </Link>
               </div>
             </div>
           </div>
           <div className="hidden md:block">
-            <Button
-              variant="default"
-              className="bg-finance-green text-black hover:bg-finance-green/90 font-medium"
-            >
-              Subscribe Now
-            </Button>
+            <a href="#subscription">
+              <Button
+                variant="default"
+                className="bg-finance-green text-black hover:bg-finance-green/90 font-medium"
+              >
+                Start My Trial
+              </Button>
+            </a>
           </div>
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white"
-              aria-expanded="false"
+              aria-expanded={isMenuOpen}
             >
               <span className="sr-only">Open main menu</span>
               <svg
@@ -62,21 +110,54 @@ export function Navbar() {
           </div>
         </div>
       </div>
-
       <div className={cn("md:hidden", isMenuOpen ? "block" : "hidden")}>
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/80 backdrop-blur-lg">
-          <a href="#features" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Features</a>
-          <a href="#preview" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Preview</a>
-          <a href="#testimonials" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Testimonials</a>
-          <a href="#pricing" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Pricing</a>
-          <div className="pt-2 pb-1">
+          {navLinks.map((link) =>
+            link.isAnchor ? (
+              <a
+                key={link.label}
+                href={link.href}
+                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.label}
+                to={link.href}
+                className={cn(
+                  "text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium",
+                  location.pathname === link.href && "underline text-white"
+                )}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            )
+          )}
+          <Link
+            to="/privacy-policy"
+            className="block text-gray-400 hover:text-white px-3 py-2 rounded-md text-base font-medium"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Privacy
+          </Link>
+          <Link
+            to="/terms"
+            className="block text-gray-400 hover:text-white px-3 py-2 rounded-md text-base font-medium"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Terms
+          </Link>
+          <a href="#subscription">
             <Button
               variant="default"
-              className="w-full bg-finance-green text-black hover:bg-finance-green/90 font-medium"
+              className="w-full bg-finance-green text-black hover:bg-finance-green/90 font-medium mt-2"
             >
-              Subscribe Now
+              Start My Trial
             </Button>
-          </div>
+          </a>
         </div>
       </div>
     </nav>
