@@ -19,6 +19,13 @@ export default {
 		},
 		extend: {
 			colors: {
+				finance: {
+					green: '#00D166',
+					blue: '#0099FF',
+					red: '#FF4D4F',
+					gold: '#FFD700',
+					chart: '#2563EB',
+				},
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
