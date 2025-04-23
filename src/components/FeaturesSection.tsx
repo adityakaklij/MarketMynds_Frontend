@@ -1,25 +1,26 @@
+
 import { Card } from "@/components/ui/card";
 import { ChartLine, TrendingUp, CalendarDays, MessageSquare } from "lucide-react";
 
 export function FeaturesSection() {
   const features = [
     {
-      icon: <ChartLine className="h-10 w-10 text-transparent bg-clip-text bg-gradient-to-r from-finance-green to-finance-blue" />,
+      icon: <ChartLine className="h-10 w-10 text-finance-blue" />,
       title: "Technical Analysis",
       description: "Powerful technical indicators and chart patterns analyzed by expert traders to identify key market movements."
     },
     {
-      icon: <TrendingUp className="h-10 w-10 text-transparent bg-clip-text bg-gradient-to-r from-finance-green to-finance-blue" />,
+      icon: <TrendingUp className="h-10 w-10 text-finance-green" />,
       title: "Market Trends",
       description: "Daily overview of market trends, sector rotations, and powerful moves across global financial markets."
     },
     {
-      icon: <CalendarDays className="h-10 w-10 text-transparent bg-clip-text bg-gradient-to-r from-finance-green to-finance-blue" />,
+      icon: <CalendarDays className="h-10 w-10 text-finance-gold" />,
       title: "Economic Calendar",
       description: "Stay informed about upcoming economic events that could impact your portfolio and trading decisions."
     },
     {
-      icon: <MessageSquare className="h-10 w-10 text-transparent bg-clip-text bg-gradient-to-r from-finance-green to-finance-blue" />,
+      icon: <MessageSquare className="h-10 w-10 text-finance-chart" />,
       title: "Analyst Insights",
       description: "Expert commentary and predictions from seasoned market analysts with decades of trading experience."
     }
@@ -39,8 +40,8 @@ export function FeaturesSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
-            <Card key={index} className="glass-card p-6 flex flex-col items-center text-center border-2 border-transparent relative before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-r before:from-finance-green before:to-finance-blue before:opacity-20 hover:before:opacity-60 before:z-[-1] transition-all">
-              <div className="mb-4 rounded-full bg-gradient-to-r from-finance-green to-finance-blue p-3">
+            <Card key={index} className="glass-card p-6 flex flex-col items-center text-center hover:border-finance-green transition-colors duration-300">
+              <div className="mb-4 rounded-full bg-gray-800/50 p-3">
                 {feature.icon}
               </div>
               <h3 className="text-xl font-bold text-white mb-2">{feature.title}</h3>
@@ -65,7 +66,7 @@ export function FeaturesSection() {
                     "Economic events impact analysis"
                   ].map((item, index) => (
                     <li key={index} className="flex items-start">
-                      <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-gradient-to-r from-finance-green to-finance-blue text-black font-medium text-sm mr-3 mt-0.5">✓</span>
+                      <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-finance-green text-black font-medium text-sm mr-3 mt-0.5">✓</span>
                       <span className="text-gray-300">{item}</span>
                     </li>
                   ))}

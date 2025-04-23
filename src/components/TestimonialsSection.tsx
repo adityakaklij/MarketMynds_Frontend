@@ -1,3 +1,4 @@
+
 import { Card } from "@/components/ui/card";
 
 export function TestimonialsSection() {
@@ -36,7 +37,7 @@ export function TestimonialsSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="glass-card p-6 hover:border-gradient-to-r hover:from-finance-green hover:to-finance-blue border-2 border-transparent transition-all">
+            <Card key={index} className="glass-card p-6 hover:border-finance-green/50 transition-all">
               <div className="flex items-center space-x-1 mb-4">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <svg key={star} className="w-5 h-5 text-finance-gold" fill="currentColor" viewBox="0 0 20 20">
@@ -49,7 +50,7 @@ export function TestimonialsSection() {
               
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <div className="h-10 w-10 rounded-full bg-gradient-to-r from-finance-green to-finance-blue flex items-center justify-center">
+                  <div className="h-10 w-10 rounded-full bg-finance-blue flex items-center justify-center">
                     <span className="text-white font-medium">{testimonial.avatar}</span>
                   </div>
                 </div>
@@ -63,7 +64,7 @@ export function TestimonialsSection() {
         </div>
 
         <div className="mt-16 text-center">
-          <p className="bg-gradient-to-r from-finance-green to-finance-blue bg-clip-text text-transparent font-bold">Join over 5,000 satisfied subscribers</p>
+          <p className="text-finance-green font-bold">Join over 5,000 satisfied subscribers</p>
           <p className="text-gray-400 mt-2">Our community is growing every day. Don't miss out!</p>
         </div>
       </div>
