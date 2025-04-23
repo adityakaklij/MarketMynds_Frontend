@@ -5,25 +5,25 @@ import { Button } from "@/components/ui/button";
 const plans = [
   {
     title: "1 Month",
-    price: "₹149",
+    price: "₹99",
     description: "Full pre-market access, billed monthly.",
     bonus: false
   },
   {
     title: "3 Months",
-    price: "₹395",
-    description: "Save 10% - Full access for 3 months.",
+    price: "₹249",
+    description: "Save 16% - Full access for 3 months.",
     bonus: false
   },
   {
     title: "6 Months",
-    price: "₹595",
-    description: "Save 33% - Full access for 6 months.",
+    price: "₹449",
+    description: "Save 24% - Full access for 6 months.",
     bonus: false
   },
   {
     title: "12 Months",
-    price: "₹795",
+    price: "₹649",
     description: "Best value - Full access for 12 months.",
     bonus: true
   },
@@ -56,14 +56,15 @@ export default function Pricing() {
       </div>
       <div className="max-w-lg mx-auto text-center">
         <div className="text-lg font-medium flex items-center justify-center gap-2 mb-2">
-          <Receipt className="text-finance-green" size={20} /> Bonus: "Market Toolkit" with every plan!
+          <Receipt className="text-finance-green" size={20} />No auto-renewals. 3-day refund window after purchase.
         </div>
-        <div className="text-gray-400 text-sm mb-4">
+        
+        {/* <div className="text-gray-400 text-sm mb-4">
           Includes macro tracking templates & a weekly trading planner.
         </div>
         <div className="text-gray-400 text-xs">
           No auto-renewals. 3-day refund window after purchase.
-        </div>
+        </div> */}
       </div>
     </div>
   );

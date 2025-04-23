@@ -3,17 +3,17 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
-
+import Logo from '../../public/matketMyndsLogo.png'
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
   const navLinks = [
-    { label: "Features", href: "#features", isAnchor: true },
-    { label: "Preview", href: "#preview", isAnchor: true },
-    { label: "Testimonials", href: "#testimonials", isAnchor: true },
+    // { label: "Features", href: "#features", isAnchor: true },
+    // { label: "Preview", href: "#preview", isAnchor: true },
     { label: "Pricing", href: "/pricing", isAnchor: false },
     { label: "Contact", href: "/contact", isAnchor: false },
+    { label: "Love ❤️", href: "#testimonials", isAnchor: true },
   ];
 
   return (
@@ -23,7 +23,8 @@ export function Navbar() {
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <Link to="/" className="text-2xl font-bold text-white">
-                Market<span className="text-finance-green">Mynds</span>
+                {/* Market<span className="text-finance-green">Mynds</span> */}
+                <img src={Logo}  style={{ height: "50px", width: "250px" }}alt="" />
               </Link>
             </div>
             <div className="hidden md:block">
@@ -75,7 +76,7 @@ export function Navbar() {
                 variant="default"
                 className="bg-finance-green text-black hover:bg-finance-green/90 font-medium"
               >
-                Start My Trial
+                Subscribe Now
               </Button>
             </a>
           </div>

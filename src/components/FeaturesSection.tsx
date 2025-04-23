@@ -1,28 +1,31 @@
 
 import { Card } from "@/components/ui/card";
-import { ChartLine, TrendingUp, CalendarDays, MessageSquare } from "lucide-react";
+import { ChartLine, TrendingUp, CalendarDays, MessageSquare, Search, TrendingUpDown } from "lucide-react";
 
 export function FeaturesSection() {
+
   const features = [
     {
       icon: <ChartLine className="h-10 w-10 text-finance-blue" />,
-      title: "Technical Analysis",
-      description: "Powerful technical indicators and chart patterns analyzed by expert traders to identify key market movements."
+      title: "Technical Puls",
+      description: "Volume spikes, momentum shifts delivered as raw information, not opinions. You decide what to act on."
+    },
+    {
+      icon: <Search className="h-10 w-10 text-finance-gold" />,
+      title: "Trend Watch",
+      description: "Daily scans of what’s moving, why it matters, and where momentum is building across sectors and global markets."
     },
     {
       icon: <TrendingUp className="h-10 w-10 text-finance-green" />,
-      title: "Market Trends",
+      title: "Event Trends",
       description: "Daily overview of market trends, sector rotations, and powerful moves across global financial markets."
     },
     {
-      icon: <CalendarDays className="h-10 w-10 text-finance-gold" />,
-      title: "Economic Calendar",
-      description: "Stay informed about upcoming economic events that could impact your portfolio and trading decisions."
-    },
-    {
-      icon: <MessageSquare className="h-10 w-10 text-finance-chart" />,
-      title: "Analyst Insights",
-      description: "Expert commentary and predictions from seasoned market analysts with decades of trading experience."
+      icon: <TrendingUpDown className="h-10 w-10 text-finance-chart" />,
+      // title: "Clean, Curated Data",
+      
+      title: "Curated Data",
+      description: "No fluff. No noise. Just structured market intelligence from analysts who know what matters and skip what doesn’t."
     }
   ];
 
@@ -31,10 +34,10 @@ export function FeaturesSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-white">
-            Comprehensive Market Analysis
+            What's Inside The Report
           </h2>
           <p className="mt-4 text-xl text-gray-400 max-w-3xl mx-auto">
-            Our daily reports provide everything you need to make informed investment decisions
+          Market Mynds delivers reliable, data-driven pre-market reports to your WhatsApp every morning.
           </p>
         </div>
 
@@ -58,12 +61,13 @@ export function FeaturesSection() {
                 
                 <ul className="space-y-4">
                   {[
-                    "Pre-market analysis and key levels to watch",
-                    "Top stocks to watch with entry and exit points",
-                    "Major index forecasts and trend analysis",
-                    "Sector rotation insights and opportunities",
-                    "Risk management advice and position sizing",
-                    "Economic events impact analysis"
+                    "Sector trends and key index levels",
+                    "FII/DII flows and derivatives snapshot",
+                    "Unusual stock moves and volume spikes",
+                    "Market mood and global cues, simplified",
+                    "Economic calendar with market-relevant events",
+                    "IPO updates, result calendar, and banned stocks list",
+                    
                   ].map((item, index) => (
                     <li key={index} className="flex items-start">
                       <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-finance-green text-black font-medium text-sm mr-3 mt-0.5">✓</span>
@@ -82,18 +86,18 @@ export function FeaturesSection() {
                         <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                         <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                         <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                        <div className="ml-2 text-xs text-gray-400">Market Report - June 12, 2024</div>
+                        <div className="ml-2 text-xs text-gray-400">Market Report - April 10, 2025</div>
                       </div>
                     </div>
                     <div className="p-6 text-sm text-gray-300">
-                      <p className="font-bold text-finance-green mb-4">MARKET OUTLOOK:</p>
-                      <p className="mb-2">S&P 500 is approaching key resistance at 4,850. Watch for breakout confirmation.</p>
-                      <p className="mb-4">RSI showing slight divergence on hourly charts - caution advised.</p>
+                      <p className="font-bold text-finance-green mb-4">Market Overview:</p>
+                      <p className="mb-2">Key indices like Nifty, Bank Nifty, and sectoral trends.</p>
+                      {/* <p className="mb-4"> </p> */}
                       
-                      <p className="font-bold text-finance-blue mb-4">TOP OPPORTUNITIES:</p>
-                      <p className="mb-1">AAPL: Support at $182.30, resistance at $188.75</p>
-                      <p className="mb-1">TSLA: Watch for breakout above $242.60</p>
-                      <p>NVDA: Consider entries after FOMC announcement</p>
+                      <p className="font-bold text-finance-blue mb-4">Pivot Levels:</p>
+                      <p className="mb-1">Daily support and resistance levels for informed decisions.</p>
+                      {/* <p className="mb-1">TSLA: Watch for breakout above $242.60</p>
+                      <p>NVDA: Consider entries after FOMC announcement</p> */}
                     </div>
                   </div>
                 </div>

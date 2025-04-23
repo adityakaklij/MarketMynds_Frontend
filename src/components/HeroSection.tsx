@@ -43,15 +43,14 @@ export function HeroSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
         <div className="text-center max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            <span className="block">Daily Market Insights</span>
+            <span className="block">The Market. At a Glance.</span>
             <span className="block mt-2">
-              Delivered to Your <span className="text-finance-green">WhatsApp</span>
+              <span className="text-finance-green">Before 9 AM.</span>
             </span>
           </h1>
           
           <p className="mt-6 text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Professional stock market analysis delivered each morning before markets open. 
-            Actionable insights, trends, and predictions to power your investment decisions.
+          No opinions. No hype. Just a crisp morning snapshot of what’s moving markets global and local.
           </p>
           
           <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
@@ -59,7 +58,7 @@ export function HeroSection() {
               className="text-lg py-6 px-8 bg-finance-green hover:bg-finance-green/90 text-black font-medium shadow-lg shadow-finance-green/20"
               size="lg"
             >
-              Start Your Free Trial
+              Subscribe Now
             </Button>
             <Button 
               className="text-lg py-6 px-8 bg-transparent border border-white/20 hover:bg-white/10 text-white shadow-lg"
@@ -72,18 +71,19 @@ export function HeroSection() {
           
           <div className="mt-10 flex items-center justify-center space-x-6">
             <div className="text-center">
-              <p className="text-3xl font-bold text-finance-green">98%</p>
-              <p className="text-sm text-gray-400">Accuracy Rate</p>
+              <p className="text-3xl font-bold text-finance-green">99%</p>
+              <p className="text-sm text-gray-400">Delivered On Time</p>
             </div>
             <div className="h-10 w-px bg-gray-700"></div>
             <div className="text-center">
-              <p className="text-3xl font-bold text-finance-green">5,000+</p>
-              <p className="text-sm text-gray-400">Daily Subscribers</p>
+              <p className="text-3xl font-bold text-finance-green">2,000+</p>
+              <p className="text-sm text-gray-400">Daily Subscribers*</p>
             </div>
             <div className="h-10 w-px bg-gray-700"></div>
             <div className="text-center">
-              <p className="text-3xl font-bold text-finance-green">365</p>
-              <p className="text-sm text-gray-400">Days/Year</p>
+              <p className="text-3xl font-bold text-finance-green">50+</p>
+              {/* <p className="text-sm text-gray-400">Days/Year</p> */}
+              <p className="text-sm text-gray-400">Data Points</p>
             </div>
           </div>
         </div>

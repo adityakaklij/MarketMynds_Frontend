@@ -64,7 +64,7 @@ export function TestimonialsSection() {
         </div>
 
         <div className="mt-16 text-center">
-          <p className="text-finance-green font-bold">Join over 5,000 satisfied subscribers</p>
+          <p className="text-finance-green font-bold">Join over 2,000 satisfied subscribers</p>
           <p className="text-gray-400 mt-2">Our community is growing every day. Don't miss out!</p>
         </div>
       </div>

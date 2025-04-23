@@ -7,11 +7,12 @@ export function Footer() {
           <div className="col-span-1">
             <div className="text-2xl font-bold text-white">Market<span className="text-finance-green">Whisper</span></div>
             <p className="mt-4 text-gray-400">
-              Professional stock market analysis delivered daily to your WhatsApp.
+              By the Traders, For the Traders
             </p>
           </div>
           
-          <div>
+          
+          {/* <div>
             <h3 className="text-sm font-semibold text-white tracking-wider uppercase">Services</h3>
             <ul className="mt-4 space-y-4">
               <li><a href="#" className="text-gray-400 hover:text-finance-green">Daily Reports</a></li>
@@ -19,15 +20,15 @@ export function Footer() {
               <li><a href="#" className="text-gray-400 hover:text-finance-green">Premium Insights</a></li>
               <li><a href="#" className="text-gray-400 hover:text-finance-green">Trading Education</a></li>
             </ul>
-          </div>
+          </div> */}
           
           <div>
             <h3 className="text-sm font-semibold text-white tracking-wider uppercase">Company</h3>
             <ul className="mt-4 space-y-4">
-              <li><a href="#" className="text-gray-400 hover:text-finance-green">About Us</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-finance-green">Our Team</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-finance-green">Careers</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-finance-green">Contact</a></li>
+              {/* <li><a href="#" className="text-gray-400 hover:text-finance-green">About Us</a></li> */}
+              {/* <li><a href="#" className="text-gray-400 hover:text-finance-green">Our Team</a></li> */}
+              {/* <li><a href="#" className="text-gray-400 hover:text-finance-green">Careers</a></li> */}
+              <li><a href="#" className="text-gray-400 hover:text-finance-green">Contact Us</a></li>
             </ul>
           </div>
           
@@ -36,7 +37,7 @@ export function Footer() {
             <ul className="mt-4 space-y-4">
               <li><a href="#" className="text-gray-400 hover:text-finance-green">Terms of Service</a></li>
               <li><a href="#" className="text-gray-400 hover:text-finance-green">Privacy Policy</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-finance-green">Cookie Policy</a></li>
+              {/* <li><a href="#" className="text-gray-400 hover:text-finance-green">Cookie Policy</a></li> */}
               <li><a href="#" className="text-gray-400 hover:text-finance-green">Disclaimer</a></li>
             </ul>
           </div>

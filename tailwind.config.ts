@@ -20,7 +20,8 @@ export default {
 		extend: {
 			colors: {
 				finance: {
-					green: '#00D166',
+					// green: '#00D166',
+					green: '#00B77F', // Blue
 					blue: '#0099FF',
 					red: '#FF4D4F',
 					gold: '#FFD700',

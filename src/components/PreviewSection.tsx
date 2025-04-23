@@ -11,10 +11,11 @@ export function PreviewSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-white">
-            Preview Our Market Analysis
+          No Noise. Just Numbers.
           </h2>
           <p className="mt-4 text-xl text-gray-400 max-w-3xl mx-auto">
-            Each report is delivered as a clean, easy-to-read PDF directly to your WhatsApp
+          We're not here to tell you what to buy or sell.
+          Market Mynds is for traders and investors who prefer facts over forecasts.
           </p>
         </div>
 
@@ -24,23 +25,25 @@ export function PreviewSection() {
             
             <div className="space-y-6">
               <div className="glass-card p-4 rounded-lg">
-                <h4 className="text-lg font-medium text-finance-green mb-2">Morning Market Brief</h4>
+                <h4 className="text-lg font-medium text-finance-green mb-2">We don’t offer tips.
+                </h4>
                 <p className="text-gray-300">
-                  Start your day with a comprehensive overview of what happened overnight and what to expect during the trading day.
+                Comprehensive market data and overnight developments presented factually.
                 </p>
               </div>
               
               <div className="glass-card p-4 rounded-lg">
-                <h4 className="text-lg font-medium text-finance-blue mb-2">Technical Analysis</h4>
+                <h4 className="text-lg font-medium text-finance-blue mb-2">We don’t issue signals.
+                </h4>
                 <p className="text-gray-300">
-                  Key support and resistance levels, chart patterns, and technical indicators for major indices and trending stocks.
+                Technical data showing support/resistance levels and patterns for major indices.
                 </p>
               </div>
               
               <div className="glass-card p-4 rounded-lg">
-                <h4 className="text-lg font-medium text-finance-gold mb-2">Trade Ideas</h4>
+                <h4 className="text-lg font-medium text-finance-gold mb-2">We simply help you start your day with clear, unbiased data.</h4>
                 <p className="text-gray-300">
-                  Actionable trade ideas with entry points, stop losses, and profit targets based on market conditions.
+                Market condition metrics and price action data to inform your independent trading decisions.
                 </p>
               </div>
             </div>
@@ -69,7 +72,7 @@ export function PreviewSection() {
                 <div className="p-6">
                   <div className="bg-gray-900 rounded p-4 mb-4">
                     <div className="flex justify-between items-center mb-3">
-                      <h4 className="text-finance-green font-bold">Market Whisper</h4>
+                      <h4 className="text-finance-green font-bold">MarketMynds</h4>
                       <span className="text-xs text-gray-400">June 12, 2024</span>
                     </div>
                     <h5 className="text-white text-lg font-bold mb-3">Daily Market Analysis</h5>
