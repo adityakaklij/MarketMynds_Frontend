@@ -7,7 +7,7 @@ export function FeaturesSection() {
   const features = [
     {
       icon: <ChartLine className="h-10 w-10 text-finance-blue" />,
-      title: "Technical Puls",
+      title: "Technical Pulse",
       description: "Volume spikes, momentum shifts delivered as raw information, not opinions. You decide what to act on."
     },
     {
