@@ -1,11 +1,10 @@
 
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
-import { WhatsInsideSection } from "@/components/WhatsInsideSection";
-import { NoNoiseSection } from "@/components/NoNoiseSection";
-import { DeliverySection } from "@/components/DeliverySection";
-import { PlansSection } from "@/components/PlansSection";
-import { DataDrivenSection } from "@/components/DataDrivenSection";
+import { FeaturesSection } from "@/components/FeaturesSection";
+import { PreviewSection } from "@/components/PreviewSection";
+import { TestimonialsSection } from "@/components/TestimonialsSection";
+import { SubscriptionCTA } from "@/components/SubscriptionCTA";
 import { Footer } from "@/components/Footer";
 
 const Index = () => {
@@ -13,11 +12,10 @@ const Index = () => {
     <div className="min-h-screen bg-black text-white">
       <Navbar />
       <HeroSection />
-      <WhatsInsideSection />
-      <NoNoiseSection />
-      <DeliverySection />
-      <PlansSection />
-      <DataDrivenSection />
+      <FeaturesSection />
+      <PreviewSection />
+      <TestimonialsSection />
+      <SubscriptionCTA />
       <Footer />
     </div>
   );

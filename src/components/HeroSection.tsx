@@ -4,46 +4,87 @@ import { Button } from "@/components/ui/button";
 export function HeroSection() {
   return (
     <div className="relative min-h-screen flex items-center pt-16 overflow-hidden">
-      {/* Gradient and background styles preserved */}
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900 via-[#0A1122] to-black -z-10" aria-hidden="true" />
-
-      {/* Animated chart lines */}
+      {/* Background gradient */}
+      <div 
+        className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900 via-[#0A1122] to-black -z-10"
+        aria-hidden="true"
+      />
+      
+      {/* Animated graph lines in background */}
       <div className="absolute inset-0 opacity-10 -z-10">
-        <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0">
-          <path d="M0,70 Q25,50 50,70 T100,50 L100,100 L0,100 Z" fill="none" stroke="#8685ff" strokeWidth="0.7" className="animate-pulse" />
-          <path d="M0,50 Q25,70 50,50 T100,70 L100,100 L0,100 Z" fill="none" stroke="#0FC7FF" strokeWidth="0.4" className="animate-pulse" />
+        <svg
+          width="100%"
+          height="100%"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          className="absolute inset-0"
+        >
+          <path
+            d="M0,70 Q25,50 50,70 T100,50 L100,100 L0,100 Z"
+            fill="none"
+            stroke="#00D166"
+            strokeWidth="0.5"
+            className="animate-pulse"
+          />
+          <path
+            d="M0,50 Q25,70 50,50 T100,70 L100,100 L0,100 Z"
+            fill="none"
+            stroke="#0099FF"
+            strokeWidth="0.5"
+            className="animate-pulse"
+          />
         </svg>
       </div>
 
       {/* Accent circles */}
-      <div className="absolute -top-40 -left-40 w-80 h-80 rounded-full bg-blue-500/10 blur-3xl" />
-      <div className="absolute -bottom-40 -right-40 w-80 h-80 rounded-full bg-[#b16cea]/10 blur-3xl" />
-
+      <div className="absolute -top-40 -left-40 w-80 h-80 rounded-full bg-finance-blue/10 blur-3xl" />
+      <div className="absolute -bottom-40 -right-40 w-80 h-80 rounded-full bg-finance-green/10 blur-3xl" />
+      
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
-        <div className="text-center max-w-2xl mx-auto">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white mb-6 leading-tight">
-            <span className="block">The Market. At a Glance. Before 9 AM.</span>
-          </h1>
-          <p className="mt-6 text-xl text-gray-300 mb-8 max-w-xl mx-auto">
-            No opinions. No hype. Just a crisp morning snapshot of what’s moving markets—global and local.<br />
-            <span className="block mt-4">
-              <b>Market Mynds</b> delivers reliable, data-driven pre-market reports to your WhatsApp every morning at <b>8:00 AM IST</b>.
+        <div className="text-center max-w-4xl mx-auto">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            <span className="block">Daily Market Insights</span>
+            <span className="block mt-2">
+              Delivered to Your <span className="text-finance-green">WhatsApp</span>
             </span>
+          </h1>
+          
+          <p className="mt-6 text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            Professional stock market analysis delivered each morning before markets open. 
+            Actionable insights, trends, and predictions to power your investment decisions.
           </p>
-          <div className="mt-10 flex flex-col sm:flex-row justify-center gap-5">
-            <Button
-              className="text-lg py-6 px-8 bg-transparent border-2 font-bold rounded-lg bg-gradient-to-br from-[#16e7ff] via-[#b16cea] to-[#ff5e69] border-[3px] border-transparent hover:border-white text-white shadow-lg [background-clip:padding-box] relative transition"
-              style={{
-                borderImage: "linear-gradient(90deg, #16e7ff, #b16cea, #ff5e69) 1",
-                boxShadow: "0 0 24px 0 #16e7ff50",
-              }}
+          
+          <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+            <Button 
+              className="text-lg py-6 px-8 bg-finance-green hover:bg-finance-green/90 text-black font-medium shadow-lg shadow-finance-green/20"
               size="lg"
             >
-              Start My Trial
+              Start Your Free Trial
+            </Button>
+            <Button 
+              className="text-lg py-6 px-8 bg-transparent border border-white/20 hover:bg-white/10 text-white shadow-lg"
+              variant="outline" 
+              size="lg"
+            >
+              View Sample Report
             </Button>
           </div>
-          <div className="mt-10 text-gray-400 italic text-base">
-            Your first report arrives tomorrow at 8:00 AM
+          
+          <div className="mt-10 flex items-center justify-center space-x-6">
+            <div className="text-center">
+              <p className="text-3xl font-bold text-finance-green">98%</p>
+              <p className="text-sm text-gray-400">Accuracy Rate</p>
+            </div>
+            <div className="h-10 w-px bg-gray-700"></div>
+            <div className="text-center">
+              <p className="text-3xl font-bold text-finance-green">5,000+</p>
+              <p className="text-sm text-gray-400">Daily Subscribers</p>
+            </div>
+            <div className="h-10 w-px bg-gray-700"></div>
+            <div className="text-center">
+              <p className="text-3xl font-bold text-finance-green">365</p>
+              <p className="text-sm text-gray-400">Days/Year</p>
+            </div>
           </div>
         </div>
       </div>
