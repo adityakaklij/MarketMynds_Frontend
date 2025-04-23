@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -20,15 +19,16 @@ export function Navbar() {
                 <a href="#preview" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Preview</a>
                 <a href="#testimonials" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Testimonials</a>
                 <a href="#pricing" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Pricing</a>
+                <a href="/contact" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
               </div>
             </div>
           </div>
           <div className="hidden md:block">
             <Button
               variant="default"
-              className="bg-finance-green text-black hover:bg-finance-green/90 font-medium"
+              className="font-medium border-2 border-transparent relative before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-r before:from-finance-green before:to-finance-blue before:z-[-1] before:opacity-100 before:transition-opacity hover:before:opacity-80 before:border-gradient text-black bg-transparent"
             >
-              Subscribe Now
+              <span className="bg-gradient-to-r from-finance-green to-finance-blue bg-clip-text text-transparent">Subscribe Now</span>
             </Button>
           </div>
           <div className="md:hidden">
@@ -69,12 +69,13 @@ export function Navbar() {
           <a href="#preview" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Preview</a>
           <a href="#testimonials" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Testimonials</a>
           <a href="#pricing" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Pricing</a>
+          <a href="/contact" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</a>
           <div className="pt-2 pb-1">
             <Button
               variant="default"
-              className="w-full bg-finance-green text-black hover:bg-finance-green/90 font-medium"
+              className="w-full font-medium border-2 border-transparent relative before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-r before:from-finance-green before:to-finance-blue before:z-[-1] before:opacity-100 before:transition-opacity hover:before:opacity-80 before:border-gradient text-black bg-transparent"
             >
-              Subscribe Now
+              <span className="bg-gradient-to-r from-finance-green to-finance-blue bg-clip-text text-transparent">Subscribe Now</span>
             </Button>
           </div>
         </div>

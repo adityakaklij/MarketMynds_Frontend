@@ -1,12 +1,11 @@
-
 import { Button } from "@/components/ui/button";
 
 export function PreviewSection() {
   return (
     <section id="preview" className="py-24 bg-black relative overflow-hidden">
       {/* Background elements */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-finance-blue/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-finance-green/5 rounded-full blur-3xl"></div>
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-finance-green to-finance-blue/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-to-l from-finance-green to-finance-blue/5 rounded-full blur-3xl"></div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
@@ -24,14 +23,14 @@ export function PreviewSection() {
             
             <div className="space-y-6">
               <div className="glass-card p-4 rounded-lg">
-                <h4 className="text-lg font-medium text-finance-green mb-2">Morning Market Brief</h4>
+                <h4 className="text-lg font-medium text-transparent bg-clip-text bg-gradient-to-r from-finance-green to-finance-blue mb-2">Morning Market Brief</h4>
                 <p className="text-gray-300">
                   Start your day with a comprehensive overview of what happened overnight and what to expect during the trading day.
                 </p>
               </div>
               
               <div className="glass-card p-4 rounded-lg">
-                <h4 className="text-lg font-medium text-finance-blue mb-2">Technical Analysis</h4>
+                <h4 className="text-lg font-medium text-transparent bg-clip-text bg-gradient-to-r from-finance-green to-finance-blue mb-2">Technical Analysis</h4>
                 <p className="text-gray-300">
                   Key support and resistance levels, chart patterns, and technical indicators for major indices and trending stocks.
                 </p>
@@ -46,8 +45,8 @@ export function PreviewSection() {
             </div>
             
             <div className="mt-8">
-              <Button className="bg-finance-green hover:bg-finance-green/90 text-black">
-                Download Sample Report
+              <Button className="bg-transparent border-2 border-transparent relative before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-r before:from-finance-green before:to-finance-blue before:z-[-1] before:opacity-100 before:transition-opacity hover:before:opacity-80 text-black">
+                <span className="bg-gradient-to-r from-finance-green to-finance-blue bg-clip-text text-transparent">Download Sample Report</span>
               </Button>
             </div>
           </div>

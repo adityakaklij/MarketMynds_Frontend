@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 
 export function HeroSection() {
@@ -37,15 +36,15 @@ export function HeroSection() {
       </div>
 
       {/* Accent circles */}
-      <div className="absolute -top-40 -left-40 w-80 h-80 rounded-full bg-finance-blue/10 blur-3xl" />
-      <div className="absolute -bottom-40 -right-40 w-80 h-80 rounded-full bg-finance-green/10 blur-3xl" />
+      <div className="absolute -top-40 -left-40 w-80 h-80 rounded-full bg-gradient-to-r from-finance-green via-finance-blue to-finance-green/10 blur-3xl" />
+      <div className="absolute -bottom-40 -right-40 w-80 h-80 rounded-full bg-gradient-to-r from-finance-green via-finance-blue to-finance-green/10 blur-3xl" />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
         <div className="text-center max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
             <span className="block">Daily Market Insights</span>
             <span className="block mt-2">
-              Delivered to Your <span className="text-finance-green">WhatsApp</span>
+              Delivered to Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-finance-green via-finance-blue to-finance-green">WhatsApp</span>
             </span>
           </h1>
           
@@ -56,13 +55,13 @@ export function HeroSection() {
           
           <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
             <Button 
-              className="text-lg py-6 px-8 bg-finance-green hover:bg-finance-green/90 text-black font-medium shadow-lg shadow-finance-green/20"
+              className="text-lg py-6 px-8 bg-transparent font-medium shadow-lg shadow-finance-green/20 border-2 border-transparent relative before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-r before:from-finance-green before:to-finance-blue before:z-[-1] before:opacity-100 before:transition-opacity hover:before:opacity-80 before:border-gradient"
               size="lg"
             >
-              Start Your Free Trial
+              <span className="bg-gradient-to-r from-finance-green to-finance-blue bg-clip-text text-transparent">Start Your Free Trial</span>
             </Button>
             <Button 
-              className="text-lg py-6 px-8 bg-transparent border border-white/20 hover:bg-white/10 text-white shadow-lg"
+              className="text-lg py-6 px-8 bg-transparent border-2 border-gradient-to-r border-finance-green border-finance-blue hover:border-finance-blue text-white shadow-lg"
               variant="outline" 
               size="lg"
             >

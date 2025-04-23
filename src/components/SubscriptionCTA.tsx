@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { MessageSquare } from "lucide-react";
@@ -10,7 +9,7 @@ export function SubscriptionCTA() {
       <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-black -z-10"></div>
       
       {/* Background accent */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-finance-green/5 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br from-finance-green via-finance-blue to-black/70 rounded-full blur-3xl -z-10"></div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto">
@@ -28,29 +27,23 @@ export function SubscriptionCTA() {
                     </p>
                     
                     <div className="flex items-center justify-center lg:justify-start space-x-4 mb-6">
-                      <div className="flex items-center">
-                        <span className="h-5 w-5 rounded-full bg-finance-green flex items-center justify-center text-black text-xs">✓</span>
-                        <span className="ml-2 text-sm text-gray-300">No spam</span>
-                      </div>
-                      <div className="flex items-center">
-                        <span className="h-5 w-5 rounded-full bg-finance-green flex items-center justify-center text-black text-xs">✓</span>
-                        <span className="ml-2 text-sm text-gray-300">Cancel anytime</span>
-                      </div>
-                      <div className="flex items-center">
-                        <span className="h-5 w-5 rounded-full bg-finance-green flex items-center justify-center text-black text-xs">✓</span>
-                        <span className="ml-2 text-sm text-gray-300">7-day free trial</span>
-                      </div>
+                      {["No spam", "Cancel anytime", "7-day free trial"].map((txt, i) => (
+                        <div className="flex items-center" key={i}>
+                          <span className="h-5 w-5 rounded-full bg-gradient-to-r from-finance-green to-finance-blue flex items-center justify-center text-black text-xs">✓</span>
+                          <span className="ml-2 text-sm text-gray-300">{txt}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
                   
                   <div className="lg:flex-1 lg:pl-8 w-full">
                     <div className="bg-black/50 rounded-lg p-6 border border-gray-800">
                       <div className="text-center mb-4">
-                        <span className="bg-finance-green/10 text-finance-green text-sm font-medium px-3 py-1 rounded-full">
+                        <span className="bg-gradient-to-r from-finance-green to-finance-blue text-finance-green text-sm font-medium px-3 py-1 rounded-full text-transparent bg-clip-text">
                           7-day free trial
                         </span>
                         <div className="mt-4">
-                          <span className="text-2xl font-bold text-white">$19.99</span>
+                          <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-finance-green to-finance-blue">$19.99</span>
                           <span className="text-gray-400 ml-2">/ month</span>
                         </div>
                       </div>
@@ -88,15 +81,14 @@ export function SubscriptionCTA() {
                           />
                         </div>
                         <Button 
-                          className="w-full py-6 bg-finance-green hover:bg-finance-green/90 text-black font-medium"
+                          className="w-full py-6 bg-transparent border-2 border-transparent relative before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-r before:from-finance-green before:to-finance-blue before:z-[-1] before:opacity-100 before:transition-opacity hover:before:opacity-80 font-medium"
                         >
-                          <MessageSquare className="mr-2 h-5 w-5" />
-                          Start Free Trial
+                          <span className="bg-gradient-to-r from-finance-green to-finance-blue bg-clip-text text-transparent flex items-center justify-center"><MessageSquare className="mr-2 h-5 w-5" />Start Free Trial</span>
                         </Button>
                       </form>
                       
                       <p className="text-xs text-gray-400 mt-4 text-center">
-                        By subscribing you agree to our Terms of Service and Privacy Policy
+                        By subscribing you agree to our <a href="/terms" className="underline text-finance-green hover:text-finance-blue">Terms of Service</a> and <a href="/privacy" className="underline text-finance-green hover:text-finance-blue">Privacy Policy</a>
                       </p>
                     </div>
                   </div>

@@ -1,16 +1,14 @@
-
 export function Footer() {
   return (
     <footer className="bg-black py-12 border-t border-gray-800">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1">
-            <div className="text-2xl font-bold text-white">Market<span className="text-finance-green">Whisper</span></div>
+            <div className="text-2xl font-bold text-white">Market<span className="bg-gradient-to-r from-finance-green to-finance-blue bg-clip-text text-transparent">Whisper</span></div>
             <p className="mt-4 text-gray-400">
               Professional stock market analysis delivered daily to your WhatsApp.
             </p>
           </div>
-          
           <div>
             <h3 className="text-sm font-semibold text-white tracking-wider uppercase">Services</h3>
             <ul className="mt-4 space-y-4">
@@ -20,22 +18,20 @@ export function Footer() {
               <li><a href="#" className="text-gray-400 hover:text-finance-green">Trading Education</a></li>
             </ul>
           </div>
-          
           <div>
             <h3 className="text-sm font-semibold text-white tracking-wider uppercase">Company</h3>
             <ul className="mt-4 space-y-4">
               <li><a href="#" className="text-gray-400 hover:text-finance-green">About Us</a></li>
               <li><a href="#" className="text-gray-400 hover:text-finance-green">Our Team</a></li>
               <li><a href="#" className="text-gray-400 hover:text-finance-green">Careers</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-finance-green">Contact</a></li>
+              <li><a href="/contact" className="text-gray-400 hover:text-finance-green">Contact</a></li>
             </ul>
           </div>
-          
           <div>
             <h3 className="text-sm font-semibold text-white tracking-wider uppercase">Legal</h3>
             <ul className="mt-4 space-y-4">
-              <li><a href="#" className="text-gray-400 hover:text-finance-green">Terms of Service</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-finance-green">Privacy Policy</a></li>
+              <li><a href="/terms" className="text-gray-400 hover:text-finance-green">Terms of Service</a></li>
+              <li><a href="/privacy" className="text-gray-400 hover:text-finance-green">Privacy Policy</a></li>
               <li><a href="#" className="text-gray-400 hover:text-finance-green">Cookie Policy</a></li>
               <li><a href="#" className="text-gray-400 hover:text-finance-green">Disclaimer</a></li>
             </ul>
