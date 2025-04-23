@@ -24,7 +24,8 @@ export function Navbar() {
             <div className="flex-shrink-0">
               <Link to="/" className="text-2xl font-bold text-white">
                 {/* Market<span className="text-finance-green">Mynds</span> */}
-                <img src={Logo}  style={{ height: "50px", width: "250px" }}alt="" />
+                {/* <img src={Logo}  style={{ height: "50px", width: "250px" }}alt="" /> */}
+                <img src={Logo} alt="Market Mynds" style={{ height: "30px" }} className="mt-2" />
               </Link>
             </div>
             <div className="hidden md:block">
