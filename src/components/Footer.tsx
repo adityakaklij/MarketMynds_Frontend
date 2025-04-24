@@ -5,7 +5,7 @@ export function Footer() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1">
-            <div className="text-2xl font-bold text-white">Market<span className="text-finance-green">Minds</span></div>
+            <div className="text-2xl font-bold text-white">Market<span className="text-finance-green">Mynds</span></div>
             <p className="mt-4 text-gray-400">
               By the Traders, For the Traders
             </p>
