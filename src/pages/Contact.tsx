@@ -1,9 +1,12 @@
 
 import { Mail, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Navbar } from "@/components/Navbar";
 
 export default function Contact() {
   return (
+    <>
+    <Navbar/>
     <div className="min-h-screen bg-black text-white pt-24 px-4 pb-20">
       <div className="max-w-lg mx-auto text-center">
         <h1 className="text-4xl font-bold mb-2">Contact Us</h1>
@@ -23,5 +26,6 @@ export default function Contact() {
         </a>
       </div>
     </div>
+    </>
   );
 }

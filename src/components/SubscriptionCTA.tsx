@@ -5,7 +5,7 @@ import { MessageSquare } from "lucide-react";
 
 export function SubscriptionCTA() {
   return (
-    <section id="pricing" className="py-24 relative overflow-hidden">
+    <section className="py-24 relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-black -z-10"></div>
       

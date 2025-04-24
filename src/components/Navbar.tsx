@@ -11,7 +11,7 @@ export function Navbar() {
   const navLinks = [
     // { label: "Features", href: "#features", isAnchor: true },
     // { label: "Preview", href: "#preview", isAnchor: true },
-    { label: "Pricing", href: "/pricing", isAnchor: false },
+    { label: "Pricing", href: "#pricing", isAnchor: true },
     { label: "Contact", href: "/contact", isAnchor: false },
     { label: "Love ❤️", href: "#testimonials", isAnchor: true },
   ];
