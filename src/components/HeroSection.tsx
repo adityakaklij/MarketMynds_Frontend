@@ -78,6 +78,16 @@ export function HeroSection() {
     });
   };
 
+  // Add downloadSampleReport function
+  const downloadSampleReport = () => {
+    const link = document.createElement('a');
+    link.href = '/MarketMynds.pdf';
+    link.download = 'MarketMynds-Sample-Report.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div 
       className="relative min-h-screen flex items-center pt-16 overflow-hidden"
@@ -227,16 +237,19 @@ export function HeroSection() {
           </p>
           
           <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-            <Button 
-              className="text-lg py-6 px-8 bg-finance-green hover:bg-finance-green/90 text-black font-medium shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-finance-green/30 hover:-translate-y-1"
-              size="lg"
-            >
-              Subscribe Now
-            </Button>
+          <a href="#pricing">
+              <Button 
+                className="text-lg py-6 px-8 bg-finance-green hover:bg-finance-green/90 text-black font-medium shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-finance-green/30 hover:-translate-y-1"
+                size="lg"
+                >
+                Subscribe Now
+              </Button>
+            </a>
             <Button 
               className="text-lg py-6 px-8 bg-transparent border border-white/20 hover:bg-white/10 text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:border-white/40 hover:-translate-y-1"
               variant="outline" 
               size="lg"
+              onClick={downloadSampleReport}
             >
               View Sample Report
             </Button>
@@ -259,8 +272,10 @@ export function HeroSection() {
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
-              }}>2,000+</p>
-              <p className="text-sm text-gray-400">Daily Subscribers*</p>
+              }}>AI + Human</p>
+              {/* }}>2,000+</p> */}
+              <p className="text-sm text-gray-400">Reviewed Report</p>
+              {/* <p className="text-sm text-gray-400">Daily Subscribers*</p> */}
             </div>
             <div className="h-10 w-px bg-gray-700"></div>
             <div className="text-center">

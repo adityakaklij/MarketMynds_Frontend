@@ -1,7 +1,16 @@
-
 import { Button } from "@/components/ui/button";
 
 export function PreviewSection() {
+  // Add downloadSampleReport function
+  const downloadSampleReport = () => {
+    const link = document.createElement('a');
+    link.href = '/MarketMynds.pdf';
+    link.download = 'MarketMynds-Sample-Report.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <section id="preview" className="py-24 bg-black relative overflow-hidden">
       {/* Background elements */}
@@ -25,7 +34,7 @@ export function PreviewSection() {
             
             <div className="space-y-6">
               <div className="glass-card p-4 rounded-lg">
-                <h4 className="text-lg font-medium text-finance-green mb-2">We don’t offer tips.
+                <h4 className="text-lg font-medium text-finance-green mb-2">We don't offer tips.
                 </h4>
                 <p className="text-gray-300">
                 Comprehensive market data and overnight developments presented factually.
@@ -33,7 +42,7 @@ export function PreviewSection() {
               </div>
               
               <div className="glass-card p-4 rounded-lg">
-                <h4 className="text-lg font-medium text-finance-blue mb-2">We don’t issue signals.
+                <h4 className="text-lg font-medium text-finance-blue mb-2">We don't issue signals.
                 </h4>
                 <p className="text-gray-300">
                 Technical data showing support/resistance levels and patterns for major indices.
@@ -49,7 +58,10 @@ export function PreviewSection() {
             </div>
             
             <div className="mt-8">
-              <Button className="bg-finance-green hover:bg-finance-green/90 text-black">
+              <Button 
+                className="bg-finance-green hover:bg-finance-green/90 text-black"
+                onClick={downloadSampleReport}
+              >
                 Download Sample Report
               </Button>
             </div>

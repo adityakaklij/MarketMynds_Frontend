@@ -4,22 +4,22 @@ import { Card } from "@/components/ui/card";
 export function TestimonialsSection() {
   const testimonials = [
     {
-      quote: "These daily reports have completely transformed my trading routine. The morning analysis gives me everything I need to plan my day.",
-      author: "Michael T.",
-      role: "Day Trader",
-      avatar: "M"
+      quote: "I've cut my morning prep time in half. Everything I need. global cues, key levels, volumes is right there at 8 AM. No fluff, just facts.",
+      author: "Aniket R.",
+      role: "Options Trader",
+      avatar: "A"
     },
     {
-      quote: "As a busy professional, I don't have time to analyze the markets each day. Market Whisper does the heavy lifting for me.",
-      author: "Sarah K.",
-      role: "Portfolio Manager",
-      avatar: "S"
+      quote: "I don’t have time to track 10 sites before work. Market Mynds gives me a full market picture in 5 minutes, every day.",
+      author: "Ritika M.",
+      role: "Equity Investor & Analyst",
+      avatar: "R"
     },
     {
-      quote: "The accuracy of these reports is impressive. Their technical analysis has identified multiple major moves before they happened.",
-      author: "David L.",
-      role: "Retail Investor",
-      avatar: "D"
+      quote: "I subscribed for a month to try it out. Renewed for a year within two weeks. It’s that good. You should also give it a try.",
+      author: "Gangesh",
+      role: "Chartered Accountant",
+      avatar: "G"
     },
   ];
 
@@ -64,7 +64,8 @@ export function TestimonialsSection() {
         </div>
 
         <div className="mt-16 text-center">
-          <p className="text-finance-green font-bold">Join over 2,000 satisfied subscribers</p>
+          {/* <p className="text-finance-green font-bold">Join over 2,000 satisfied subscribers</p> */}
+          <p className="text-finance-green font-bold">Join our community now</p>
           <p className="text-gray-400 mt-2">Our community is growing every day. Don't miss out!</p>
         </div>
       </div>

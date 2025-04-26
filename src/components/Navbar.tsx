@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -36,6 +35,13 @@ export function Navbar() {
                       key={link.label}
                       href={link.href}
                       className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                      onClick={(e) => {
+                        // Only use anchor navigation on home page
+                        if (location.pathname !== '/') {
+                          e.preventDefault();
+                          window.location.href = '/' + link.href;
+                        }
+                      }}
                     >
                       {link.label}
                     </a>
@@ -52,27 +58,12 @@ export function Navbar() {
                     </Link>
                   )
                 )}
-                <Link
-                  to="/privacy-policy"
-                  className={cn(
-                    "hidden text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  )}
-                >
-                  Privacy
-                </Link>
-                <Link
-                  to="/terms"
-                  className={cn(
-                    "hidden text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  )}
-                >
-                  Terms
-                </Link>
+                
               </div>
             </div>
           </div>
           <div className="hidden md:block">
-            <a href="#subscription">
+            <a href="#pricing">
               <Button
                 variant="default"
                 className="bg-finance-green text-black hover:bg-finance-green/90 font-medium"
@@ -120,7 +111,14 @@ export function Navbar() {
                 key={link.label}
                 href={link.href}
                 className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={(e) => {
+                  setIsMenuOpen(false);
+                  // Only use anchor navigation on home page
+                  if (location.pathname !== '/') {
+                    e.preventDefault();
+                    window.location.href = '/' + link.href;
+                  }
+                }}
               >
                 {link.label}
               </a>
@@ -132,7 +130,14 @@ export function Navbar() {
                   "text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium",
                   location.pathname === link.href && "underline text-white"
                 )}
-                onClick={() => setIsMenuOpen(false)}
+                onClick={(e) => {
+                  setIsMenuOpen(false);
+                  // Only use anchor navigation on home page
+                  if (location.pathname !== '/') {
+                    e.preventDefault();
+                    window.location.href = '/' + link.href;
+                  }
+                }}
               >
                 {link.label}
               </Link>
@@ -141,14 +146,28 @@ export function Navbar() {
           <Link
             to="/privacy-policy"
             className="block text-gray-400 hover:text-white px-3 py-2 rounded-md text-base font-medium"
-            onClick={() => setIsMenuOpen(false)}
+            onClick={(e) => {
+              setIsMenuOpen(false);
+              // Only use anchor navigation on home page
+              if (location.pathname !== '/') {
+                e.preventDefault();
+                window.location.href = '/privacy-policy';
+              }
+            }}
           >
             Privacy
           </Link>
           <Link
             to="/terms"
             className="block text-gray-400 hover:text-white px-3 py-2 rounded-md text-base font-medium"
-            onClick={() => setIsMenuOpen(false)}
+            onClick={(e) => {
+              setIsMenuOpen(false);
+              // Only use anchor navigation on home page
+              if (location.pathname !== '/') {
+                e.preventDefault();
+                window.location.href = '/terms';
+              }
+            }}
           >
             Terms
           </Link>
