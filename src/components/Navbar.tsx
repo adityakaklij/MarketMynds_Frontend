@@ -67,6 +67,13 @@ export function Navbar() {
               <Button
                 variant="default"
                 className="bg-finance-green text-black hover:bg-finance-green/90 font-medium"
+                onClick={(e) => {
+                  // Only use anchor navigation on home page
+                  if (location.pathname !== '/') {
+                    e.preventDefault();
+                    window.location.href = '/#pricing';
+                  }
+                }}
               >
                 Subscribe Now
               </Button>

@@ -10,7 +10,8 @@ import {
   DialogFooter,
   DialogDescription,
 } from "@/components/ui/dialog";
-
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 // Add animation keyframes CSS
 const animationStyles = `
   @keyframes pulse-border {
@@ -34,37 +35,43 @@ const animationStyles = `
 const plans = [
   {
     title: "1 Month",
-    price: "₹99",
+    price:99,
     description: "Full pre-market access, billed monthly.",
-    bonus: false
+    bonus: false,
+    planId: "1"
   },
   {
     title: "3 Months",
-    price: "₹249",
+    price: 249,
     description: "Save 16% - Full access for 3 months.",
-    bonus: false
+    bonus: false,
+    planId: "2"
   },
   {
     title: "6 Months",
-    price: "₹449",
+    price: 449,
     description: "Save 24% - Full access for 6 months.",
-    bonus: false
+    bonus: false,
+    planId: "3"
   },
   {
     title: "12 Months",
-    price: "₹649",
+    price: 649,
     description: "Best value - Full access for 12 months.",
-    bonus: true
+    bonus: true,
+    planId: "4"
   },
 ];
 
 export default function Pricing() {
+  const navigate = useNavigate();
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [paymentOpen, setPaymentOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [whatsappNumber, setWhatsappNumber] = useState("");
   const [remainingSpots, setRemainingSpots] = useState(200);
+  const [processingPayment, setProcessingPayment] = useState(false);
   
   // Form validation states
   const [errors, setErrors] = useState({
@@ -141,14 +148,42 @@ export default function Pricing() {
     return isValid;
   };
 
-  const handlePayment = () => {
-    // setIsSubmitting(true);
-    
+  const handlePayment = async () => {
     if (validateForm()) {
-      // Here you would implement your payment processing logic
-      alert(`Processing payment for ${selectedPlan.title} plan for ${name}`);
-      setPaymentOpen(false);
-      setIsSubmitting(false);
+      setProcessingPayment(true);
+
+      // let makePayment = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/make-payment`, {
+      let makePayment = await axios.post(`http://localhost:5001/api/make-payment`, {
+        name: name,
+        email: email,
+        mobile: whatsappNumber,
+        plan: selectedPlan.planId,
+        amount: selectedPlan.price,
+      },
+    {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+
+      console.log("makePayment",makePayment);
+      window.location.href = makePayment.data.data?.redirect_url
+      setProcessingPayment(false);
+      
+      // Simulate payment processing with a random success/failure
+      // setTimeout(() => {
+      //   setProcessingPayment(false);
+      //   setPaymentOpen(false);
+        
+      //   // For demo purposes: 80% success rate
+      //   const isSuccessful = Math.random() < 0.8;
+        
+      //   if (isSuccessful) {
+      //     navigate('/payment-success');
+      //   } else {
+      //     navigate('/payment-failed');
+      //   }
+      // }, 2000); // Simulate a 2-second payment process
     }
   };
 
@@ -235,9 +270,10 @@ export default function Pricing() {
                   className="bg-finance-green hover:bg-finance-green/90 text-black font-bold text-lg px-8 py-6 rounded-xl shadow-lg shadow-finance-green/30"
                   onClick={() => handlePlanSelect({
                     title: "Lifetime",
-                    price: "₹999",
+                    price: 999,
                     description: "One-time payment, lifetime access to MarketMynds reports.",
-                    bonus: true
+                    bonus: true,
+                    planId: "5"
                   })}
                 >
                   Get Lifetime Access
@@ -259,7 +295,7 @@ export default function Pricing() {
                 <span className="ml-2 px-2 py-1 rounded bg-finance-green/10 text-finance-green text-xs font-medium">Best Value</span>
               )}
             </div>
-            <div className="text-3xl font-extrabold mb-2">{plan.price}</div>
+            <div className="text-3xl font-extrabold mb-2"> ₹{plan.price}</div>
             <div className="text-gray-400 mb-6">{plan.description}</div>
             <Button 
               className="bg-finance-green hover:bg-finance-green/90 text-black/90 w-full font-semibold"
@@ -301,7 +337,7 @@ export default function Pricing() {
 
           <div className="space-y-4 my-4">
             <div className="text-center mb-4">
-              <div className="text-3xl font-extrabold mb-2">{selectedPlan && selectedPlan.price}</div>
+              <div className="text-3xl font-extrabold mb-2"> ₹{selectedPlan && selectedPlan.price}</div>
               <div className="text-gray-400 text-sm">One-time payment. No auto-renewal.</div>
             </div>
 
@@ -380,9 +416,19 @@ export default function Pricing() {
             <Button
               className="bg-finance-green hover:bg-finance-green/90 text-black w-full font-semibold py-5 mt-2"
               onClick={handlePayment}
-              disabled={isSubmitting}
+              disabled={processingPayment}
             >
-              {isSubmitting ? 'Processing...' : 'Make Payment'}
+              {processingPayment ? (
+                <div className="flex items-center justify-center">
+                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Processing Payment...
+                </div>
+              ) : (
+                'Make Payment'
+              )}
             </Button>
           </DialogFooter>
         </DialogContent>
