@@ -32,6 +32,13 @@ const animationStyles = `
   }
 `;
 
+// Add type declaration for window.dataLayer
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
+
 const plans = [
   {
     title: "1 Month",
@@ -98,6 +105,19 @@ export default function Pricing() {
   }, []);
 
   const handlePlanSelect = (plan) => {
+    // Data events.
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'begin_checkout',
+      ecommerce: {
+        items: [{
+          item_name: plan?.title,
+          item_category: 'Subscription Plan',
+          price: plan?.price
+        }]
+      }
+    });
+
     setSelectedPlan(plan);
     setPaymentOpen(true);
     // Reset form fields and errors when opening the dialog
@@ -152,8 +172,23 @@ export default function Pricing() {
     if (validateForm()) {
       setProcessingPayment(true);
 
-      // let makePayment = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/make-payment`, {
-      let makePayment = await axios.post(`http://localhost:5001/api/make-payment`, {
+
+      // Event Events.
+      window.dataLayer.push({
+        event: 'add_payment_info',
+        ecommerce: {
+          payment_type: 'Online Payment',
+          items: [{
+            item_name: selectedPlan.title,
+            item_category: 'Subscription Plan',
+            price: selectedPlan.price
+          }]
+        }
+      });
+    
+
+      let makePayment = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/make-payment`, {
+      // let makePayment = await axios.post(`http://localhost:5001/api/make-payment`, {
         name: name,
         email: email,
         mobile: whatsappNumber,

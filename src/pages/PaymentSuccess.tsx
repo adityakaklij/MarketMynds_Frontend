@@ -3,27 +3,54 @@ import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+
+// Add type declaration for window.dataLayer
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
 
 export default function PaymentSuccess() {
   const navigate = useNavigate();
-  // const [countdown, setCountdown] = useState(10);
-
-  // Optional: Auto-redirect after 10 seconds
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setCountdown((prev) => {
-  //       if (prev <= 1) {
-  //         clearInterval(timer);
-  //         navigate("/");
-  //         return 0;
-  //       }
-  //       return prev - 1;
-  //     });
-  //   }, 1000);
-
-  //   return () => clearInterval(timer);
-  // }, [navigate]);
+  const location = useLocation();
+  const [transactionInfo, setTransactionInfo] = useState({
+    id: '',
+    amount: 0,
+    plan: 'Subscription'
+  });
+  
+  useEffect(() => {
+    // Parse URL parameters to get transaction details
+    const queryParams = new URLSearchParams(location.search);
+    const orderId = queryParams.get('order_id') || `ORDER-${Date.now()}`;
+    const amount = Number(queryParams.get('amount')) || 999;
+    const plan = queryParams.get('plan') || 'Lifetime Access';
+    
+    setTransactionInfo({
+      id: orderId,
+      amount: amount,
+      plan: plan
+    });
+    
+    // Send purchase event to Google Analytics
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'purchase',
+      ecommerce: {
+        transaction_id: orderId,
+        value: amount,
+        currency: 'INR',
+        items: [{
+          item_name: plan,
+          item_category: 'Subscription Plan',
+          price: amount
+        }]
+      }
+    });
+    
+  }, [location]);
 
   return (
     <>
@@ -45,6 +72,20 @@ export default function PaymentSuccess() {
               <p className="text-gray-300 mb-6">
                 Thank you for subscribing to MarketMynds. Your payment has been processed successfully, and your subscription is now active.
               </p>
+
+              {transactionInfo.id && (
+                <div className="bg-finance-blue/10 border border-finance-blue/20 rounded-lg p-3 mb-6 w-full">
+                  <p className="text-sm text-gray-300">
+                    <span className="text-finance-blue">Order ID:</span> {transactionInfo.id}
+                  </p>
+                  <p className="text-sm text-gray-300">
+                    <span className="text-finance-blue">Plan:</span> {transactionInfo.plan}
+                  </p>
+                  <p className="text-sm text-gray-300">
+                    <span className="text-finance-blue">Amount:</span> ₹{transactionInfo.amount}
+                  </p>
+                </div>
+              )}
 
               <div className="bg-finance-green/10 rounded-lg p-4 mb-6 text-left w-full">
                 <h2 className="text-finance-green font-medium mb-2">What happens next?</h2>
@@ -73,10 +114,6 @@ export default function PaymentSuccess() {
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </div>
-
-              {/* <p className="text-gray-400 text-sm mt-4">
-                Auto-redirecting in {countdown} seconds...
-              </p> */}
             </div>
           </div>
         </div>

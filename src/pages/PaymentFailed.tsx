@@ -2,10 +2,46 @@ import { XCircle, ArrowRight, RefreshCw, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+
+// Add type declaration for window.dataLayer
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
 
 export default function PaymentFailed() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    // Parse URL parameters to get error details
+    const queryParams = new URLSearchParams(location.search);
+    const orderId = queryParams.get('order_id') || `ERROR-${Date.now()}`;
+    const amount = Number(queryParams.get('amount')) || 0;
+    const plan = queryParams.get('plan') || 'Subscription Plan';
+    const errorCode = queryParams.get('error_code') || 'unknown';
+    
+    // Send payment_failed event to Google Analytics
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'payment_failed',
+      ecommerce: {
+        transaction_id: orderId,
+        value: amount,
+        currency: 'INR',
+        error_code: errorCode,
+        items: [{
+          item_name: plan,
+          item_category: 'Subscription Plan',
+          price: amount
+        }]
+      }
+    });
+    
+  }, [location]);
 
   return (
     <>
