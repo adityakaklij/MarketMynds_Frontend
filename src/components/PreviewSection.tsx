@@ -30,7 +30,7 @@ export function PreviewSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1">
-            <h3 className="text-2xl font-bold text-white mb-6">Professional Analysis, Simple Delivery</h3>
+            <h3 className="text-2xl font-bold text-white mb-6">Savings 30 mins of your Day</h3>
             
             <div className="space-y-6">
               <div className="glass-card p-4 rounded-lg">
