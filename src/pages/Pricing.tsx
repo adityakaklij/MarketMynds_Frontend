@@ -155,12 +155,12 @@ export default function Pricing() {
       isValid = false;
     }
 
-    // WhatsApp number validation
+    // WhatsApp number validation (allow international format)
     if (!whatsappNumber.trim()) {
       newErrors.whatsappNumber = "WhatsApp number is required";
       isValid = false;
-    } else if (!/^\d{10}$/.test(whatsappNumber.replace(/\D/g, ''))) {
-      newErrors.whatsappNumber = "Please enter a valid 10-digit number";
+    } else if (!/^\+?\d{8,15}$/.test(whatsappNumber.replace(/\s/g, ''))) {
+      newErrors.whatsappNumber = "Please enter a valid number with country code (e.g. +919876543210)";
       isValid = false;
     }
 
@@ -204,21 +204,6 @@ export default function Pricing() {
       console.log("makePayment",makePayment);
       window.location.href = makePayment.data.data?.redirect_url
       setProcessingPayment(false);
-      
-      // Simulate payment processing with a random success/failure
-      // setTimeout(() => {
-      //   setProcessingPayment(false);
-      //   setPaymentOpen(false);
-        
-      //   // For demo purposes: 80% success rate
-      //   const isSuccessful = Math.random() < 0.8;
-        
-      //   if (isSuccessful) {
-      //     navigate('/payment-success');
-      //   } else {
-      //     navigate('/payment-failed');
-      //   }
-      // }, 2000); // Simulate a 2-second payment process
     }
   };
 
@@ -430,7 +415,7 @@ export default function Pricing() {
                   <Input
                     id="whatsapp"
                     type="tel"
-                    placeholder="Your WhatsApp number"
+                    placeholder="e.g. +91 9876543210"
                     className={`bg-gray-900 border-gray-700 focus:border-finance-green text-white pl-10 ${errors.whatsappNumber ? 'border-red-500' : ''}`}
                     value={whatsappNumber}
                     onChange={(e) => setWhatsappNumber(e.target.value)}
