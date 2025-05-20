@@ -20,6 +20,11 @@ export default function Contact() {
               support@marketmynds.com
             </a>
           </div>
+            Remsic
+            <br />
+            Address: Om Sai, 102, Hanuman Tekdi Manmad Road, Nandgaon, Nashik, Maharashtra 423106
+            <br />
+            Contact: +91 7620513676
           {/* <div className="flex items-center gap-3 text-lg text-finance-green">
             <Phone /><span className="text-white">+91 90000-00000</span>
           </div> */}
