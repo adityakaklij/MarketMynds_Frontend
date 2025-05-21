@@ -219,14 +219,7 @@ communications relating to these Terms must be communicated to us using the cont
 information provided on this website.
 <br />
 <br />
-<h1>Refund Policy</h1>
-<br />
-We will notify you once we’ve received your refund request, and let you know if
-the refund was approved or not. If approved, you’ll be automatically refunded on your
-original payment method within 10 business days. Please remember it can take some
-time for your bank or credit card company to process and post the refund too. If more
-than 15 business days have passed since we’ve approved your refund, 
-<br />
+
 <br />
 
 <h1>Please contact us at </h1>

@@ -55,6 +55,10 @@ We aim to respond to all refund requests promptly and process eligible refunds w
 <li>The request lacks sufficient purchase details or is made with fraudulent intent.</li></p>
 
        
+
+<h2>Please contact us at</h2>
+
+email: support@marketmynds.com
         </div>
         <div className="mt-8 text-xs text-gray-400 text-center">
           Last updated: 21 May 2025
