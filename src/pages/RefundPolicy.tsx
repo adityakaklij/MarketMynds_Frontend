@@ -7,7 +7,7 @@ export default function RefundPolicy() {
       <Navbar />
     <div className="min-h-screen bg-black text-white pt-24 px-4 pb-20">
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center">Terms of Service</h1>
+        <h1 className="text-4xl font-bold mb-8 text-center">Refund Policy</h1>
         <div className="space-y-4 text-gray-300">
           {/* <p>Market Mynds provides pre-market data and reports for informational purposes only. We do not provide investment advice, tips, or buy/sell signals.</p> */}
           <p>At Market Mynds, we strive to ensure that our users are satisfied with the services and content we provide. This Refund Policy outlines the terms and conditions under which refunds may be issued for our digital subscription services.</p>
