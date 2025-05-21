@@ -27,6 +27,7 @@ export default function RefundPolicy() {
 
 </p>
             <h2>3. Refund Process</h2>
+            <p>Once the users initiated the Refund Request, Will process the reqest within 1-2 working days  </p>
             <p>Once your refund request is approved, the funds will be credited back to your original payment method within 5–10 business days, depending on your bank or payment provider's processing times.</p>
             
             
