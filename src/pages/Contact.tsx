@@ -20,7 +20,7 @@ export default function Contact() {
               support@marketmynds.com
             </a>
           </div>
-            Remsic
+            Resmic
             <br />
             Address: Om Sai, 102, Hanuman Tekdi Manmad Road, Nandgaon, Nashik, Maharashtra 423106
             <br />

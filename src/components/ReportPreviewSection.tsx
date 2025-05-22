@@ -47,18 +47,18 @@ export function ReportPreviewSection() {
                     <span className="w-4 h-4 bg-red-600 rounded-sm flex items-center justify-center text-[8px] text-white">HK</span>
                     <span className="text-white text-sm">Hang Seng</span>
                   </div>
-                  <div className="flex items-center gap-1 bg-gray-800 py-1 px-3 rounded-full">
+                  {/* <div className="flex items-center gap-1 bg-gray-800 py-1 px-3 rounded-full">
                     <span className="w-4 h-4 bg-white rounded-sm flex items-center justify-center text-[8px] text-red-600">JP</span>
                     <span className="text-white text-sm">Nikkei 225</span>
-                  </div>
+                  </div> */}
                   <div className="flex items-center gap-1 bg-gray-800 py-1 px-3 rounded-full">
                     <span className="w-4 h-4 bg-blue-600 rounded-sm flex items-center justify-center text-[8px] text-white">KR</span>
                     <span className="text-white text-sm">KOSPI</span>
                   </div>
-                  <div className="flex items-center gap-1 bg-gray-800 py-1 px-3 rounded-full">
+                  {/* <div className="flex items-center gap-1 bg-gray-800 py-1 px-3 rounded-full">
                     <span className="w-4 h-4 bg-blue-800 rounded-sm flex items-center justify-center text-[8px] text-white">AU</span>
                     <span className="text-white text-sm">ASX 200</span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               
@@ -270,7 +270,7 @@ export function ReportPreviewSection() {
             <div className="bg-gray-800 p-3 rounded-lg mr-4">
               <Ban className="w-5 h-5 text-gray-400" />
             </div>
-            <span className="text-white font-medium">Stock in ban list</span>
+            <span className="text-white font-medium">Stock In Ban List</span>
           </div>
           
           <div className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center">

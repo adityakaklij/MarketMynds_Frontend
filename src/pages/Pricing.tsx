@@ -43,7 +43,7 @@ const plans = [
   {
     title: "1 Month",
     price:99,
-    description: "Full pre-market access, billed monthly.",
+    description: "Full pre-market access for 30 days*.",
     bonus: false,
     planId: "1"
   },
@@ -257,7 +257,7 @@ export default function Pricing() {
                       animation: 'shimmer 3s linear infinite',
                     }}
                   >
-                    Lifetime Access
+                    Lifetime Access*
                   </h3>
                 </div>
                 

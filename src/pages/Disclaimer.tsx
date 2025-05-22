@@ -7,17 +7,24 @@ export default function Disclaimer() {
       <Navbar />
       <div className="min-h-screen bg-black text-white pt-24 px-4 pb-20">
         <div className="max-w-2xl mx-auto">
-          <h1 className="text-4xl font-bold mb-8 text-center">Terms of Service</h1>
+          <h1 className="text-4xl font-bold mb-8 text-center">Disclaimer</h1>
           <div className="space-y-4 text-gray-300">
-            <p>Market Mynds provides pre-market data and reports for informational purposes only. We do not provide investment advice, tips, or buy/sell signals.</p>
-            <ul className="list-disc list-inside ml-4">
-              <li>All purchases are one-time and non-renewing.</li>
-              <li>You may request a refund within 3 days of your first report delivery.</li>
-              <li>Reports are sent between 7:50–8:10 AM IST on working days, barring unforeseen circumstances.</li>
-              <li>Do not share or redistribute paid reports outside your own use.</li>
-            </ul>
-            <p>By subscribing, you agree to our privacy policy and consent to receive messages from Market Mynds on WhatsApp.</p>
-            <p>Market Mynds, its staff, or partners are not liable for trading losses or investment outcomes resulting from use of the reports.</p>
+            <p>The information provided by Market Mynds is intended solely for informational and educational purposes. It should not be interpreted as investment advice, stock recommendations, or financial guidance of any kind.
+
+Market Mynds does not provide buy/sell signals, and no content shared should be construed as a solicitation to trade or invest in any security or financial instrument.
+
+While we strive for accuracy and timely delivery, Market Mynds makes no guarantees regarding the completeness, reliability, or availability of the information. Market conditions, data sources, and technical issues may affect the timeliness or content of our reports.
+
+By accessing our reports, you acknowledge and agree that:
+
+You use the information at your own risk.
+
+Market Mynds, its team members, and partners shall not be held liable for any financial losses, damages, or outcomes arising from decisions made based on our reports.
+
+Past performance or trends discussed do not guarantee future results.
+
+Always conduct your own research or consult a licensed financial advisor before making any trading or investment decisions.</p>
+            
           </div>
           <div className="mt-8 text-xs text-gray-400 text-center">
             Last updated: April 2025
