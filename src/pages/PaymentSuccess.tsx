@@ -73,7 +73,7 @@ export default function PaymentSuccess() {
                 Thank you for subscribing to MarketMynds. Your payment has been processed successfully, and your subscription is now active.
               </p>
 
-              {transactionInfo.id && (
+              {/* {transactionInfo.id && (
                 <div className="bg-finance-blue/10 border border-finance-blue/20 rounded-lg p-3 mb-6 w-full">
                   <p className="text-sm text-gray-300">
                     <span className="text-finance-blue">Order ID:</span> {transactionInfo.id}
@@ -85,14 +85,14 @@ export default function PaymentSuccess() {
                     <span className="text-finance-blue">Amount:</span> ₹{transactionInfo.amount}
                   </p>
                 </div>
-              )}
+              )} */}
 
               <div className="bg-finance-green/10 rounded-lg p-4 mb-6 text-left w-full">
                 <h2 className="text-finance-green font-medium mb-2">What happens next?</h2>
                 <ul className="space-y-2 text-gray-300">
                   <li className="flex items-start gap-2">
                     <Send className="h-5 w-5 text-finance-green flex-shrink-0 mt-0.5" />
-                    <span>You'll receive a welcome message on WhatsApp shortly.</span>
+                    <span>You'll receive a welcome message on Email shortly.</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <Send className="h-5 w-5 text-finance-green flex-shrink-0 mt-0.5" />
