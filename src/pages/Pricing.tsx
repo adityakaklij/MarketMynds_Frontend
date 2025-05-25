@@ -72,7 +72,11 @@ const plans = [
 
 export default function Pricing() {
   const navigate = useNavigate();
-  const [selectedPlan, setSelectedPlan] = useState(null);
+  const [selectedPlan, setSelectedPlan] = useState({title: "1 Month",
+                    price: 99,
+                    description: "Full pre-market access for 30 days.",
+                    bonus: true,
+                    planId: "1"});
   const [paymentOpen, setPaymentOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -202,7 +206,13 @@ export default function Pricing() {
     })
 
       console.log("makePayment",makePayment);
-      window.location.href = makePayment.data.data?.redirect_url
+      if (makePayment.data.data?.redirect_url) {
+        window.location.href = makePayment.data.data.redirect_url;
+      } else {
+        console.error("No redirect URL received from payment API");
+        // Fallback to a generic payment error page or show an error message
+        alert("Payment processing error. Please try again or contact support.");
+      }
       setProcessingPayment(false);
     }
   };
