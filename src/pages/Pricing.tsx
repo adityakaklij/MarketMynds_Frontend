@@ -42,7 +42,7 @@ declare global {
 const plans = [
   {
     title: "1 Month",
-    price:99,
+    price: 99,
     description: "Full pre-market access for 30 days*.",
     bonus: false,
     planId: "1"
