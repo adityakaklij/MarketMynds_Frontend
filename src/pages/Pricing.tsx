@@ -164,7 +164,7 @@ export default function Pricing() {
       newErrors.whatsappNumber = "WhatsApp number is required";
       isValid = false;
     } else if (!/^\+?\d{8,15}$/.test(whatsappNumber.replace(/\s/g, ''))) {
-      newErrors.whatsappNumber = "Please enter a valid number with country code (e.g. +919876543210)";
+      newErrors.whatsappNumber = "Please enter a valid number without country code (e.g. 9876543210)";
       isValid = false;
     }
 
@@ -425,7 +425,7 @@ export default function Pricing() {
                   <Input
                     id="whatsapp"
                     type="tel"
-                    placeholder="e.g. +91 9876543210"
+                    placeholder="e.g. 9876543210"
                     className={`bg-gray-900 border-gray-700 focus:border-finance-green text-white pl-10 ${errors.whatsappNumber ? 'border-red-500' : ''}`}
                     value={whatsappNumber}
                     onChange={(e) => setWhatsappNumber(e.target.value)}
