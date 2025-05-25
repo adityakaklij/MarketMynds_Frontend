@@ -24,7 +24,7 @@ export default function PaymentSuccess() {
   useEffect(() => {
     // Parse URL parameters to get transaction details
     const queryParams = new URLSearchParams(location.search);
-    const orderId = queryParams.get('order_id') || `ORDER-${Date.now()}`;
+    const orderId = queryParams.get('payment_id') || `ORDER-${Date.now()}`;
     const amount = Number(queryParams.get('amount')) || 999;
     const plan = queryParams.get('plan') || 'Lifetime Access';
     
