@@ -355,7 +355,7 @@ export default function Pricing() {
 
       {/* Payment Dialog */}
       <Dialog open={paymentOpen} onOpenChange={setPaymentOpen}>
-        <DialogContent className="bg-black border border-finance-green/20 text-white max-w-md mx-auto">
+        <DialogContent className="bg-black border border-finance-green/20 text-white max-w-md mx-auto max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold text-finance-green">
               {selectedPlan && `${selectedPlan.title} Plan`}
@@ -442,9 +442,9 @@ export default function Pricing() {
             </div>
           </div>
 
-          <DialogFooter>
+          <DialogFooter className="mt-4 sm:mt-2">
             <Button
-              className="bg-finance-green hover:bg-finance-green/90 text-black w-full font-semibold py-5 mt-2"
+              className="bg-finance-green hover:bg-finance-green/90 text-black w-full font-semibold py-5"
               onClick={handlePayment}
               disabled={processingPayment}
             >

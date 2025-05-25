@@ -20,14 +20,10 @@ export default function Contact() {
               support@marketmynds.com
             </a>
           </div>
-            Resmic
-            <br />
-            Address: Om Sai, 102, Hanuman Tekdi Manmad Road, Nandgaon, Nashik, Maharashtra 423106
-            <br />
-            Contact: +91 7620513676
-          {/* <div className="flex items-center gap-3 text-lg text-finance-green">
-            <Phone /><span className="text-white">+91 90000-00000</span>
-          </div> */}
+          
+          <div className="flex items-center gap-3 text-lg text-finance-green">
+            <Phone /><span className="text-white">+91 93072 02438</span>
+          </div>
         </div>
         <a href="mailto:support@marketmynds.com">
           <Button className="bg-finance-green text-black hover:bg-finance-green/90 px-8 text-lg" size="lg">Email Us</Button>
