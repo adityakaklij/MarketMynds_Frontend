@@ -225,7 +225,6 @@ information provided on this website.
 <br />
 email: support@marketmynds.com
 <br />
-Mo.: +91 7620513676
           </p>
           <div className="text-xs text-gray-400 text-center">
             Last updated: 20 May 2025
