@@ -71,3 +71,32 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+
+
+<!-- Tasks for affiliate integration -->
+1. User create the account with login with google 
+    i. Generate the unique code there only linkedin with email.
+    ii.
+2. Create the unique ref id if exists
+    i. Check the ID
+    ii. Store it in the local storage
+    iii. If in the locakstorage, read it wheile making the paymnet
+    iv. Make the paymnet status initiated here only
+3. Store it in the back-end db when user initiate the payment  
+    i. Afther the paymnet while verifygn the payment, if it's done then only update
+4. Create GET back-end request to display it at the front-end
+
+
+affiliate Schema
+
+email
+uid
+refferals {
+    "plan_id1":count",
+    "plan_id2":count",
+    "plan_id3":count",
+    "plan_id4":count",
+}
+total_earnings:0 // Will make it 0 once we make payment to the users
+lifetime_earnings:0
+joined_on

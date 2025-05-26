@@ -10,7 +10,7 @@ import {
   DialogFooter,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 // Add animation keyframes CSS
 const animationStyles = `
@@ -72,6 +72,7 @@ const plans = [
 
 export default function Pricing() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [selectedPlan, setSelectedPlan] = useState({title: "1 Month",
                     price: 99,
                     description: "Full pre-market access for 30 days.",
@@ -83,6 +84,7 @@ export default function Pricing() {
   const [whatsappNumber, setWhatsappNumber] = useState("");
   const [remainingSpots, setRemainingSpots] = useState(200);
   const [processingPayment, setProcessingPayment] = useState(false);
+  const [referralCode, setReferralCode] = useState("");
   
   // Form validation states
   const [errors, setErrors] = useState({
@@ -91,6 +93,25 @@ export default function Pricing() {
     whatsappNumber: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Check for referral code in URL and save to localStorage
+  useEffect(() => {
+    // Parse the URL search params
+    const queryParams = new URLSearchParams(location.search);
+    const refCode = queryParams.get('ref');
+    
+    // If referral code exists in URL, save it to localStorage
+    if (refCode) {
+      localStorage.setItem('referralCode', refCode);
+      setReferralCode(refCode);
+    } else {
+      // If no code in URL, check localStorage
+      const storedRefCode = localStorage.getItem('referralCode');
+      if (storedRefCode) {
+        setReferralCode(storedRefCode);
+      }
+    }
+  }, [location]);
 
   // Simulate spots decreasing randomly
   useEffect(() => {
@@ -176,7 +197,6 @@ export default function Pricing() {
     if (validateForm()) {
       setProcessingPayment(true);
 
-
       // Event Events.
       window.dataLayer.push({
         event: 'add_payment_info',
@@ -190,20 +210,22 @@ export default function Pricing() {
         }
       });
     
+      // Get referral code from state (which was populated from localStorage)
+      const refCode = referralCode || '';
 
       let makePayment = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/make-payment`, {
-      // let makePayment = await axios.post(`http://localhost:5001/api/make-payment`, {
         name: name,
         email: email,
         mobile: whatsappNumber,
         plan: selectedPlan.planId,
         amount: selectedPlan.price,
+        referralCode: refCode, // Send referral code with payment data
       },
-    {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
 
       console.log("makePayment",makePayment);
       if (makePayment.data.data?.redirect_url) {

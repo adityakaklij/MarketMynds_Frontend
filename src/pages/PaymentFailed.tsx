@@ -70,10 +70,10 @@ export default function PaymentFailed() {
                   <h2 className="text-yellow-500 font-medium">Common reasons for payment failure:</h2>
                 </div>
                 <ul className="space-y-2 text-gray-300 ml-7 list-disc">
-                  <li>Insufficient funds in the account</li>
                   <li>Incorrect payment details</li>
                   <li>Transaction declined by your bank</li>
                   <li>Network or connectivity issues</li>
+                  <li>Payment gateway issues</li>
                 </ul>
               </div>
 
