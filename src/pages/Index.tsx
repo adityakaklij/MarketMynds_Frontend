@@ -6,6 +6,7 @@ import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { SubscriptionCTA } from "@/components/SubscriptionCTA";
 import { Footer } from "@/components/Footer";
 import { ReportPreviewSection } from "@/components/ReportPreviewSection";
+import { HowItWorks } from "@/components/HowItWorks";
 import Pricing from "./Pricing";
 
 const Index = () => {
@@ -13,6 +14,7 @@ const Index = () => {
     <div className="min-h-screen bg-black text-white">
       <Navbar />
       <HeroSection />
+      <HowItWorks />
       {/* <FeaturesSection /> */}
       <ReportPreviewSection />
       <PreviewSection />
