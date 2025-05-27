@@ -2,6 +2,13 @@ import React from 'react';
 import { ChevronUp, ChevronDown, BarChart2, TrendingUp, TrendingDown, ArrowRight, ArrowLeft, AlertTriangle, Layers, Briefcase, Activity, List, MessageSquare, FileText, Clock, Ban, Rocket, Bookmark } from 'lucide-react';
 
 export function ReportPreviewSection() {
+  const scrollToPreview = () => {
+    const previewSection = document.getElementById('preview');
+    if (previewSection) {
+      previewSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="report-preview" className="py-24 bg-black relative overflow-hidden">
       {/* Background elements */}
@@ -21,7 +28,10 @@ export function ReportPreviewSection() {
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
           {/* Fear and Greed Index */}
-          <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-gray-800">
+          <div 
+            className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-gray-800 cursor-pointer hover:border-finance-green/50 transition-all"
+            onClick={scrollToPreview}
+          >
             <h4 className="text-xl font-semibold text-white mb-4">Fear and Greed Index</h4>
             <div className="flex flex-col items-center justify-center p-4 bg-gray-800/50 rounded-lg">
               <img 
@@ -33,7 +43,10 @@ export function ReportPreviewSection() {
           </div>
           
           {/* Global Market Overview */}
-          <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-gray-800">
+          <div 
+            className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-gray-800 cursor-pointer hover:border-finance-green/50 transition-all"
+            onClick={scrollToPreview}
+          >
             <div className="flex justify-between items-center mb-4">
               <h4 className="text-xl font-semibold text-white">Global Market Overview</h4>
               <span className="text-xs text-gray-400 bg-gray-800 px-2 py-1 rounded">+ Indian market</span>
@@ -103,7 +116,10 @@ export function ReportPreviewSection() {
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
           {/* Market Snapshot */}
-          <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-gray-800">
+          <div 
+            className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-gray-800 cursor-pointer hover:border-finance-green/50 transition-all"
+            onClick={scrollToPreview}
+          >
             <div className="flex justify-between items-center mb-4">
               <h4 className="text-xl font-semibold text-white">Market Snapshot</h4>
               <span className="text-finance-blue font-medium">Nifty 50</span>
@@ -148,7 +164,10 @@ export function ReportPreviewSection() {
           </div>
           
           {/* Sectoral Indices Chart */}
-          <div className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-gray-800">
+          <div 
+            className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-gray-800 cursor-pointer hover:border-finance-green/50 transition-all"
+            onClick={scrollToPreview}
+          >
             <div className="flex justify-between items-center mb-4">
               <h4 className="text-xl font-semibold text-white">Sectoral Indices Chart</h4>
               <span className="text-xs text-gray-400">7-day and 1-day change</span>
@@ -238,63 +257,90 @@ export function ReportPreviewSection() {
         
         {/* Additional Report Features */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center">
+          <div 
+            className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center cursor-pointer hover:border-finance-green/50 transition-all"
+            onClick={scrollToPreview}
+          >
             <div className="bg-gray-800 p-3 rounded-lg mr-4">
               <List className="w-5 h-5 text-gray-400" />
             </div>
             <span className="text-white font-medium">Long Short Build Up</span>
           </div>
           
-          <div className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center">
+          <div 
+            className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center cursor-pointer hover:border-finance-green/50 transition-all"
+            onClick={scrollToPreview}
+          >
             <div className="bg-gray-800 p-3 rounded-lg mr-4">
               <BarChart2 className="w-5 h-5 text-gray-400" />
             </div>
             <span className="text-white font-medium">Technical Analysis</span>
           </div>
           
-          <div className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center">
+          <div 
+            className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center cursor-pointer hover:border-finance-green/50 transition-all"
+            onClick={scrollToPreview}
+          >
             <div className="bg-gray-800 p-3 rounded-lg mr-4">
               <FileText className="w-5 h-5 text-gray-400" />
             </div>
             <span className="text-white font-medium">Stocks in News</span>
           </div>
           
-          <div className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center">
+          <div 
+            className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center cursor-pointer hover:border-finance-green/50 transition-all"
+            onClick={scrollToPreview}
+          >
             <div className="bg-gray-800 p-3 rounded-lg mr-4">
               <Briefcase className="w-5 h-5 text-gray-400" />
             </div>
             <span className="text-white font-medium">FII and DII Activity</span>
           </div>
           
-          <div className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center">
+          <div 
+            className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center cursor-pointer hover:border-finance-green/50 transition-all"
+            onClick={scrollToPreview}
+          >
             <div className="bg-gray-800 p-3 rounded-lg mr-4">
               <Ban className="w-5 h-5 text-gray-400" />
             </div>
             <span className="text-white font-medium">Stock In Ban List</span>
           </div>
           
-          <div className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center">
+          <div 
+            className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center cursor-pointer hover:border-finance-green/50 transition-all"
+            onClick={scrollToPreview}
+          >
             <div className="bg-gray-800 p-3 rounded-lg mr-4">
               <Rocket className="w-5 h-5 text-gray-400" />
             </div>
             <span className="text-white font-medium">Current IPOs</span>
           </div>
           
-          <div className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center">
+          <div 
+            className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center cursor-pointer hover:border-finance-green/50 transition-all"
+            onClick={scrollToPreview}
+          >
             <div className="bg-gray-800 p-3 rounded-lg mr-4">
               <Activity className="w-5 h-5 text-gray-400" />
             </div>
             <span className="text-white font-medium">PCR & Pivot Levels</span>
           </div>
           
-          <div className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center">
+          <div 
+            className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center cursor-pointer hover:border-finance-green/50 transition-all"
+            onClick={scrollToPreview}
+          >
             <div className="bg-gray-800 p-3 rounded-lg mr-4">
               <MessageSquare className="w-5 h-5 text-gray-400" />
             </div>
             <span className="text-white font-medium">Option Chain</span>
           </div>
           
-          <div className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center">
+          <div 
+            className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center cursor-pointer hover:border-finance-green/50 transition-all"
+            onClick={scrollToPreview}
+          >
             <div className="bg-gray-800 p-3 rounded-lg mr-4">
               <Bookmark className="w-5 h-5 text-gray-400" />
             </div>

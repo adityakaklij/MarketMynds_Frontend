@@ -15,6 +15,15 @@ export function Navbar() {
     { label: "Love ❤️", href: "#testimonials", isAnchor: true },
   ];
 
+  const downloadSampleReport = () => {
+    const link = document.createElement('a');
+    link.href = '/MarketMynds.pdf';
+    link.download = 'MarketMynds-Sample-Report.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <nav className="fixed top-0 w-full z-50 backdrop-blur-lg bg-black/50 border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -178,14 +187,13 @@ export function Navbar() {
           >
             Terms
           </Link>
-          <a href="#subscription">
             <Button
               variant="default"
               className="w-full bg-finance-green text-black hover:bg-finance-green/90 font-medium mt-2"
+              onClick={downloadSampleReport}
             >
-              Start My Trial
+              Download Sample Report
             </Button>
-          </a>
         </div>
       </div>
     </nav>
