@@ -1,4 +1,4 @@
-import { BadgeIndianRupee, Receipt, Download, FileCheck, User, Mail, MessageSquare, AlertCircle, Clock, Sparkles, UserCheck } from "lucide-react";
+import { BadgeIndianRupee, Receipt, Download, FileCheck, User, Mail, MessageSquare, AlertCircle, Clock, Sparkles, UserCheck, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
@@ -85,6 +85,13 @@ export default function Pricing() {
   const [remainingSpots, setRemainingSpots] = useState(200);
   const [processingPayment, setProcessingPayment] = useState(false);
   const [referralCode, setReferralCode] = useState("");
+  const [couponCode, setCouponCode] = useState("");
+  const [discountedPrice, setDiscountedPrice] = useState(0);
+  const [couponError, setCouponError] = useState("");
+  const [couponSuccess, setCouponSuccess] = useState("");
+  const [validatingCoupon, setValidatingCoupon] = useState(false);
+  const [discountPercentage, setDiscountPercentage] = useState(0);
+  const [showCouponField, setShowCouponField] = useState(false);
   
   // Form validation states
   const [errors, setErrors] = useState({
@@ -193,6 +200,62 @@ export default function Pricing() {
     return isValid;
   };
 
+  const validateCoupon = async () => {
+    if (!couponCode.trim()) {
+      setCouponError("Please enter a coupon code");
+      return;
+    }
+
+    setValidatingCoupon(true);
+    setCouponError("");
+    setCouponSuccess("");
+
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/validate-coupon`, {
+        coupon_code: couponCode,
+        amount: selectedPlan.price,
+        email: email,
+        plan: selectedPlan.planId
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log("response",response);
+
+      if (response.data.status === "success") {
+        const newDiscountedPrice = response.data.data.final_amount || 0;
+        setDiscountedPrice(newDiscountedPrice);
+        
+        // Calculate discount percentage
+        // const originalPrice = selectedPlan.price || 0;
+        // const discount = originalPrice - newDiscountedPrice;
+        // const percentage = Math.round((discount / originalPrice) * 100);
+        // setDiscountPercentage(isNaN(percentage) ? 0 : percentage);
+        setDiscountPercentage(response.data.data.discount_percentage);
+        console.log("discount_percentage",response.data.data.discount_percentage);
+        
+        // setCouponSuccess(`Coupon applied successfully! (${isNaN(percentage) ? 0 : percentage}% off)`);
+        setCouponSuccess(`Coupon applied successfully! (${response.data.data.discount_percentage}% off)`);
+      } else {
+        setCouponError(response.data.message || "Invalid coupon");
+        setDiscountedPrice(0);
+        setDiscountPercentage(0);
+      }
+    } catch (error) {
+      console.error("Error validating coupon:", error);
+      if (error.response && error.response.data && error.response.data.message) {
+        setCouponError(error.response.data.message);
+      } else {
+        setCouponError("Failed to validate coupon. Please try again.");
+      }
+      setDiscountedPrice(0);
+      setDiscountPercentage(0);
+    } finally {
+      setValidatingCoupon(false);
+    }
+  };
+
   const handlePayment = async () => {
     if (validateForm()) {
       setProcessingPayment(true);
@@ -205,7 +268,7 @@ export default function Pricing() {
           items: [{
             item_name: selectedPlan.title,
             item_category: 'Subscription Plan',
-            price: selectedPlan.price
+            price: discountedPrice > 0 ? discountedPrice : selectedPlan.price
           }]
         }
       });
@@ -218,8 +281,9 @@ export default function Pricing() {
         email: email,
         mobile: whatsappNumber,
         plan: selectedPlan.planId,
-        amount: selectedPlan.price,
+        amount: discountedPrice > 0 ? discountedPrice : selectedPlan.price,
         referralCode: refCode, // Send referral code with payment data
+        couponCode: couponSuccess ? couponCode : "", // Send coupon code only if it was successfully applied
       },
       {
         headers: {
@@ -376,7 +440,18 @@ export default function Pricing() {
       </div>
 
       {/* Payment Dialog */}
-      <Dialog open={paymentOpen} onOpenChange={setPaymentOpen}>
+      <Dialog open={paymentOpen} onOpenChange={(open) => {
+        setPaymentOpen(open);
+        if (!open) {
+          // Reset coupon state when dialog closes
+          setCouponCode("");
+          setDiscountedPrice(0);
+          setCouponError("");
+          setCouponSuccess("");
+          setDiscountPercentage(0);
+          setShowCouponField(false);
+        }
+      }}>
         <DialogContent className="bg-black border border-finance-green/20 text-white max-w-md mx-auto max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold text-finance-green">
@@ -387,80 +462,155 @@ export default function Pricing() {
             </DialogDescription>
           </DialogHeader>
 
-          <div className="space-y-4 my-4">
-            <div className="text-center mb-4">
-              <div className="text-3xl font-extrabold mb-2"> ₹{selectedPlan && selectedPlan.price}</div>
-              <div className="text-gray-400 text-sm">One-time payment. No auto-renewal.</div>
+          {/* Price display section */}
+          <div className="my-6 text-center">
+            {discountedPrice > 0 ? (
+              <div className="flex flex-col items-center">
+                <div className="inline-flex items-center gap-3 mb-1">
+                  <div className="relative">
+                    <span className="text-2xl font-bold text-gray-400">₹{selectedPlan?.price}</span>
+                    <span className="absolute top-1/2 left-0 right-0 h-0.5 bg-red-500 transform -rotate-12"></span>
+                  </div>
+                  <span className="text-3xl font-extrabold text-finance-green">₹{discountedPrice}</span>
+                  <span className="text-xs font-medium bg-finance-green/10 text-finance-green py-0.5 px-2 rounded-full">
+                    {discountPercentage}% OFF
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <div className="text-5xl font-extrabold mb-2">₹{selectedPlan && selectedPlan.price}</div>
+            )}
+            <div className="text-gray-400 text-sm mt-2">One-time payment. No auto-renewal.</div>
+          </div>
+
+          {/* Form section */}
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">Your Name</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <User className="h-4 w-4 text-gray-400" />
+                </div>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="Enter your full name"
+                  className={`bg-gray-900 border-gray-700 focus:border-finance-green text-white pl-10 ${errors.name ? 'border-red-500' : ''}`}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              {errors.name && (
+                <div className="text-red-500 text-xs mt-1 flex items-center">
+                  <AlertCircle className="h-3 w-3 mr-1" />
+                  {errors.name}
+                </div>
+              )}
+            </div>
+            
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">Your Email</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Mail className="h-4 w-4 text-gray-400" />
+                </div>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="Enter your email"
+                  className={`bg-gray-900 border-gray-700 focus:border-finance-green text-white pl-10 ${errors.email ? 'border-red-500' : ''}`}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              {errors.email && (
+                <div className="text-red-500 text-xs mt-1 flex items-center">
+                  <AlertCircle className="h-3 w-3 mr-1" />
+                  {errors.email}
+                </div>
+              )}
+            </div>
+            
+            <div>
+              <label htmlFor="whatsapp" className="block text-sm font-medium text-gray-300 mb-1">WhatsApp Number</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <MessageSquare className="h-4 w-4 text-gray-400" />
+                </div>
+                <Input
+                  id="whatsapp"
+                  type="tel"
+                  placeholder="e.g. 9876543210"
+                  className={`bg-gray-900 border-gray-700 focus:border-finance-green text-white pl-10 ${errors.whatsappNumber ? 'border-red-500' : ''}`}
+                  value={whatsappNumber}
+                  onChange={(e) => setWhatsappNumber(e.target.value)}
+                />
+              </div>
+              {errors.whatsappNumber && (
+                <div className="text-red-500 text-xs mt-1 flex items-center">
+                  <AlertCircle className="h-3 w-3 mr-1" />
+                  {errors.whatsappNumber}
+                </div>
+              )}
+              <p className="text-xs text-gray-400 mt-1">We'll send reports to this WhatsApp number</p>
             </div>
 
-            <div className="space-y-4">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">Your Name</label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <User className="h-4 w-4 text-gray-400" />
+            {/* Coupon Code Section */}
+            <div>
+              {showCouponField || couponSuccess ? (
+                <>
+                  <label htmlFor="coupon" className="block text-sm font-medium text-gray-300 mb-1">Coupon Code</label>
+                  <div className="flex space-x-2">
+                    <div className="relative flex-grow">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <Tag className="h-4 w-4 text-gray-400" />
+                      </div>
+                      <Input
+                        id="coupon"
+                        type="text"
+                        placeholder="Enter coupon code"
+                        className={`bg-gray-900 border-gray-700 focus:border-finance-green text-white pl-10 ${couponError ? 'border-red-500' : couponSuccess ? 'border-green-500' : ''}`}
+                        value={couponCode}
+                        onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                      />
+                    </div>
+                    <Button 
+                      className="bg-finance-green hover:bg-finance-green/90 text-black font-semibold"
+                      onClick={validateCoupon}
+                      disabled={validatingCoupon}
+                    >
+                      {validatingCoupon ? (
+                        <div className="flex items-center justify-center">
+                          <svg className="animate-spin h-4 w-4 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                        </div>
+                      ) : "Apply"}
+                    </Button>
                   </div>
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="Enter your full name"
-                    className={`bg-gray-900 border-gray-700 focus:border-finance-green text-white pl-10 ${errors.name ? 'border-red-500' : ''}`}
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </div>
-                {errors.name && (
-                  <div className="text-red-500 text-xs mt-1 flex items-center">
-                    <AlertCircle className="h-3 w-3 mr-1" />
-                    {errors.name}
-                  </div>
-                )}
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">Your Email</label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Mail className="h-4 w-4 text-gray-400" />
-                  </div>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="Enter your email"
-                    className={`bg-gray-900 border-gray-700 focus:border-finance-green text-white pl-10 ${errors.email ? 'border-red-500' : ''}`}
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                {errors.email && (
-                  <div className="text-red-500 text-xs mt-1 flex items-center">
-                    <AlertCircle className="h-3 w-3 mr-1" />
-                    {errors.email}
-                  </div>
-                )}
-              </div>
-              <div>
-                <label htmlFor="whatsapp" className="block text-sm font-medium text-gray-300 mb-1">WhatsApp Number</label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <MessageSquare className="h-4 w-4 text-gray-400" />
-                  </div>
-                  <Input
-                    id="whatsapp"
-                    type="tel"
-                    placeholder="e.g. 9876543210"
-                    className={`bg-gray-900 border-gray-700 focus:border-finance-green text-white pl-10 ${errors.whatsappNumber ? 'border-red-500' : ''}`}
-                    value={whatsappNumber}
-                    onChange={(e) => setWhatsappNumber(e.target.value)}
-                  />
-                </div>
-                {errors.whatsappNumber && (
-                  <div className="text-red-500 text-xs mt-1 flex items-center">
-                    <AlertCircle className="h-3 w-3 mr-1" />
-                    {errors.whatsappNumber}
-                  </div>
-                )}
-                <p className="text-xs text-gray-400 mt-1">We'll send reports to this WhatsApp number</p>
-              </div>
+                  {couponError && (
+                    <div className="text-red-500 text-xs mt-1 flex items-center">
+                      <AlertCircle className="h-3 w-3 mr-1" />
+                      {couponError}
+                    </div>
+                  )}
+                  {couponSuccess && (
+                    <div className="text-green-500 text-xs mt-1 flex items-center">
+                      <Sparkles className="h-3 w-3 mr-1" />
+                      Coupon applied successfully!
+                    </div>
+                  )}
+                </>
+              ) : (
+                <button
+                  onClick={() => setShowCouponField(true)}
+                  className="text-finance-green text-sm flex items-center gap-1 hover:underline focus:outline-none mt-2"
+                >
+                  <Tag className="h-3.5 w-3.5" />
+                  Add coupon code
+                </button>
+              )}
             </div>
           </div>
 
@@ -479,7 +629,7 @@ export default function Pricing() {
                   Processing Payment...
                 </div>
               ) : (
-                'Make Payment'
+                `Make Payment${discountedPrice > 0 ? ` - ₹${discountedPrice}` : ''}`
               )}
             </Button>
           </DialogFooter>
