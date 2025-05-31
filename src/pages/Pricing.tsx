@@ -43,24 +43,24 @@ const plans = [
   {
     title: "1 Month",
     price: 99,
-    description: "Full pre-market access for 30 days*.",
+    description: "Try for one month.",
     bonus: false,
     planId: "1"
   },
-  {
-    title: "3 Months",
-    price: 249,
-    description: "Save 16% - Full access for 3 months.",
-    bonus: false,
-    planId: "2"
-  },
-  {
-    title: "6 Months",
-    price: 449,
-    description: "Save 24% - Full access for 6 months.",
-    bonus: false,
-    planId: "3"
-  },
+  // {
+  //   title: "3 Months",
+  //   price: 249,
+  //   description: "Save 16% - Full access for 3 months.",
+  //   bonus: false,
+  //   planId: "2"
+  // },
+  // {
+  //   title: "6 Months",
+  //   price: 449,
+  //   description: "Save 24% - Full access for 6 months.",
+  //   bonus: false,
+  //   planId: "3"
+  // },
   {
     title: "12 Months",
     price: 649,
