@@ -54,17 +54,18 @@ const plans = [
   //   bonus: false,
   //   planId: "2"
   // },
-  // {
-  //   title: "6 Months",
-  //   price: 449,
-  //   description: "Save 24% - Full access for 6 months.",
-  //   bonus: false,
-  //   planId: "3"
-  // },
+  {
+    title: "6 Months",
+    price: 449,
+    description: "Full access for 6 months.",
+    bonus: false,
+    planId: "3"
+  },
   {
     title: "12 Months",
     price: 649,
-    description: "Best value - Full access for 12 months.",
+    // description: "Best value - Full access for 12 months.",
+    description: "Full access for 12 months.",
     bonus: true,
     planId: "4"
   },
@@ -326,12 +327,15 @@ export default function Pricing() {
       {/* Lifetime Deal - Special Offer */}
       <div className="max-w-3xl mx-auto mb-12">
         <div 
-          className="relative rounded-xl border-2 border-finance-green p-1 bg-gradient-to-b from-black to-finance-blue/20 shadow-xl"
-          style={{ 
-            animation: 'pulse-border 2s infinite',
-            transformStyle: 'preserve-3d'
-          }}
+          className="relative rounded-xl border-2 border-gray-700 p-1 bg-gradient-to-b from-black to-finance-blue/20 shadow-xl opacity-90"
         >
+          {/* Sold Out Overlay */}
+          {/* <div className="absolute inset-0  flex items-center justify-center z-20 rounded-xl">
+            <div className="bg-red-600 text-white px-8 py-4 rounded-full transform rotate-12 text-2xl font-extrabold shadow-lg">
+              SOLD OUT
+            </div>
+          </div> */}
+          
           {/* Corner badge */}
           <div className="absolute -top-4 -right-4 bg-finance-green text-black font-bold py-2 px-4 rounded-full shadow-lg z-10 transform rotate-12">
             EXCLUSIVE
@@ -370,29 +374,23 @@ export default function Pricing() {
                 <div className="space-y-2 mb-4">
                   <div className="flex items-center gap-2">
                     <Clock className="text-finance-green h-4 w-4" />
-                    <span className="text-gray-200">Limited time offer - ending soon!</span>
+                    <span className="text-gray-200">Limited time offer - SOLD OUT!</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <UserCheck className="text-finance-green h-4 w-4" />
                     <span className="text-gray-200">
-                      Only for first 200 Subscribers
+                      All 200 spots have been claimed
                     </span>
                   </div>
                 </div>
               </div>
               
-              <div className="flex-none" style={{ animation: 'float 3s ease-in-out infinite' }}>
+              <div className="flex-none">
                 <Button 
-                  className="bg-finance-green hover:bg-finance-green/90 text-black font-bold text-lg px-8 py-6 rounded-xl shadow-lg shadow-finance-green/30"
-                  onClick={() => handlePlanSelect({
-                    title: "Lifetime",
-                    price: 999,
-                    description: "One-time payment, lifetime access to MarketMynds reports.",
-                    bonus: true,
-                    planId: "5"
-                  })}
+                  className="bg-gray-700 text-gray-300 font-bold text-lg px-8 py-6 rounded-xl shadow-lg cursor-not-allowed"
+                  disabled={true}
                 >
-                  Get Lifetime Access
+                  Sold Out
                 </Button>
               </div>
             </div>
@@ -401,7 +399,7 @@ export default function Pricing() {
       </div>
       
       {/* Regular plans */}
-      <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-12">
+      <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
         {plans.map((plan) => (
           <div key={plan.title} className="rounded-xl border border-finance-green/20 bg-gradient-to-b from-finance-blue/5 to-black p-8 flex flex-col items-center shadow-lg shadow-black/20">
             <div className="flex items-center gap-2 mb-2">
