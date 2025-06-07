@@ -40,13 +40,7 @@ declare global {
 }
 
 const plans = [
-  {
-    title: "1 Month",
-    price: 99,
-    description: "Try for one month.",
-    bonus: false,
-    planId: "1"
-  },
+  
   // {
   //   title: "3 Months",
   //   price: 249,
@@ -55,19 +49,26 @@ const plans = [
   //   planId: "2"
   // },
   {
+    title: "12 Months",
+    price: 649,
+    description: "Full access for 12 months.",
+    bonus: true,
+    planId: "4"
+  },
+  {
     title: "6 Months",
     price: 449,
     description: "Full access for 6 months.",
     bonus: false,
     planId: "3"
   },
+
   {
-    title: "12 Months",
-    price: 649,
-    // description: "Best value - Full access for 12 months.",
-    description: "Full access for 12 months.",
-    bonus: true,
-    planId: "4"
+    title: "1 Month",
+    price: 99,
+    description: "Try for one month.",
+    bonus: false,
+    planId: "1"
   },
 ];
 
