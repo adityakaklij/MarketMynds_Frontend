@@ -209,9 +209,38 @@ export function HeroSection() {
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
         <div className="text-center max-w-4xl mx-auto">
+          {/* Trusted by section with avatars - moved to top */}
+          <div className="mb-8 flex justify-center">
+            <div className="bg-[#073B3A] bg-opacity-80 rounded-full py-3 px-5 inline-flex items-center justify-center shadow-lg backdrop-blur-sm border border-[#00D166]/20">
+              <div className="flex -space-x-2 mr-3">
+                <img 
+                  src="https://randomuser.me/api/portraits/men/32.jpg" 
+                  alt="User avatar" 
+                  className="w-8 h-8 rounded-full border-2 border-[#073B3A]"
+                />
+                <img 
+                  src="https://randomuser.me/api/portraits/women/44.jpg" 
+                  alt="User avatar" 
+                  className="w-8 h-8 rounded-full border-2 border-[#073B3A]"
+                />
+                <img 
+                  src="https://randomuser.me/api/portraits/men/86.jpg" 
+                  alt="User avatar" 
+                  className="w-8 h-8 rounded-full border-2 border-[#073B3A]"
+                />
+                <img 
+                  src="https://randomuser.me/api/portraits/women/63.jpg" 
+                  alt="User avatar" 
+                  className="w-8 h-8 rounded-full border-2 border-[#073B3A]"
+                />
+              </div>
+              <span className="text-white font-medium">Trusted by 1,000+ people</span>
+            </div>
+          </div>
+          
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
             <span className="block relative">
-              The Market. At a Glance.
+            Start Your Trading Day Smarter.
               <span className="absolute -bottom-2 left-1/2 w-20 h-1 bg-finance-green/80 transform -translate-x-1/2 rounded-full"></span>
             </span>
             <span className="block mt-4">
@@ -227,13 +256,15 @@ export function HeroSection() {
                   textShadow: '0 0 20px rgba(0, 209, 102, 0.3)',
                 }}
               >
-                Before 9 AM.
+                {/* Before 9 AM. */}
+                With AI.
               </span>
             </span>
           </h1>
           
           <p className="mt-6 text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            No opinions. No hype. Just a crisp morning snapshot of what's moving markets global and local.
+            {/* No opinions. No hype. Just a crisp morning snapshot of what's moving markets global and local. */}
+            Get India's smartest pre-market report delivered to your WhatsApp by 8 AM just ₹99/month.
           </p>
           
           <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
@@ -273,7 +304,7 @@ export function HeroSection() {
                   </a>
                 </span>
               </div>
-          
+
           <div className="mt-12 flex items-center justify-center space-x-6 sm:space-x-12">
             <div className="text-center">
               <p className="text-3xl font-bold" style={{
