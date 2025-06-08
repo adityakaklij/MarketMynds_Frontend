@@ -1,5 +1,30 @@
-import React from 'react';
-import { ChevronUp, ChevronDown, BarChart2, TrendingUp, TrendingDown, ArrowRight, ArrowLeft, AlertTriangle, Layers, Briefcase, Activity, List, MessageSquare, FileText, Clock, Ban, Rocket, Bookmark } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ChevronUp, ChevronDown, BarChart2, TrendingUp, TrendingDown, ArrowRight, ArrowLeft, AlertTriangle, Layers, Briefcase, Activity, List, MessageSquare, FileText, Clock, Ban, Rocket, Bookmark, Zap, Send } from 'lucide-react';
+
+// Simplified typing animation styles
+const typingAnimationStyles = `
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 16px;
+  background-color: #00D166;
+  margin-left: 4px;
+  animation: blink 1s infinite;
+  vertical-align: middle;
+}
+
+.text-area {
+  color: white;
+  font-size: 16px;
+  line-height: 1.5;
+}
+`;
 
 export function ReportPreviewSection() {
   const scrollToPreview = () => {
@@ -8,6 +33,59 @@ export function ReportPreviewSection() {
       previewSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  // SIMPLIFIED Typing animation states
+  const [text, setText] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
+  
+  // Chat messages for typing animation
+  const messages = [
+    "The market showed mixed sentiment with select sectors witnessing gains, while others faced mild declines over the past week.",
+    "I've spotted some notable corporate developments:",
+    "Tata Motors shares rose 4.5% following strong Jaguar Land Rover quarterly sales data.",
+    "However, Adani Enterprises declined by 3.7% after reports of regulatory scrutiny affecting investor sentiment.",
+    "Looking at sectors, IT gained over 2% while Pharma saw a 3.2% gain over the week.",
+    "Defensive sectors like FMCG and Pharma gained traction amid broader market uncertainty."
+  ];
+
+  useEffect(() => {
+    // Reset the animation when component mounts
+    setText('');
+    setCurrentIndex(0);
+    setCurrentMessageIndex(0);
+    setIsTyping(true);
+  }, []);
+
+  useEffect(() => {
+    // Simple typing animation
+    if (!isTyping) return;
+
+    const message = messages[currentMessageIndex];
+    
+    // If we've completed typing the current message
+    if (currentIndex >= message.length) {
+      // Wait for 2 seconds before erasing
+      const timeout = setTimeout(() => {
+        // Start erasing
+        setText('');
+        setCurrentIndex(0);
+        // Move to next message
+        setCurrentMessageIndex((prev) => (prev + 1) % messages.length);
+      }, 2000);
+      
+      return () => clearTimeout(timeout);
+    }
+    
+    // Type the next character
+    const typingTimeout = setTimeout(() => {
+      setText(message.substring(0, currentIndex + 1));
+      setCurrentIndex(currentIndex + 1);
+    }, 50); // Adjust speed as needed
+    
+    return () => clearTimeout(typingTimeout);
+  }, [currentIndex, currentMessageIndex, isTyping]);
 
   return (
     <section id="report-preview" className="py-24 bg-black relative overflow-hidden">
@@ -24,6 +102,79 @@ export function ReportPreviewSection() {
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             Everything you need to stay ahead before the market opens.
           </p>
+        </div>
+
+        {/* Myndbyte Feature - AI Market Briefing with Chat Interface */}
+        <div className="mb-16">
+          <div 
+            className="bg-[#0A0E17] backdrop-blur-sm p-8 rounded-xl border border-gray-800 cursor-pointer hover:border-finance-green/50 transition-all"
+            onClick={scrollToPreview}
+          >
+            {/* Chat header */}
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center">
+                <div className="w-10 h-10 bg-finance-green rounded-full flex items-center justify-center mr-3">
+                  <Zap className="w-5 h-5 text-black" />
+                </div>
+                <div>
+                  <h4 className="text-xl w-1/2 font-bold text-white">Myndbyte</h4>
+                  <p className="text-sm text-gray-400">Your bite-sized AI briefing before the bell</p>
+                </div>
+              </div>
+              {/* <div className="text-xs bg-[#043832] text-finance-green px-4 py-1.5 text-center rounded-full whitespace-nowrap min-w-[90px]"> */}
+              <div className="text-xs bg-[#043832] text-finance-green px-4 py-1.5 text-center rounded-full whitespace-nowrap ">
+                AI Powered
+              </div>
+            </div>
+
+            {/* Chat conversation area */}
+            <div className="bg-[#12141C] rounded-lg p-5 mb-2 min-h-[10px] flex">
+              {/* Style for typing animation */}
+              <style dangerouslySetInnerHTML={{ __html: typingAnimationStyles }} />
+              
+              {/* Vertical indicator bar */}
+              <div className="w-1.5 h-8 bg-finance-green rounded-full mr-4 mt-1 self-start flex-shrink-0"></div>
+              
+              {/* Typing area */}
+              <div className="flex items-start pt-2">
+                <div className="text-area">
+                  {text}
+                  <span className="typing-cursor"></span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Market data cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+              <div className="bg-[#12141C] rounded-lg p-4 border border-gray-800">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-gray-400 text-sm">Nifty 50</span>
+                  <span className="text-green-500 text-sm flex items-center">
+                    +0.24% <TrendingUp className="ml-1 w-3 h-3" />
+                  </span>
+                </div>
+                <div className="text-white font-medium">22,124.35</div>
+              </div>
+              
+              <div className="bg-[#12141C] rounded-lg p-4 border border-gray-800">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-gray-400 text-sm">Fear & Greed</span>
+                  <span className="text-yellow-500 text-sm">Neutral</span>
+                </div>
+                <div className="text-white font-medium">52/100</div>
+              </div>
+              
+              <div className="bg-[#12141C] rounded-lg p-4 border border-gray-800">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-gray-400 text-sm">Top Sector</span>
+                  <span className="text-green-500 text-sm flex items-center">
+                    +3.2% <TrendingUp className="ml-1 w-3 h-3" />
+                  </span>
+                </div>
+                <div className="text-white font-medium">Pharma</div>
+              </div>
+            </div>
+          </div>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
@@ -327,7 +478,7 @@ export function ReportPreviewSection() {
             <span className="text-white font-medium">PCR & Pivot Levels</span>
           </div>
           
-          <div 
+          {/* <div 
             className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center cursor-pointer hover:border-finance-green/50 transition-all"
             onClick={scrollToPreview}
           >
@@ -335,7 +486,7 @@ export function ReportPreviewSection() {
               <MessageSquare className="w-5 h-5 text-gray-400" />
             </div>
             <span className="text-white font-medium">Option Chain</span>
-          </div>
+          </div> */}
           
           <div 
             className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center cursor-pointer hover:border-finance-green/50 transition-all"
@@ -344,7 +495,17 @@ export function ReportPreviewSection() {
             <div className="bg-gray-800 p-3 rounded-lg mr-4">
               <Bookmark className="w-5 h-5 text-gray-400" />
             </div>
-            <span className="text-white font-medium">Most Active Contracts</span>
+            <span className="text-white font-medium">Most Active Contracts & Option Chain</span>
+          </div>
+          
+          <div 
+            className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 flex items-center cursor-pointer hover:border-finance-green/50 transition-all"
+            onClick={scrollToPreview}
+          >
+            <div className="bg-gray-800 p-3 rounded-lg mr-4">
+              <Zap className="w-5 h-5 text-gray-400" />
+            </div>
+            <span className="text-white font-medium">Myndbyte Daily Briefing</span>
           </div>
         </div>
       </div>
