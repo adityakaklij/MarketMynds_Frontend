@@ -214,22 +214,22 @@ export function HeroSection() {
             <div className="bg-[#073B3A] bg-opacity-80 rounded-full py-3 px-5 inline-flex items-center justify-center shadow-lg backdrop-blur-sm border border-[#00D166]/20">
               <div className="flex -space-x-2 mr-3">
                 <img 
-                  src="https://randomuser.me/api/portraits/men/32.jpg" 
+                  src="https://randomuser.me/api/portraits/men/65.jpg" 
                   alt="User avatar" 
                   className="w-8 h-8 rounded-full border-2 border-[#073B3A]"
                 />
                 <img 
-                  src="https://randomuser.me/api/portraits/women/44.jpg" 
+                  src="https://randomuser.me/api/portraits/women/8.jpg" 
                   alt="User avatar" 
                   className="w-8 h-8 rounded-full border-2 border-[#073B3A]"
                 />
                 <img 
-                  src="https://randomuser.me/api/portraits/men/86.jpg" 
+                  src="https://randomuser.me/api/portraits/men/50.jpg" 
                   alt="User avatar" 
                   className="w-8 h-8 rounded-full border-2 border-[#073B3A]"
                 />
                 <img 
-                  src="https://randomuser.me/api/portraits/women/63.jpg" 
+                  src="https://randomuser.me/api/portraits/men/39.jpg" 
                   alt="User avatar" 
                   className="w-8 h-8 rounded-full border-2 border-[#073B3A]"
                 />

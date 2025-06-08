@@ -39,7 +39,17 @@ declare global {
   }
 }
 
-const plans = [
+// Add type for plan
+interface Plan {
+  title: string;
+  price: number;
+  originalPrice?: number;
+  description: string;
+  bonus: boolean;
+  planId: string;
+}
+
+const plans: Plan[] = [
   
   // {
   //   title: "3 Months",
@@ -49,9 +59,10 @@ const plans = [
   //   planId: "2"
   // },
   {
-    title: "12 Months",
+    title: "1 Year",
     price: 649,
-    description: "Full access for 12 months.",
+    originalPrice: 1188,
+    description: "Full access for 1 year.",
     bonus: true,
     planId: "4"
   },
@@ -75,11 +86,13 @@ const plans = [
 export default function Pricing() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [selectedPlan, setSelectedPlan] = useState({title: "1 Month",
-                    price: 99,
-                    description: "Full pre-market access for 30 days.",
-                    bonus: true,
-                    planId: "1"});
+  const [selectedPlan, setSelectedPlan] = useState<Plan>({
+    title: "1 Month",
+    price: 99,
+    description: "Full pre-market access for 30 days.",
+    bonus: true,
+    planId: "1"
+  });
   const [paymentOpen, setPaymentOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -138,16 +151,16 @@ export default function Pricing() {
     randomDecrement();
   }, []);
 
-  const handlePlanSelect = (plan) => {
+  const handlePlanSelect = (plan: Plan) => {
     // Data events.
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: 'begin_checkout',
       ecommerce: {
         items: [{
-          item_name: plan?.title,
+          item_name: plan.title,
           item_category: 'Subscription Plan',
-          price: plan?.price
+          price: plan.price
         }]
       }
     });
@@ -326,18 +339,10 @@ export default function Pricing() {
       </div>
       
       {/* Lifetime Deal - Special Offer */}
-      <div className="max-w-3xl mx-auto mb-12">
+      {/* <div className="max-w-3xl mx-auto mb-12">
         <div 
           className="relative rounded-xl border-2 border-gray-700 p-1 bg-gradient-to-b from-black to-finance-blue/20 shadow-xl opacity-90"
-        >
-          {/* Sold Out Overlay */}
-          {/* <div className="absolute inset-0  flex items-center justify-center z-20 rounded-xl">
-            <div className="bg-red-600 text-white px-8 py-4 rounded-full transform rotate-12 text-2xl font-extrabold shadow-lg">
-              SOLD OUT
-            </div>
-          </div> */}
-          
-          {/* Corner badge */}
+        >          
           <div className="absolute -top-4 -right-4 bg-finance-green text-black font-bold py-2 px-4 rounded-full shadow-lg z-10 transform rotate-12">
             EXCLUSIVE
           </div>
@@ -364,7 +369,6 @@ export default function Pricing() {
                 
                 <div className="flex items-center gap-2 mb-2">
                   <div className="relative">
-                    {/* <span className="text-3xl font-extrabold">₹1,999</span> */}
                     <span className="absolute top-1/2 left-0 right-0 h-0.5 bg-red-500 transform -rotate-12"></span>
                   </div>
                   <span className="text-4xl font-extrabold text-finance-green">₹999</span>
@@ -397,7 +401,7 @@ export default function Pricing() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       
       {/* Regular plans */}
       <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
@@ -407,10 +411,24 @@ export default function Pricing() {
               <BadgeIndianRupee className="text-finance-green" />
               <span className="text-2xl font-semibold">{plan.title}</span>
               {plan.bonus && (
-                <span className="ml-2 px-2 py-1 rounded bg-finance-green/10 text-finance-green text-xs font-medium">Best Value</span>
+                // <span className="ml-2 px-2 py-1 rounded bg-finance-green/10 text-finance-green text-xs font-medium">Best Value</span>
+                <span className="ml-2 px-2 py-1 rounded bg-finance-green/10 text-finance-green text-xs font-medium">Save 45%</span>
               )}
             </div>
-            <div className="text-3xl font-extrabold mb-2"> ₹{plan.price}</div>
+            {plan.originalPrice ? (
+              <div className="flex flex-col items-center">
+                <div className="relative mb-1">
+                  <span className="text-xl font-bold text-gray-400">₹{plan.originalPrice}</span>
+                  <span className="absolute top-1/2 left-0 right-0 h-0.5 bg-red-500 transform -rotate-12"></span>
+                </div>
+                <div className="text-3xl font-extrabold text-finance-green mb-2">₹{plan.price}</div>
+                {/* <span className="text-xs font-medium bg-finance-green/10 text-finance-green py-0.5 px-2 rounded-full mb-1">
+                  {Math.round(((plan.originalPrice - plan.price) / plan.originalPrice) * 100)}% OFF
+                </span> */}
+              </div>
+            ) : (
+              <div className="text-3xl font-extrabold mb-2">₹{plan.price}</div>
+            )}
             <div className="text-gray-400 mb-6">{plan.description}</div>
             <Button 
               className="bg-finance-green hover:bg-finance-green/90 text-black/90 w-full font-semibold"
@@ -473,6 +491,19 @@ export default function Pricing() {
                   <span className="text-3xl font-extrabold text-finance-green">₹{discountedPrice}</span>
                   <span className="text-xs font-medium bg-finance-green/10 text-finance-green py-0.5 px-2 rounded-full">
                     {discountPercentage}% OFF
+                  </span>
+                </div>
+              </div>
+            ) : selectedPlan && selectedPlan.originalPrice ? (
+              <div className="flex flex-col items-center">
+                <div className="inline-flex items-center gap-3 mb-1">
+                  <div className="relative">
+                    <span className="text-2xl font-bold text-gray-400">₹{selectedPlan.originalPrice}</span>
+                    <span className="absolute top-1/2 left-0 right-0 h-0.5 bg-red-500 transform -rotate-12"></span>
+                  </div>
+                  <span className="text-3xl font-extrabold text-finance-green">₹{selectedPlan.price}</span>
+                  <span className="text-xs font-medium bg-finance-green/10 text-finance-green py-0.5 px-2 rounded-full">
+                    {Math.round(((selectedPlan.originalPrice - selectedPlan.price) / selectedPlan.originalPrice) * 100)}% OFF
                   </span>
                 </div>
               </div>
