@@ -43,7 +43,7 @@ export function ReportPreviewSection() {
   // Chat messages for typing animation
   const messages = [
     "The market showed mixed sentiment with select sectors witnessing gains, while others faced mild declines over the past week.",
-    "I've spotted some notable corporate developments:",
+    "I've spotted some notable corporate developments.",
     "Tata Motors shares rose 4.5% following strong Jaguar Land Rover quarterly sales data.",
     "However, Adani Enterprises declined by 3.7% after reports of regulatory scrutiny affecting investor sentiment.",
     "Looking at sectors, IT gained over 2% while Pharma saw a 3.2% gain over the week.",
