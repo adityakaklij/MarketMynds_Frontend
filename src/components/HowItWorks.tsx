@@ -11,7 +11,8 @@ export function HowItWorks() {
 
   const openWhatsApp = () => {
     const message = encodeURIComponent("Hi! I'm interested in the MarketMynds pre-market reports.");
-    window.open(`https://wa.me/+919307202438?text=${message}`, '_blank');
+    // window.open(`https://wa.me/+?text=${message}`, '_blank');
+    window.open(`https://wa.me/+918062960996?text=${message}`, '_blank');
   };
 
   const downloadSampleReport = () => {

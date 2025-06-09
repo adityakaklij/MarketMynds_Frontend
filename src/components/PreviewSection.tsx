@@ -72,7 +72,8 @@ export function PreviewSection() {
                 <span>
                   Check our latest PDF report on {' '}
                   <a 
-                    href="https://api.whatsapp.com/send?phone=+919307202438&text=Can%20I%20see%20the%20sample%20PDF%20report%3F" 
+                    // href="https://api.whatsapp.com/send?phone=+919307202438&text=Can%20I%20see%20the%20sample%20PDF%20report%3F" 
+                    href="https://api.whatsapp.com/send?phone=+918062960996&text=Can%20I%20see%20the%20sample%20PDF%20report%3F" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-finance-green hover:underline inline-flex items-center"
