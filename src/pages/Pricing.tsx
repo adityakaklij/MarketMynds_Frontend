@@ -51,13 +51,7 @@ interface Plan {
 
 const plans: Plan[] = [
   
-  // {
-  //   title: "3 Months",
-  //   price: 249,
-  //   description: "Save 16% - Full access for 3 months.",
-  //   bonus: false,
-  //   planId: "2"
-  // },
+  
   {
     title: "1 Year",
     price: 649,
@@ -75,12 +69,20 @@ const plans: Plan[] = [
   },
 
   {
-    title: "1 Month",
-    price: 99,
-    description: "Try for one month.",
+    title: "3 Months",
+    price: 249,
+    description: "Full access for 3 months.",
     bonus: false,
-    planId: "1"
+    planId: "2"
   },
+
+  // {
+  //   title: "1 Month",
+  //   price: 99,
+  //   description: "Try for one month.",
+  //   bonus: false,
+  //   planId: "1"
+  // },
 ];
 
 export default function Pricing() {
