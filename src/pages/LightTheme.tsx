@@ -7,6 +7,7 @@ import { SubscriptionCTA } from "@/components/SubscriptionCTA";
 import { Footer } from "@/components/Footer";
 import { ReportPreviewSection } from "@/components/ReportPreviewSection";
 import { HowItWorks } from "@/components/HowItWorks";
+import { YouTubeVideo } from "@/components/YouTubeVideo";
 import { useState, useEffect } from "react";
 import Pricing from "./Pricing";
 
@@ -81,6 +82,32 @@ const lightThemeStyles = `
 
   .light-theme .hero-section p {
     color: var(--text-secondary);
+  }
+
+  /* YouTube Video Section */
+  .light-theme .py-16.bg-black {
+    background-color: var(--bg-primary) !important;
+  }
+  
+  .light-theme .py-16.bg-black h2 {
+    color: var(--text-primary) !important;
+  }
+  
+  .light-theme .py-16.bg-black p,
+  .light-theme .py-16.bg-black li span:last-child {
+    color: var(--text-secondary) !important;
+  }
+  
+  .light-theme .py-16.bg-black .bg-finance-green {
+    background-color: var(--accent-color) !important;
+  }
+  
+  .light-theme .py-16.bg-black .border-gray-800 {
+    border-color: var(--border-color) !important;
+  }
+  
+  .light-theme .py-16.bg-black .bg-gray-900 {
+    background-color: var(--bg-secondary) !important;
   }
 
   /* How It Works - UPDATED */
@@ -403,6 +430,7 @@ const LightTheme = () => {
       
       <Navbar />
       <HeroSection />
+      <YouTubeVideo videoId="FPYpvV7XnKU" />
       <HowItWorks />
       <ReportPreviewSection />
       <PreviewSection />

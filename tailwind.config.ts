@@ -100,5 +100,27 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		function({ addComponents }) {
+			addComponents({
+				'.aspect-w-16': {
+					position: 'relative',
+					paddingBottom: '56.25%'
+				},
+				'.aspect-h-9': {
+					position: 'relative'
+				},
+				'.aspect-w-16 > *, .aspect-h-9 > *': {
+					position: 'absolute',
+					height: '100%',
+					width: '100%',
+					top: '0',
+					right: '0',
+					bottom: '0',
+					left: '0'
+				}
+			})
+		}
+	],
 } satisfies Config;

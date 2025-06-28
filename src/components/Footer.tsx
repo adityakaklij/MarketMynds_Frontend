@@ -8,8 +8,8 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1">
             <div className="text-2xl font-bold text-white">Market<span className="text-finance-green">Mynds</span></div>
-            <p className="mt-4 text-gray-400">
-              By the Traders, For the Traders
+            <p className="mt-1 text-gray-400">
+              Be Informed. 
             </p>
           </div>
           
@@ -76,7 +76,7 @@ export function Footer() {
         
         <div className="mt-8">
           <p className="text-xs text-gray-500 text-center">
-            Disclaimer: Market analysis and trade ideas are provided for informational purposes only. We are not registered financial advisors. Trading involves risk.
+            Disclaimer: Market Mynds is not a tips provider. The report is for informational purposes only and not investment advice. Read *Terms of Service
           </p>
         </div>
       </div>

@@ -30,9 +30,15 @@ export default function Terms() {
               <p>“Lifetime Access” is valid only for the operational lifetime of the Market Mynds service.</p>
               <p>If the service or company is discontinued in the future, the lifetime subscription will automatically terminate.</p>
             </div>
+
             <div className="space-y-4">
               <h2 className="text-xl font-semibold text-finance-green">Communication</h2>
               <p>By subscribing, you consent to receive updates and messages from Market Mynds on WhatsApp.</p>
+              <p>*The ₹54/month rate is an effective monthly cost based on the annual subscription price of ₹649. Monthly billing is not available at this rate.</p>
+            </div>
+            <div className="space-y-4">
+              <h2 className="text-xl font-semibold text-finance-green">AI Disclaimer</h2>
+              <p>Our reports are generated using AI models based on structured market data and predefined prompts. While we strive for accuracy, AI may occasionally miss context. Think of this as an added layer of insight to help you make more informed decisions.</p>
             </div>
             <div className="space-y-4">
               <h2 className="text-xl font-semibold text-finance-green">Liability Disclaimer</h2>
@@ -40,7 +46,7 @@ export default function Terms() {
             </div>
           </div>
           <div className="mt-8 text-xs text-gray-400 text-center">
-            Last updated: 22 May 2025
+            Last updated: 28 June 2025
           </div>
         </div>
       </div>

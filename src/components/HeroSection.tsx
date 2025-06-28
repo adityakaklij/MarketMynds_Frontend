@@ -234,16 +234,18 @@ export function HeroSection() {
                   className="w-8 h-8 rounded-full border-2 border-[#073B3A]"
                 />
               </div>
-              <span className="text-white font-medium">Trusted by 1,000+ people</span>
+              <span className="text-white font-medium">Trusted by 2,000+ people</span>
             </div>
           </div>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
             <span className="block relative">
-            Start Your Trading Day Smarter.
+            
+            {/* Start Your Trading Day Smarter. */}
+            90% of Traders Lose Money.
               <span className="absolute -bottom-2 left-1/2 w-20 h-1 bg-finance-green/80 transform -translate-x-1/2 rounded-full"></span>
             </span>
-            <span className="block mt-4">
+            <span className="block mt-4">Trade Smart-
               <span 
                 className="relative"
                 style={{
@@ -264,7 +266,7 @@ export function HeroSection() {
           
           <p className="mt-6 text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
             {/* No opinions. No hype. Just a crisp morning snapshot of what's moving markets global and local. */}
-            Get India's smartest pre-market report delivered to your WhatsApp by 8 AM. Get it for as low as 54/Month*.
+            Get India's smartest pre-market report delivered to your WhatsApp by 8 AM. Start now for as low as 54/Month*.
             {/* Get India's smartest pre-market report delivered to your WhatsApp by 8 AM. Starting at just ₹99/month. */}
           </p>
           

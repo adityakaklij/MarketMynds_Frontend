@@ -7,6 +7,7 @@ import { SubscriptionCTA } from "@/components/SubscriptionCTA";
 import { Footer } from "@/components/Footer";
 import { ReportPreviewSection } from "@/components/ReportPreviewSection";
 import { HowItWorks } from "@/components/HowItWorks";
+import { YouTubeVideo } from "@/components/YouTubeVideo";
 import Pricing from "./Pricing";
 
 const Index = () => {
@@ -14,6 +15,7 @@ const Index = () => {
     <div className="min-h-screen bg-black text-white">
       <Navbar />
       <HeroSection />
+      <YouTubeVideo videoId="FPYpvV7XnKU" />
       <HowItWorks />
       {/* <FeaturesSection /> */}
       <ReportPreviewSection />
