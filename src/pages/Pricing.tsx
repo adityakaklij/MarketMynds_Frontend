@@ -472,7 +472,7 @@ export default function Pricing() {
                 <div className="w-full relative">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-finance-green to-finance-blue opacity-75 rounded-lg blur"></div>
                   <Button 
-                    className="relative bg-finance-green hover:bg-finance-green/90 text-black/90 w-full font-semibold py-6 text-lg"
+                    className="relative bg-finance-green hover:bg-finance-green/90 text-black/90 w-full font-semibold py-3"
                     onClick={() => handlePlanSelect(plan)}
                     style={{ animation: 'pulse-border 2s infinite' }}
                   >
@@ -518,9 +518,9 @@ export default function Pricing() {
                 <div className="text-gray-400 mb-6">{plan.description}</div>
                 
                 <div className="w-full relative">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-finance-green to-finance-blue opacity-50 rounded-lg blur"></div>
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-finance-green to-finance-blue opacity-50 rounded-lg"></div>
                   <Button 
-                    className="relative bg-finance-green hover:bg-finance-green/90 text-black/90 w-full font-semibold"
+                    className="relative bg-finance-green hover:bg-finance-green/90 text-black/90 w-full font-semibold py-3"
                     onClick={() => handlePlanSelect(plan)}
                   >
                     Choose {plan.title}
@@ -553,7 +553,7 @@ export default function Pricing() {
               )}
               <div className="text-gray-400 mb-6">{plan.description}</div>
               <Button 
-                className="bg-finance-green hover:bg-finance-green/90 text-black/90 w-full font-semibold"
+                className="bg-finance-green hover:bg-finance-green/90 text-black/90 w-full font-semibold py-3"
                 onClick={() => handlePlanSelect(plan)}
               >
                 Choose {plan.title}
