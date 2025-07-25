@@ -30,6 +30,12 @@ const animationStyles = `
     0% { background-position: -200% center; }
     100% { background-position: 200% center; }
   }
+  
+  @keyframes subtle-glow {
+    0% { box-shadow: 0 0 5px 0 rgba(0, 209, 102, 0.3); }
+    50% { box-shadow: 0 0 15px 0 rgba(0, 209, 102, 0.5); }
+    100% { box-shadow: 0 0 5px 0 rgba(0, 209, 102, 0.3); }
+  }
 `;
 
 // Add type declaration for window.dataLayer
@@ -55,7 +61,7 @@ const plans: Plan[] = [
   {
     title: "1 Year",
     price: 649,
-    originalPrice: 1188,
+    originalPrice: 1399,
     description: "Full access for 1 year.",
     bonus: true,
     planId: "4"
@@ -63,18 +69,25 @@ const plans: Plan[] = [
   {
     title: "6 Months",
     price: 449,
+    originalPrice: 749,
     description: "Full access for 6 months.",
     bonus: false,
     planId: "3"
   },
-
   {
-    title: "3 Months",
-    price: 249,
-    description: "Full access for 3 months.",
+    title: "Lifetime",
+    price: 1999,
+    description: "Lifetime access*. \n Only for next 200 users.",
     bonus: false,
-    planId: "2"
+    planId: "5"
   },
+  // {
+  //   title: "3 Months",
+  //   price: 249,
+  //   description: "Full access for 3 months.",
+  //   bonus: false,
+  //   planId: "2"
+  // },
 
   // {
   //   title: "1 Month",
@@ -407,39 +420,147 @@ export default function Pricing() {
       
       {/* Regular plans */}
       <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
-        {plans.map((plan) => (
-          <div key={plan.title} className="rounded-xl border border-finance-green/20 bg-gradient-to-b from-finance-blue/5 to-black p-8 flex flex-col items-center shadow-lg shadow-black/20">
-            <div className="flex items-center gap-2 mb-2">
-              <BadgeIndianRupee className="text-finance-green" />
-              <span className="text-2xl font-semibold">{plan.title}</span>
-              {plan.bonus && (
-                // <span className="ml-2 px-2 py-1 rounded bg-finance-green/10 text-finance-green text-xs font-medium">Best Value</span>
-                <span className="ml-2 px-2 py-1 rounded bg-finance-green/10 text-finance-green text-xs font-medium">Save 45%</span>
-              )}
-            </div>
-            {plan.originalPrice ? (
-              <div className="flex flex-col items-center">
-                <div className="relative mb-1">
-                  <span className="text-xl font-bold text-gray-400">₹{plan.originalPrice}</span>
-                  <span className="absolute top-1/2 left-0 right-0 h-0.5 bg-red-500 transform -rotate-12"></span>
+        {plans.map((plan) => {
+          // Special rendering for Lifetime plan
+          if (plan.title === "Lifetime") {
+            return (
+              <div key={plan.title} className="rounded-xl border border-finance-green/40 bg-[#0A0E17] p-8 flex flex-col items-center shadow-lg shadow-finance-green/10 relative overflow-hidden hover:border-finance-green/70 transition-all duration-300 hover:-translate-y-1"
+                style={{ animation: 'subtle-glow 3s infinite' }}
+              >
+                {/* EXCLUSIVE banner */}
+                <div 
+                  className="absolute top-5 right-[-30px] bg-finance-green text-black font-bold py-1 transform rotate-45 text-xs text-center"
+                  style={{ width: '120px' }}
+                >
+                  ON DEMAND
                 </div>
-                <div className="text-3xl font-extrabold text-finance-green mb-2">₹{plan.price}</div>
-                {/* <span className="text-xs font-medium bg-finance-green/10 text-finance-green py-0.5 px-2 rounded-full mb-1">
-                  {Math.round(((plan.originalPrice - plan.price) / plan.originalPrice) * 100)}% OFF
-                </span> */}
+                
+                <div className="flex items-center gap-2 mb-2">
+                  <BadgeIndianRupee className="text-finance-green" />
+                  <span className="text-2xl font-semibold">Lifetime</span>
+                </div>
+                
+                <div 
+                  className="text-3xl font-extrabold mb-2"
+                  style={{
+                    background: 'linear-gradient(90deg, #00D166, #3182ce, #00D166)',
+                    backgroundSize: '200% auto',
+                    WebkitBackgroundClip: 'text',
+                    backgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    animation: 'shimmer 3s linear infinite',
+                  }}
+                >
+                  ₹1999
+                </div>
+                
+                <p className="text-gray-400 mb-6">Lifetime access*. Only for next 200 users.</p>
+                
+                {/* <div className="w-full mb-4">
+                  <div className="flex justify-between items-center text-xs text-gray-400 mb-1">
+                    <span>Limited spots</span>
+                    <span>{remainingSpots}/200 remaining</span>
+                  </div>
+                  <div className="w-full bg-gray-700 h-1.5 rounded-full overflow-hidden">
+                    <div 
+                      className="bg-gradient-to-r from-finance-green to-finance-blue h-full rounded-full" 
+                      style={{ width: `${(remainingSpots / 200) * 100}%` }}
+                    ></div>
+                  </div>
+                </div> */}
+                
+                <div className="w-full relative">
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-finance-green to-finance-blue opacity-75 rounded-lg blur"></div>
+                  <Button 
+                    className="relative bg-finance-green hover:bg-finance-green/90 text-black/90 w-full font-semibold py-6 text-lg"
+                    onClick={() => handlePlanSelect(plan)}
+                    style={{ animation: 'pulse-border 2s infinite' }}
+                  >
+                    Choose Lifetime
+                  </Button>
+                </div>
               </div>
-            ) : (
-              <div className="text-3xl font-extrabold mb-2">₹{plan.price}</div>
-            )}
-            <div className="text-gray-400 mb-6">{plan.description}</div>
-            <Button 
-              className="bg-finance-green hover:bg-finance-green/90 text-black/90 w-full font-semibold"
-              onClick={() => handlePlanSelect(plan)}
-            >
-              Choose {plan.title}
-            </Button>
-          </div>
-        ))}
+            );
+          }
+          
+          // Special rendering for 1 Year plan
+          if (plan.title === "1 Year") {
+            return (
+              <div 
+                key={plan.title} 
+                className="rounded-xl border border-finance-green/30 bg-gradient-to-b from-finance-blue/5 to-black p-8 flex flex-col items-center shadow-lg shadow-finance-green/10 relative overflow-hidden hover:border-finance-green/70 transition-all duration-300 hover:-translate-y-1"
+                style={{ boxShadow: '0 0 15px 0 rgba(0, 209, 102, 0.1)' }}
+              >
+                {/* BEST VALUE sticker */}
+                <div 
+                  className="absolute top-5 right-[-30px] bg-finance-green text-black font-bold py-1 transform rotate-45 text-xs text-center"
+                  style={{ width: '120px' }}
+                >
+                  BEST VALUE
+                </div>
+                
+                <div className="flex items-center gap-2 mb-2">
+                  <BadgeIndianRupee className="text-finance-green" />
+                  <span className="text-2xl font-semibold">{plan.title}</span>
+                  <span className="ml-2 px-2 py-1 rounded bg-finance-green/10 text-finance-green text-xs font-medium">Save 53%</span>
+                </div>
+                
+                {plan.originalPrice && (
+                  <div className="flex flex-col items-center">
+                    <div className="relative mb-1">
+                      <span className="text-xl font-bold text-gray-400">₹{plan.originalPrice}</span>
+                      <span className="absolute top-1/2 left-0 right-0 h-0.5 bg-red-500 transform -rotate-12"></span>
+                    </div>
+                    <div className="text-3xl font-extrabold text-finance-green mb-2">₹{plan.price}</div>
+                  </div>
+                )}
+                
+                <div className="text-gray-400 mb-6">{plan.description}</div>
+                
+                <div className="w-full relative">
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-finance-green to-finance-blue opacity-50 rounded-lg blur"></div>
+                  <Button 
+                    className="relative bg-finance-green hover:bg-finance-green/90 text-black/90 w-full font-semibold"
+                    onClick={() => handlePlanSelect(plan)}
+                  >
+                    Choose {plan.title}
+                  </Button>
+                </div>
+              </div>
+            );
+          }
+          
+          // Regular plan rendering
+          return (
+            <div key={plan.title} className="rounded-xl border border-finance-green/20 bg-gradient-to-b from-finance-blue/5 to-black p-8 flex flex-col items-center shadow-lg shadow-black/20">
+              <div className="flex items-center gap-2 mb-2">
+                <BadgeIndianRupee className="text-finance-green" />
+                <span className="text-2xl font-semibold">{plan.title}</span>
+                {plan.bonus && plan.title !== "1 Year" && (
+                  <span className="ml-2 px-2 py-1 rounded bg-finance-green/10 text-finance-green text-xs font-medium">Save 53%</span>
+                )}
+              </div>
+              {plan.originalPrice ? (
+                <div className="flex flex-col items-center">
+                  <div className="relative mb-1">
+                    <span className="text-xl font-bold text-gray-400">₹{plan.originalPrice}</span>
+                    <span className="absolute top-1/2 left-0 right-0 h-0.5 bg-red-500 transform -rotate-12"></span>
+                  </div>
+                  <div className="text-3xl font-extrabold text-finance-green mb-2">₹{plan.price}</div>
+                </div>
+              ) : (
+                <div className="text-3xl font-extrabold mb-2">₹{plan.price}</div>
+              )}
+              <div className="text-gray-400 mb-6">{plan.description}</div>
+              <Button 
+                className="bg-finance-green hover:bg-finance-green/90 text-black/90 w-full font-semibold"
+                onClick={() => handlePlanSelect(plan)}
+              >
+                Choose {plan.title}
+              </Button>
+            </div>
+          );
+        })}
       </div>
       <div className="max-w-lg mx-auto text-center">
         <div className="text-lg font-medium flex items-center justify-center gap-2 mb-4">
