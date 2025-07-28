@@ -74,20 +74,21 @@ const plans: Plan[] = [
     bonus: false,
     planId: "3"
   },
-  {
-    title: "Lifetime",
-    price: 1999,
-    description: "Lifetime access*. \n Only for next 200 users.",
-    bonus: false,
-    planId: "5"
-  },
   // {
-  //   title: "3 Months",
-  //   price: 249,
-  //   description: "Full access for 3 months.",
+  //   title: "Lifetime",
+  //   price: 1999,
+  //   description: "Lifetime access*. \n Only for next 200 users.",
   //   bonus: false,
-  //   planId: "2"
+  //   planId: "5"
   // },
+  {
+    title: "3 Months",
+    price: 349,
+    originalPrice: 449,
+    description: "Full access for 3 months.",
+    bonus: false,
+    planId: "2"
+  },
 
   // {
   //   title: "1 Month",
@@ -151,20 +152,20 @@ export default function Pricing() {
   }, [location]);
 
   // Simulate spots decreasing randomly
-  useEffect(() => {
-    const randomDecrement = () => {
-      const timeout = Math.floor(Math.random() * 20000) + 5000; // Random time between 5-25 seconds
-      setTimeout(() => {
-        setRemainingSpots(prev => {
-          const newValue = Math.max(prev - 1, 1);
-          return newValue;
-        });
-        if (remainingSpots > 1) randomDecrement();
-      }, timeout);
-    };
+  // useEffect(() => {
+  //   const randomDecrement = () => {
+  //     const timeout = Math.floor(Math.random() * 20000) + 5000; // Random time between 5-25 seconds
+  //     setTimeout(() => {
+  //       setRemainingSpots(prev => {
+  //         const newValue = Math.max(prev - 1, 1);
+  //         return newValue;
+  //       });
+  //       if (remainingSpots > 1) randomDecrement();
+  //     }, timeout);
+  //   };
     
-    randomDecrement();
-  }, []);
+  //   randomDecrement();
+  // }, []);
 
   const handlePlanSelect = (plan: Plan) => {
     // Data events.
@@ -354,12 +355,12 @@ export default function Pricing() {
       </div>
       
       {/* Lifetime Deal - Special Offer */}
-      {/* <div className="max-w-3xl mx-auto mb-12">
+      <div className="max-w-3xl mx-auto mb-12">
         <div 
-          className="relative rounded-xl border-2 border-gray-700 p-1 bg-gradient-to-b from-black to-finance-blue/20 shadow-xl opacity-90"
+          className="relative rounded-xl border-2 border-finance-green/40 p-1 bg-gradient-to-b from-black to-finance-blue/20 shadow-xl"
         >          
           <div className="absolute -top-4 -right-4 bg-finance-green text-black font-bold py-2 px-4 rounded-full shadow-lg z-10 transform rotate-12">
-            EXCLUSIVE
+            ON DEMAND
           </div>
           
           <div className="rounded-lg p-8 backdrop-blur-sm">
@@ -383,10 +384,7 @@ export default function Pricing() {
                 </div>
                 
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="relative">
-                    <span className="absolute top-1/2 left-0 right-0 h-0.5 bg-red-500 transform -rotate-12"></span>
-                  </div>
-                  <span className="text-4xl font-extrabold text-finance-green">₹999</span>
+                  <span className="text-4xl font-extrabold text-finance-green">₹1999</span>
                 </div>
                 
                 <p className="text-gray-300 mb-4">One-time payment, lifetime access - never pay again!</p>
@@ -394,29 +392,39 @@ export default function Pricing() {
                 <div className="space-y-2 mb-4">
                   <div className="flex items-center gap-2">
                     <Clock className="text-finance-green h-4 w-4" />
-                    <span className="text-gray-200">Limited time offer - SOLD OUT!</span>
+                    <span className="text-gray-200">Limited time offer - Few spots left!</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <UserCheck className="text-finance-green h-4 w-4" />
                     <span className="text-gray-200">
-                      All 200 spots have been claimed
+                      Limited to 200 members only.
                     </span>
                   </div>
                 </div>
               </div>
               
               <div className="flex-none">
-                <Button 
-                  className="bg-gray-700 text-gray-300 font-bold text-lg px-8 py-6 rounded-xl shadow-lg cursor-not-allowed"
-                  disabled={true}
-                >
-                  Sold Out
-                </Button>
+                <div className="relative">
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-finance-green to-finance-blue opacity-75 rounded-lg blur"></div>
+                  <Button 
+                    className="relative bg-finance-green hover:bg-finance-green/90 text-black/90 font-bold text-lg px-8 py-6 rounded-xl shadow-lg"
+                    onClick={() => handlePlanSelect({
+                      title: "Lifetime",
+                      price: 1999,
+                      description: "Lifetime access*. Only for next 200 users.",
+                      bonus: false,
+                      planId: "5"
+                    })}
+                    style={{ animation: 'pulse-border 2s infinite' }}
+                  >
+                    Choose Lifetime
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
       
       {/* Regular plans */}
       <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
