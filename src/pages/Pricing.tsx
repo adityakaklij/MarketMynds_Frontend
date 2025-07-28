@@ -510,7 +510,7 @@ export default function Pricing() {
                 <div className="flex items-center gap-2 mb-2">
                   <BadgeIndianRupee className="text-finance-green" />
                   <span className="text-2xl font-semibold">{plan.title}</span>
-                  <span className="ml-2 px-2 py-1 rounded bg-finance-green/10 text-finance-green text-xs font-medium">Save 53%</span>
+                  <span className="ml-2 px-2 py-1 rounded bg-finance-green/10 text-finance-green text-xs font-medium">Save 54%</span>
                 </div>
                 
                 {plan.originalPrice && (
@@ -545,7 +545,7 @@ export default function Pricing() {
                 <BadgeIndianRupee className="text-finance-green" />
                 <span className="text-2xl font-semibold">{plan.title}</span>
                 {plan.bonus && plan.title !== "1 Year" && (
-                  <span className="ml-2 px-2 py-1 rounded bg-finance-green/10 text-finance-green text-xs font-medium">Save 53%</span>
+                  <span className="ml-2 px-2 py-1 rounded bg-finance-green/10 text-finance-green text-xs font-medium">Save 54%</span>
                 )}
               </div>
               {plan.originalPrice ? (
