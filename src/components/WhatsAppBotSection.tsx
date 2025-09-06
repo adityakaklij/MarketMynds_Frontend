@@ -198,7 +198,7 @@ export function WhatsAppBotSection() {
               </a>
               <p className="text-gray-300 text-sm">Try with 3 Free credits.</p>
               
-              <a 
+              {/* <a 
                 href="/kai-credits"
                 className="bg-finance-green hover:bg-finance-green/90 text-black font-medium py-3 px-6 rounded-lg flex items-center justify-center w-full mt-4"
               >
@@ -206,7 +206,7 @@ export function WhatsAppBotSection() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
                 Get More Credits
-              </a>
+              </a> */}
             </div>
             
             {/* CTA Buttons for Desktop */}
@@ -225,7 +225,7 @@ export function WhatsAppBotSection() {
                   Try MarketMynds KAI
                 </a>
                 
-                <a 
+                {/* <a 
                   href="/kai-credits"
                   className="bg-finance-green hover:bg-finance-green/90 text-black font-medium py-3 px-6 rounded-lg inline-flex items-center"
                 >
@@ -233,9 +233,9 @@ export function WhatsAppBotSection() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                   </svg>
                   Get More Credits
-                </a>
+                </a> */}
               </div>
-              <p className="text-gray-300 text-sm">Start with 3 free credits. Purchase more when you need them.</p>
+              <p className="text-gray-300 text-sm">Start with 3 free credits.</p>
             </div>
           </div>
           
