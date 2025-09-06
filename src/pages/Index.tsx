@@ -8,6 +8,7 @@ import { Footer } from "@/components/Footer";
 import { ReportPreviewSection } from "@/components/ReportPreviewSection";
 import { HowItWorks } from "@/components/HowItWorks";
 import { YouTubeVideo } from "@/components/YouTubeVideo";
+import { WhatsAppBotSection } from "@/components/WhatsAppBotSection";
 import Pricing from "./Pricing";
 
 const Index = () => {
@@ -17,6 +18,7 @@ const Index = () => {
       <HeroSection />
       <YouTubeVideo videoId="FPYpvV7XnKU" />
       <HowItWorks />
+      <WhatsAppBotSection />
       {/* <FeaturesSection /> */}
       <ReportPreviewSection />
       <PreviewSection />

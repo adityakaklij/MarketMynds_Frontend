@@ -14,6 +14,7 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentFailed from "./pages/PaymentFailed";
 import RefundPolicy from "./pages/RefundPolicy";
 import Upgrade from "./pages/Upgrade";
+import KAICredits from "./pages/KAICredits";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App = () => (
             <Route path="/payment-failed" element={<PaymentFailed />} />
             <Route path="/refund-policy" element={<RefundPolicy/>} />
             <Route path="/upgrade" element={<Upgrade />} />
+            <Route path="/kai-credits" element={<KAICredits />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
