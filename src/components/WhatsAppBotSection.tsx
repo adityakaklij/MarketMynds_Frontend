@@ -185,7 +185,7 @@ export function WhatsAppBotSection() {
             {/* CTA Buttons for Mobile */}
             <div className="block md:hidden mt-8 space-y-3">
               <a 
-                href="https://wa.me/+918062960996?text=Hi!%20I%20want%20to%20try%20MarketMynds%20KAI"
+                href="https://wa.me/+919035508311"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-[#25D366] hover:bg-[#20BD5A] text-black font-medium py-3 px-6 rounded-lg flex items-center justify-center w-full"
@@ -196,7 +196,7 @@ export function WhatsAppBotSection() {
                 </svg>
                 Try MarketMynds KAI
               </a>
-              <p className="text-gray-300 text-sm">Try with 3 Free credits.</p>
+              <p className="text-gray-300 text-sm text-center">Try with 3 Free credits.</p>
               
               {/* <a 
                 href="/kai-credits"
