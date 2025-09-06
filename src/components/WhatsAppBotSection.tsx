@@ -18,19 +18,19 @@ export function WhatsAppBotSection() {
     { id: 1, text: "Hi, I want to check HDFC Bank analysis", isBot: false },
     { 
       id: 2, 
-      text: "📊 *HDFC Bank Analysis* 📊\n\n*Technical Indicators:*\n• Current Price: ₹1,642\n• 50 DMA: ₹1,610 (Above)\n• 200 DMA: ₹1,580 (Above)\n• RSI: 58 (Neutral)\n• MACD: Positive crossover\n\n*Key Support & Resistance:*\n• Support: ₹1,620, ₹1,595\n• Resistance: ₹1,665, ₹1,680\n\n*Recent News:*\nQ2 Results: Net profit up 35% YoY\nExpanding digital banking initiatives", 
+      text: "📊 *HDFC Bank Summary* 📊\n\n*Technical Indicators:*\n• Current Price: ₹1,642\n• 50 DMA: ₹1,610 (Above)\n• 200 DMA: ₹1,580 (Above)\n• RSI: 58 (Neutral)\n• MACD: Positive crossover\n\n*Key Support & Resistance:*\n• Support: ₹1,620, ₹1,595\n• Resistance: ₹1,665, ₹1,680\n\n*Recent News:*\nQ2 Results: Net profit up 35% YoY\nExpanding digital banking initiatives", 
       isBot: true 
     },
     { id: 3, text: "What about Reliance?", isBot: false },
     { 
       id: 4, 
-      text: "📊 *Reliance Industries Analysis* 📊\n\n*Technical Indicators:*\n• Current Price: ₹2,842\n• 50 DMA: ₹2,780 (Above)\n• 200 DMA: ₹2,650 (Above)\n• RSI: 62 (Moderately bullish)\n• MACD: Bullish momentum\n\n*Key Support & Resistance:*\n• Support: ₹2,800, ₹2,750\n• Resistance: ₹2,875, ₹2,900\n\n*Recent News:*\nNew energy investments gaining traction\nRetail business showing strong growth", 
+      text: "📊 *Reliance Industries Summary* 📊\n\n*Technical Indicators:*\n• Current Price: ₹2,842\n• 50 DMA: ₹2,780 (Above)\n• 200 DMA: ₹2,650 (Above)\n• RSI: 62 (Moderately bullish)\n• MACD: Bullish momentum\n\n*Key Support & Resistance:*\n• Support: ₹2,800, ₹2,750\n• Resistance: ₹2,875, ₹2,900\n\n*Recent News:*\nNew energy investments gaining traction\nRetail business showing strong growth", 
       isBot: true 
     },
     { id: 5, text: "Tell me about Infosys", isBot: false },
     { 
       id: 6, 
-      text: "📊 *Infosys Analysis* 📊\n\n*Technical Indicators:*\n• Current Price: ₹1,482\n• 50 DMA: ₹1,510 (Below)\n• 200 DMA: ₹1,450 (Above)\n• RSI: 45 (Neutral)\n• MACD: Slightly bearish\n\n*Key Support & Resistance:*\n• Support: ₹1,450, ₹1,420\n• Resistance: ₹1,500, ₹1,525\n\n*Recent News:*\nSigned multiple large deals in Q2\nDigital services revenue growing at 25% YoY", 
+      text: "📊 *Infosys Summary* 📊\n\n*Technical Indicators:*\n• Current Price: ₹1,482\n• 50 DMA: ₹1,510 (Below)\n• 200 DMA: ₹1,450 (Above)\n• RSI: 45 (Neutral)\n• MACD: Slightly bearish\n\n*Key Support & Resistance:*\n• Support: ₹1,450, ₹1,420\n• Resistance: ₹1,500, ₹1,525\n\n*Recent News:*\nSigned multiple large deals in Q2\nDigital services revenue growing at 25% YoY", 
       isBot: true 
     }
   ];
