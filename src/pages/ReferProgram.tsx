@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -18,6 +18,11 @@ import { Copy, ChevronRight, PieChart, Users, CreditCard, TrendingUp, Award, Che
 import axios from "axios";
 
 const ReferProgram: React.FC = () => {
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [referrals, setReferrals] = useState<number>(5);
   const [selectedPlan, setSelectedPlan] = useState<string>("mixed");
   const [email, setEmail] = useState<string>("");
