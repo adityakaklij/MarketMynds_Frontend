@@ -15,6 +15,9 @@ import PaymentFailed from "./pages/PaymentFailed";
 import RefundPolicy from "./pages/RefundPolicy";
 import Upgrade from "./pages/Upgrade";
 import KAICredits from "./pages/KAICredits";
+import KAICreditsPaymentSuccess from "./pages/KAICreditsPaymentSuccess";
+import KAICreditsPaymentFailed from "./pages/KAICreditsPaymentFailed";
+import ReferProgram from "./pages/ReferProgram";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +40,9 @@ const App = () => (
             <Route path="/refund-policy" element={<RefundPolicy/>} />
             <Route path="/upgrade" element={<Upgrade />} />
             <Route path="/kai-credits" element={<KAICredits />} />
+            <Route path="/kai-credits-payment-success" element={<KAICreditsPaymentSuccess />} />
+            <Route path="/kai-credits-payment-failed" element={<KAICreditsPaymentFailed />} />
+            <Route path="/refer-program" element={<ReferProgram />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

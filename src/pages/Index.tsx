@@ -9,6 +9,7 @@ import { ReportPreviewSection } from "@/components/ReportPreviewSection";
 import { HowItWorks } from "@/components/HowItWorks";
 import { YouTubeVideo } from "@/components/YouTubeVideo";
 import { WhatsAppBotSection } from "@/components/WhatsAppBotSection";
+import { ReferEarnSection } from "@/components/ReferEarnSection";
 import Pricing from "./Pricing";
 
 const Index = () => {
@@ -25,6 +26,7 @@ const Index = () => {
       <TestimonialsSection />
       {/* <SubscriptionCTA /> */}
       <Pricing/>
+      <ReferEarnSection />
       <Footer />
     </div>
   );

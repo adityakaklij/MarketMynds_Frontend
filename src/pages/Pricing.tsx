@@ -62,7 +62,7 @@ const plans: Plan[] = [
     title: "1 Year",
     price: 649,
     originalPrice: 1399,
-    description: "Full access for 1 year.",
+    description: "Full access for 1 year. Includes 100 KAI credits.",
     bonus: true,
     planId: "4"
   },
@@ -70,7 +70,7 @@ const plans: Plan[] = [
     title: "6 Months",
     price: 449,
     originalPrice: 749,
-    description: "Full access for 6 months.",
+    description: "Full access for 6 months. Includes 50 KAI credits.",
     bonus: false,
     planId: "3"
   },
@@ -85,7 +85,7 @@ const plans: Plan[] = [
     title: "3 Months",
     price: 349,
     originalPrice: 449,
-    description: "Full access for 3 months.",
+    description: "Full access for 3 months. Includes 20 KAI credits.",
     bonus: false,
     planId: "2"
   },
@@ -400,6 +400,12 @@ export default function Pricing() {
                       Limited to 200 members only.
                     </span>
                   </div>
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="text-finance-green h-4 w-4" />
+                    <span className="text-gray-200">
+                      Includes 300 KAI credits every 3 months
+                    </span>
+                  </div>
                 </div>
               </div>
               
@@ -462,7 +468,13 @@ export default function Pricing() {
                   ₹1999
                 </div>
                 
-                <p className="text-gray-400 mb-6">Lifetime access*. Only for next 200 users.</p>
+                <div className="text-gray-400 mb-6">
+                  <p>Lifetime access*. Only for next 200 users.</p>
+                  <div className="flex items-center gap-1 mt-2">
+                    <Sparkles className="text-finance-green h-3.5 w-3.5 flex-shrink-0" />
+                    <span>Includes 300 KAI credits every 3 months</span>
+                  </div>
+                </div>
                 
                 {/* <div className="w-full mb-4">
                   <div className="flex justify-between items-center text-xs text-gray-400 mb-1">
@@ -523,7 +535,19 @@ export default function Pricing() {
                   </div>
                 )}
                 
-                <div className="text-gray-400 mb-6">{plan.description}</div>
+                <div className="text-gray-400 mb-6">
+                  <p>{plan.description.split('. ')[0]}</p>
+                  {plan.description.includes('Includes') && (
+                    <div className="flex items-center gap-1 mt-2">
+                      <Sparkles className="text-finance-green h-3.5 w-3.5 flex-shrink-0" />
+                      <span>Includes {
+                        plan.title.includes("3 Months") ? "20" : 
+                        plan.title.includes("6 Months") ? "50" : 
+                        "100"
+                      } KAI credits</span>
+                    </div>
+                  )}
+                </div>
                 
                 <div className="w-full relative">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-finance-green to-finance-blue opacity-50 rounded-lg"></div>
@@ -559,7 +583,19 @@ export default function Pricing() {
               ) : (
                 <div className="text-3xl font-extrabold mb-2">₹{plan.price}</div>
               )}
-              <div className="text-gray-400 mb-6">{plan.description}</div>
+                <div className="text-gray-400 mb-6">
+                  <p>{plan.description.split('. ')[0]}</p>
+                  {plan.description.includes('Includes') && (
+                    <div className="flex items-center gap-1 mt-2">
+                      <Sparkles className="text-finance-green h-3.5 w-3.5 flex-shrink-0" />
+                      <span>Includes {
+                        plan.title.includes("3 Months") ? "20" : 
+                        plan.title.includes("6 Months") ? "50" : 
+                        "100"
+                      } KAI credits</span>
+                    </div>
+                  )}
+                </div>
               <Button 
                 className="bg-finance-green hover:bg-finance-green/90 text-black/90 w-full font-semibold py-3"
                 onClick={() => handlePlanSelect(plan)}

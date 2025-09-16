@@ -18,20 +18,27 @@ interface CreditPlan {
 
 export default function KAICredits() {
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
   const [selectedPlan, setSelectedPlan] = useState<CreditPlan | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [phoneError, setPhoneError] = useState('');
+  const [emailError, setEmailError] = useState('');
 
   const creditPlans: CreditPlan[] = [
-    { credits: 10, price: 99 },
-    { credits: 25, price: 199, discount: 20, popular: true },
-    { credits: 50, price: 349, discount: 30 },
-    { credits: 100, price: 599, discount: 40 },
+    { credits: 100, price: 199 },
+    { credits: 300, price: 399, discount: 20 },
+    { credits: 500, price: 499, discount: 30, popular: true },
+    // { credits: 100, price: 599, discount: 40 },
   ];
 
   const validatePhoneNumber = (number: string) => {
     const phoneRegex = /^[6-9]\d{9}$/;
     return phoneRegex.test(number);
+  };
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,6 +49,17 @@ export default function KAICredits() {
       setPhoneError('Please enter a valid 10-digit mobile number');
     } else {
       setPhoneError('');
+    }
+  };
+  
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+    
+    if (value && !validateEmail(value)) {
+      setEmailError('Please enter a valid email address');
+    } else {
+      setEmailError('');
     }
   };
 
@@ -70,14 +88,20 @@ export default function KAICredits() {
       return;
     }
 
+    if (!email || !validateEmail(email)) {
+      setEmailError('Please enter a valid email address');
+      return;
+    }
+
     setIsLoading(true);
 
     try {
-      const response = await axios.post('/api/make-payment', {
-        phone: phoneNumber,
-        amount: selectedPlan.price,
+      const response = await axios.post('https://api.marketmynds.com/api/make-kai-credits-payment', {
+        mobile: `+91${phoneNumber}`,
+        email: email,
         credits: selectedPlan.credits,
-        product: 'kai_credits'
+        success_url: window.location.origin + '/kai-credits-payment-success',
+        failure_url: window.location.origin + '/kai-credits-payment-failed'
       });
 
       if (response.data.status === 'success') {
@@ -151,6 +175,20 @@ export default function KAICredits() {
                 />
                 {phoneError && <p className="text-red-500 text-sm mt-1">{phoneError}</p>}
                 <p className="text-xs text-gray-400 mt-1">We'll send your credits to this WhatsApp number</p>
+              </div>
+              
+              <div>
+                <Label htmlFor="email" className="text-white">Email Address</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="Enter your email address"
+                  value={email}
+                  onChange={handleEmailChange}
+                  className={`bg-gray-800 border-gray-700 text-white mt-1 ${emailError ? 'border-red-500' : ''}`}
+                />
+                {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
+                <p className="text-xs text-gray-400 mt-1">Required for payment confirmation</p>
               </div>
               
               <div>

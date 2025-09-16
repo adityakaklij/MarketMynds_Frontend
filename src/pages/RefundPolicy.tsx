@@ -60,9 +60,11 @@ We aim to respond to all refund requests promptly and process eligible refunds w
 <h2>Please contact us at</h2>
 
 email: support@marketmynds.com
+<br />
+mobile: +91 8062960996
         </div>
         <div className="mt-8 text-xs text-gray-400 text-center">
-          Last updated: 21 May 2025
+          Last updated: 10 Sep 2025
         </div>
       </div>
     </div>
