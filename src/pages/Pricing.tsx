@@ -10,6 +10,13 @@ import {
   DialogFooter,
   DialogDescription,
 } from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 // Add animation keyframes CSS
@@ -113,6 +120,7 @@ export default function Pricing() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [whatsappNumber, setWhatsappNumber] = useState("");
+  const [state, setState] = useState("");
   const [remainingSpots, setRemainingSpots] = useState(200);
   const [processingPayment, setProcessingPayment] = useState(false);
   const [referralCode, setReferralCode] = useState("");
@@ -124,11 +132,52 @@ export default function Pricing() {
   const [discountPercentage, setDiscountPercentage] = useState(0);
   const [showCouponField, setShowCouponField] = useState(false);
   
+  // List of Indian states
+  const indianStates = [
+    "Andhra Pradesh",
+    "Arunachal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chhattisgarh",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Odisha",
+    "Punjab",
+    "Rajasthan",
+    "Sikkim",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttar Pradesh",
+    "Uttarakhand",
+    "West Bengal",
+    "Andaman and Nicobar Islands",
+    "Chandigarh",
+    "Dadra and Nagar Haveli and Daman and Diu",
+    "Delhi",
+    "Jammu and Kashmir",
+    "Ladakh",
+    "Lakshadweep",
+    "Puducherry"
+  ];
+  
   // Form validation states
   const [errors, setErrors] = useState({
     name: "",
     email: "",
-    whatsappNumber: ""
+    whatsappNumber: "",
+    state: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -187,10 +236,12 @@ export default function Pricing() {
     setName("");
     setEmail("");
     setWhatsappNumber("");
+    setState("");
     setErrors({
       name: "",
       email: "",
-      whatsappNumber: ""
+      whatsappNumber: "",
+      state: ""
     });
     setIsSubmitting(false);
   };
@@ -199,7 +250,8 @@ export default function Pricing() {
     const newErrors = {
       name: "",
       email: "",
-      whatsappNumber: ""
+      whatsappNumber: "",
+      state: ""
     };
     let isValid = true;
 
@@ -224,6 +276,12 @@ export default function Pricing() {
       isValid = false;
     } else if (!/^\+?\d{8,15}$/.test(whatsappNumber.replace(/\s/g, ''))) {
       newErrors.whatsappNumber = "Please enter a valid number without country code (e.g. 9876543210)";
+      isValid = false;
+    }
+    
+    // State validation
+    if (!state) {
+      newErrors.state = "Please select your state";
       isValid = false;
     }
 
@@ -311,6 +369,7 @@ export default function Pricing() {
         name: name,
         email: email,
         mobile: whatsappNumber,
+        state: state,
         plan: selectedPlan.planId,
         amount: discountedPrice > 0 ? discountedPrice : selectedPlan.price,
         referralCode: refCode, // Send referral code with payment data
@@ -750,6 +809,34 @@ export default function Pricing() {
                 </div>
               )}
               <p className="text-xs text-gray-400 mt-1">We'll send reports to this WhatsApp number</p>
+            </div>
+            
+            <div>
+              <label htmlFor="state" className="block text-sm font-medium text-gray-300 mb-1">State</label>
+              <Select 
+                onValueChange={setState} 
+                value={state}
+              >
+                <SelectTrigger 
+                  id="state"
+                  className={`bg-gray-900 border-gray-700 focus:border-finance-green text-white ${errors.state ? 'border-red-500' : ''}`}
+                >
+                  <SelectValue placeholder="Select your state" />
+                </SelectTrigger>
+                <SelectContent className="max-h-80 bg-gray-900 border-gray-700 text-white">
+                  {indianStates.map((stateName) => (
+                    <SelectItem key={stateName} value={stateName} className="focus:bg-gray-800 focus:text-white">
+                      {stateName}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {errors.state && (
+                <div className="text-red-500 text-xs mt-1 flex items-center">
+                  <AlertCircle className="h-3 w-3 mr-1" />
+                  {errors.state}
+                </div>
+              )}
             </div>
 
             {/* Coupon Code Section */}
