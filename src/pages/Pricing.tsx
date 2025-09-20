@@ -2,6 +2,7 @@ import { BadgeIndianRupee, Receipt, Download, FileCheck, User, Mail, MessageSqua
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -17,7 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import axios from "axios";
 // Add animation keyframes CSS
 const animationStyles = `
@@ -131,6 +132,7 @@ export default function Pricing() {
   const [validatingCoupon, setValidatingCoupon] = useState(false);
   const [discountPercentage, setDiscountPercentage] = useState(0);
   const [showCouponField, setShowCouponField] = useState(false);
+  const [consentChecked, setConsentChecked] = useState(false);
   
   // List of Indian states
   const indianStates = [
@@ -177,7 +179,8 @@ export default function Pricing() {
     name: "",
     email: "",
     whatsappNumber: "",
-    state: ""
+    state: "",
+    consent: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -237,11 +240,13 @@ export default function Pricing() {
     setEmail("");
     setWhatsappNumber("");
     setState("");
+    setConsentChecked(false);
     setErrors({
       name: "",
       email: "",
       whatsappNumber: "",
-      state: ""
+      state: "",
+      consent: ""
     });
     setIsSubmitting(false);
   };
@@ -251,7 +256,8 @@ export default function Pricing() {
       name: "",
       email: "",
       whatsappNumber: "",
-      state: ""
+      state: "",
+      consent: ""
     };
     let isValid = true;
 
@@ -282,6 +288,12 @@ export default function Pricing() {
     // State validation
     if (!state) {
       newErrors.state = "Please select your state";
+      isValid = false;
+    }
+
+    // Consent validation
+    if (!consentChecked) {
+      newErrors.consent = "You must agree to the terms and privacy policy";
       isValid = false;
     }
 
@@ -896,14 +908,44 @@ export default function Pricing() {
                 </button>
               )}
             </div>
-          </div>
+            </div>
+            
+            {/* Consent Checkbox */}
+            <div className="mt-4">
+              <div className="flex items-start space-x-2">
+                <Checkbox 
+                  id="consent" 
+                  checked={consentChecked} 
+                  onCheckedChange={(checked) => {
+                    setConsentChecked(checked === true);
+                    if (checked === true) {
+                      setErrors(prev => ({...prev, consent: ""}));
+                    }
+                  }}
+                  className={`mt-1 ${errors.consent ? 'border-red-500' : ''}`}
+                />
+                <label 
+                  htmlFor="consent" 
+                  className="text-sm text-gray-300 cursor-pointer"
+                >
+                  I agree to the <Link to="/terms" className="text-finance-green hover:underline" target="_blank">Terms of Service</Link> and <Link to="/privacy-policy" className="text-finance-green hover:underline" target="_blank">Privacy Policy</Link>. 
+                  {/* I consent to the collection and processing of my personal data as described in the privacy policy. */}
+                </label>
+              </div>
+              {errors.consent && (
+                <div className="text-red-500 text-xs mt-1 flex items-center pl-6">
+                  <AlertCircle className="h-3 w-3 mr-1" />
+                  {errors.consent}
+                </div>
+              )}
+            </div>
 
-          <DialogFooter className="mt-4 sm:mt-2">
-            <Button
-              className="bg-finance-green hover:bg-finance-green/90 text-black w-full font-semibold py-5"
-              onClick={handlePayment}
-              disabled={processingPayment}
-            >
+            <DialogFooter className="mt-4 sm:mt-2">
+              <Button
+                className="bg-finance-green hover:bg-finance-green/90 text-black w-full font-semibold py-5"
+                onClick={handlePayment}
+                disabled={processingPayment}
+              >
               {processingPayment ? (
                 <div className="flex items-center justify-center">
                   <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

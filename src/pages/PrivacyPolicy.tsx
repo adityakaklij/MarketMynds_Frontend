@@ -11,16 +11,63 @@ export default function PrivacyPolicy() {
           <p className="mb-4 text-gray-300">
             At Market Mynds, we are committed to protecting your privacy. Your information is never shared or sold. We only use your phone number and/or email to deliver reports and provide support.
           </p>
-          {/* <h2 className="text-xl mt-8 mb-2 font-semibold">Data Collection & Use</h2>
+          
+          
+          <h2 className="text-xl mt-8 mb-2 font-semibold">Information We Collect</h2>
           <ul className="list-disc list-inside text-gray-300 mb-4">
-            <li>We collect only what's necessary: name, WhatsApp number, email (if provided).</li>
+            <li>We collect only what's necessary: Name, Email, WhatsApp number, Address(State).</li>
             <li>Your data is used exclusively for service delivery and customer support.</li>
-          </ul> */}
+          </ul>
 
-          {/* <h2 className="text-xl mt-8 mb-2 font-semibold">Security</h2>
+          <h2 className="text-xl mt-8 mb-2 font-semibold">Purpose of Data Collection</h2>
+          <ul className="list-disc list-inside text-gray-300 mb-4">
+            <li>Provide daily PDF reports via WhatsApp</li>
+            <li>Communicate important updates and customer service</li>
+            <li>Comply with legal and regulatory obligations</li>
+          </ul>
+
+          <h2 className="text-xl mt-8 mb-2 font-semibold">User Consent</h2>
+
+          <p className="mb-4 text-gray-300">
+          By ticking the consent checkbox, you provide us your free, specific, informed, and explicit consent to process your personal data as described in this policy. You may withdraw consent anytime by contacting us at support@marketmynds.com  
+          </p>
+
+          <h2 className="text-xl mt-8 mb-2 font-semibold">Security</h2>
           <p className="mb-4 text-gray-300">
             All communication is encrypted and secured. We never request passwords or payment details over WhatsApp or email.
-          </p> */}
+          </p>
+
+          <h2 className="text-xl mt-8 mb-2 font-semibold">Your Rights</h2>
+<p className="mb-4 text-gray-300">
+You have the right to:
+</p>
+<ul className="list-disc list-inside text-gray-300 mb-4">
+  <li>Access and obtain a copy of your personal data</li>
+  <li>Rectify inaccurate or incomplete data</li>
+  <li>Request deletion of your personal data when no longer necessary</li>
+  <li>Withdraw consent to data processing at any time</li>
+  <li>Lodge complaints with the Data Protection Board of India</li>
+</ul>
+
+<h2 className="text-xl mt-8 mb-2 font-semibold">Data Retention</h2>
+<p className="mb-4 text-gray-300">
+We retain your personal data only as long as necessary to fulfill the purposes outlined or as required by law. Upon withdrawal of consent or termination of service, we will delete your data within a reasonable time frame.
+</p>
+
+<h2 className="text-xl mt-8 mb-2 font-semibold">Data Security</h2>
+<p className="mb-4 text-gray-300">
+We implement robust security measures including encryption, access controls, and monitoring to protect your personal data from unauthorized access or breach.
+</p>
+
+<h2 className="text-xl mt-8 mb-2 font-semibold">Grievance Redressal</h2>
+<p className="mb-4 text-gray-300">
+For queries or complaints about data privacy, contact our Data Protection Officer (DPO) at support@marketmynds.com. You also have the right to escalate complaints to the Data Protection Board of India.
+</p>
+
+<h2 className="text-xl mt-8 mb-2 font-semibold">Updates to This Policy</h2>
+<p className="mb-4 text-gray-300">
+We may update this policy periodically. Changes will be communicated via email and updated on our website.
+</p>
           {/* <h2 className="text-xl mt-8 mb-2 font-semibold">Contact</h2>
           <p className="mb-8 text-gray-300">
             For privacy questions, email us at <a className="text-finance-green hover:underline" href="mailto:support@marketmynds.com">support@marketmynds.com</a>.
@@ -223,14 +270,15 @@ information provided on this website.
 
 <br />
 
-<h1>Please contact us at: </h1>
+{/* <h1>Please contact us at: </h1> */}
+<h2 className="text-xl mt-8 mb-2 font-semibold">Contact</h2>
 <br />
 email: support@marketmynds.com <br />
 mobile: +91 8062960996
 <br />
           </p>
           <div className="text-xs text-gray-400 text-center">
-            Last updated: 10 Sep 2025
+            Last updated: 20 Sep 2025
           </div>
         </div>
       </div>
