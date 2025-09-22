@@ -25,6 +25,13 @@ export default function Contact() {
             <Phone /><span className="text-white">+91 93072 02438</span>
           </div>
         </div>
+          <div className="flex items-center gap-3 text-lg text-finance-green">
+            <span className="text-white">Eleven Square Labs <br />
+            648/A OM Chambers, 4th floor, Binnamangala stage 1, indiranagar, Bengaluru, Karnataka, India - 560038</span>
+
+          </div>
+          <br />
+        {/* </div> */}
         <a href="mailto:support@marketmynds.com">
           <Button className="bg-finance-green text-black hover:bg-finance-green/90 px-8 text-lg" size="lg">Email Us</Button>
         </a>
