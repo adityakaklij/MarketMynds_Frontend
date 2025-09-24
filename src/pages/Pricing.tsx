@@ -20,6 +20,10 @@ import {
 } from "@/components/ui/select";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import axios from "axios";
+import { load } from "@cashfreepayments/cashfree-js";
+
+
+
 // Add animation keyframes CSS
 const animationStyles = `
   @keyframes pulse-border {
@@ -203,22 +207,6 @@ export default function Pricing() {
     }
   }, [location]);
 
-  // Simulate spots decreasing randomly
-  // useEffect(() => {
-  //   const randomDecrement = () => {
-  //     const timeout = Math.floor(Math.random() * 20000) + 5000; // Random time between 5-25 seconds
-  //     setTimeout(() => {
-  //       setRemainingSpots(prev => {
-  //         const newValue = Math.max(prev - 1, 1);
-  //         return newValue;
-  //       });
-  //       if (remainingSpots > 1) randomDecrement();
-  //     }, timeout);
-  //   };
-    
-  //   randomDecrement();
-  // }, []);
-
   const handlePlanSelect = (plan: Plan) => {
     // Data events.
     window.dataLayer = window.dataLayer || [];
@@ -357,11 +345,34 @@ export default function Pricing() {
     }
   };
 
+  // Initialize Cashfree SDK once when component loads
+  const [cashfreeSDK, setCashfreeSDK] = useState<any>(null);
+  
+  useEffect(() => {
+    const initializeSDK = async () => {
+      try {
+        const cfSDK = await load({
+          // mode: import.meta.env.VITE_PAYMENT_MODE || "sandbox" // Use environment variable or default to sandbox
+          mode: "production" // Use environment variable or default to sandbox
+        });
+        setCashfreeSDK(cfSDK);
+      } catch (error) {
+        console.error("Error initializing Cashfree SDK:", error);
+      }
+    };
+    
+    initializeSDK();
+  }, []);
+
   const handlePayment = async () => {
-    if (validateForm()) {
+    if (!validateForm()) {
+      return;
+    }
+    
+    try {
       setProcessingPayment(true);
 
-      // Event Events.
+      // Event tracking
       window.dataLayer.push({
         event: 'add_payment_info',
         ecommerce: {
@@ -377,31 +388,48 @@ export default function Pricing() {
       // Get referral code from state (which was populated from localStorage)
       const refCode = referralCode || '';
 
-      let makePayment = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/make-payment`, {
+      // Step 1: Get payment session ID from backend
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/make-payment`, {
         name: name,
         email: email,
         mobile: whatsappNumber,
         state: state,
         plan: selectedPlan.planId,
         amount: discountedPrice > 0 ? discountedPrice : selectedPlan.price,
-        referralCode: refCode, // Send referral code with payment data
-        couponCode: couponSuccess ? couponCode : "", // Send coupon code only if it was successfully applied
-      },
-      {
+        referralCode: refCode, 
+        couponCode: couponSuccess ? couponCode : "",
+      }, {
         headers: {
           'Content-Type': 'application/json'
         }
-      })
+      });
 
-      console.log("makePayment",makePayment);
-      if (makePayment.data.data?.redirect_url) {
-        window.location.href = makePayment.data.data.redirect_url;
-      } else {
-        console.error("No redirect URL received from payment API");
-        // Fallback to a generic payment error page or show an error message
-        alert("Payment processing error. Please try again or contact support.");
+      // Step 2: Check if we received a valid payment session ID
+      if (!response.data.data) {
+        throw new Error("No payment session ID received");
       }
+      
+      const paymentSessionId = response.data.data;
+      console.log("Payment session ID:", paymentSessionId);
+
+      // Step 3: Initialize Cashfree checkout
+      if (!cashfreeSDK) {
+        throw new Error("Cashfree SDK not initialized");
+      }
+      
+      // Step 4: Configure checkout options
+      const checkoutOptions = {
+        paymentSessionId: paymentSessionId,
+        redirectTarget: "_self", // Load in the same window
+      };
+      
+      // Step 5: Trigger Cashfree checkout
+      cashfreeSDK.checkout(checkoutOptions);
+      
+    } catch (error) {
+      console.error("Payment error:", error);
       setProcessingPayment(false);
+      alert("Payment processing error. Please try again or contact support.");
     }
   };
 
