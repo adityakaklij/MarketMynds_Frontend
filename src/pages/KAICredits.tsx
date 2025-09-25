@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import axios from 'axios';
@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import { toast } from "@/components/ui/use-toast";
 import { Loader2 } from "lucide-react";
+import { load } from "@cashfreepayments/cashfree-js";
 
 interface CreditPlan {
   credits: number;
@@ -23,6 +24,29 @@ export default function KAICredits() {
   const [isLoading, setIsLoading] = useState(false);
   const [phoneError, setPhoneError] = useState('');
   const [emailError, setEmailError] = useState('');
+  const [cashfreeSDK, setCashfreeSDK] = useState<any>(null);
+  
+  // Initialize Cashfree SDK once when component loads
+  useEffect(() => {
+    const initializeSDK = async () => {
+      try {
+        const cfSDK = await load({
+          // mode: "sandbox" // Use sandbox mode for testing, change to "production" for live
+          mode: "production"
+        });
+        setCashfreeSDK(cfSDK);
+      } catch (error) {
+        console.error("Error initializing Cashfree SDK:", error);
+        toast({
+          title: "Error",
+          description: "Failed to initialize payment system. Please try again later.",
+          variant: "destructive",
+        });
+      }
+    };
+    
+    initializeSDK();
+  }, []);
 
   const creditPlans: CreditPlan[] = [
     { credits: 100, price: 199 },
@@ -93,34 +117,52 @@ export default function KAICredits() {
       return;
     }
 
+    if (!cashfreeSDK) {
+      toast({
+        title: "Error",
+        description: "Payment system is still initializing. Please try again in a moment.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsLoading(true);
 
     try {
+      // Step 1: Get payment session ID from backend
       const response = await axios.post('https://api.marketmynds.com/api/make-kai-credits-payment', {
+      // const response = await axios.post('http://127.0.0.1:5001/api/make-kai-credits-payment', {
         mobile: `+91${phoneNumber}`,
         email: email,
-        credits: selectedPlan.credits,
-        success_url: window.location.origin + '/kai-credits-payment-success',
-        failure_url: window.location.origin + '/kai-credits-payment-failed'
+        credits: selectedPlan.credits
       });
 
-      if (response.data.status === 'success') {
-        window.location.href = response.data.payment_url;
-      } else {
-        toast({
-          title: "Error",
-          description: response.data.message || "Something went wrong",
-          variant: "destructive",
-        });
+      // Step 2: Check if we received a valid payment session ID
+      if (!response.data.data) {
+        throw new Error("No payment session ID received");
       }
+      
+      const paymentSessionId = response.data.data;
+      console.log("Payment session ID:", paymentSessionId);
+      
+      // Step 3: Configure checkout options
+      const checkoutOptions = {
+        paymentSessionId: paymentSessionId,
+        redirectTarget: "_self", // Load in the same window
+      };
+      
+      // Step 4: Trigger Cashfree checkout
+      cashfreeSDK.checkout(checkoutOptions);
+      
     } catch (error) {
+      console.error("Payment error:", error);
+      setIsLoading(false);
+      
       toast({
         title: "Error",
-        description: "Failed to initiate payment",
+        description: error.response?.data?.message || "Failed to initiate payment. Please try again.",
         variant: "destructive",
       });
-    } finally {
-      setIsLoading(false);
     }
   };
 
