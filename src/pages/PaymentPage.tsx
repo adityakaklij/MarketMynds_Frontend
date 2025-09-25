@@ -142,8 +142,8 @@ export default function PaymentPage() {
     const initializeSDK = async () => {
       try {
         const cfSDK = await load({
-          mode: "sandbox" // Use production mode
-          // mode: "production" // Use production mode
+          // mode: "sandbox" // Use production mode
+          mode: "production" // Use production mode
         });
         setCashfreeSDK(cfSDK);
       } catch (error) {
