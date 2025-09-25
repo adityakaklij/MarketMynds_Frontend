@@ -49,7 +49,7 @@ export default function Terms() {
             
             <div className="space-y-4">
               <h2 className="text-xl font-semibold text-finance-green">Pricing Disclaimer</h2>
-              <p>● The ₹54/month rate is an effective monthly cost based on the annual subscription price of ₹649.</p>
+              <p>● The ~₹74/month rate is an effective monthly cost based on the annual subscription price of ₹649.</p>
               <p>● Monthly billing is not available at this rate.</p>
             </div>
             

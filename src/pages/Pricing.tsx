@@ -54,7 +54,7 @@ const plans: Plan[] = [
   
   {
     title: "1 Year",
-    price: 649,
+    price: 849,
     originalPrice: 1399,
     description: "Full access for 1 year. Includes 100 KAI credits.",
     bonus: true,
@@ -62,8 +62,8 @@ const plans: Plan[] = [
   },
   {
     title: "6 Months",
-    price: 449,
-    originalPrice: 749,
+    price: 649,
+    originalPrice: 849,
     description: "Full access for 6 months. Includes 50 KAI credits.",
     bonus: false,
     planId: "3"
@@ -77,8 +77,8 @@ const plans: Plan[] = [
   // },
   {
     title: "3 Months",
-    price: 349,
-    originalPrice: 449,
+    price: 449,
+    originalPrice: 649,
     description: "Full access for 3 months. Includes 20 KAI credits.",
     bonus: false,
     planId: "2"
@@ -325,7 +325,7 @@ export default function Pricing() {
                 <div className="flex items-center gap-2 mb-2">
                   <BadgeIndianRupee className="text-finance-green" />
                   <span className="text-2xl font-semibold">{plan.title}</span>
-                  <span className="ml-2 px-2 py-1 rounded bg-finance-green/10 text-finance-green text-xs font-medium">Save 54%</span>
+                  <span className="ml-2 px-2 py-1 rounded bg-finance-green/10 text-finance-green text-xs font-medium">Save 39%</span>
                 </div>
                 
                 {plan.originalPrice && (
@@ -372,7 +372,7 @@ export default function Pricing() {
                 <BadgeIndianRupee className="text-finance-green" />
                 <span className="text-2xl font-semibold">{plan.title}</span>
                 {plan.bonus && plan.title !== "1 Year" && (
-                  <span className="ml-2 px-2 py-1 rounded bg-finance-green/10 text-finance-green text-xs font-medium">Save 54%</span>
+                  <span className="ml-2 px-2 py-1 rounded bg-finance-green/10 text-finance-green text-xs font-medium">Save 39%</span>
                 )}
               </div>
               {plan.originalPrice ? (

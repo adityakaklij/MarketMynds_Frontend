@@ -266,7 +266,7 @@ export function HeroSection() {
           
           <p className="mt-6 text-base md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
             {/* No opinions. No hype. Just a crisp morning snapshot of what's moving markets global and local. */}
-            Get India's smartest pre-market report delivered to your WhatsApp by 8 AM. Start now for as low as 54/Month*.
+            Get India's smartest pre-market report delivered to your WhatsApp by 8 AM. Start now for as low as ~70/Month*.
             {/* Get India's smartest pre-market report delivered to your WhatsApp by 8 AM. Starting at just ₹99/month. */}
           </p>
           
