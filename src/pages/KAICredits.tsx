@@ -305,7 +305,7 @@ export default function KAICredits() {
               </Button>
               
               <div className="text-center text-sm text-gray-400">
-                <p className="mt-2">Need help? <a href="https://wa.me/+918062960996" target="_blank" rel="noopener noreferrer" className="text-finance-green hover:underline">Contact support</a></p>
+                <p className="mt-2">Need help? <a href="https://wa.me/+919307202438" target="_blank" rel="noopener noreferrer" className="text-finance-green hover:underline">Contact support</a></p>
               </div>
             </div>
           </div>

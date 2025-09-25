@@ -126,7 +126,7 @@ export default function KAICreditsPaymentFailed() {
               </div>
 
               <p className="text-gray-400 text-sm mt-6">
-                Need help? <a href="https://wa.me/+918062960996" target="_blank" rel="noopener noreferrer" className="text-finance-green hover:underline">Contact our support team</a>
+                Need help? <a href="https://wa.me/+919307202438" target="_blank" rel="noopener noreferrer" className="text-finance-green hover:underline">Contact our support team</a>
               </p>
             </div>
           </div>
