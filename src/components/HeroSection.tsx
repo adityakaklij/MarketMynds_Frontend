@@ -242,10 +242,12 @@ export function HeroSection() {
             <span className="block relative">
             
             {/* Start Your Trading Day Smarter. */}
-            90% of Traders Lose Money.
+            {/* 90% of Traders Lose Money. */}
+            Market moves fast
               <span className="absolute -bottom-2 left-1/2 w-20 h-1 bg-finance-green/80 transform -translate-x-1/2 rounded-full"></span>
             </span>
-            <span className="block mt-4">Trade Smart-
+            <span className="block mt-4">
+              <span>let </span>
               <span 
                 className="relative"
                 style={{
@@ -259,8 +261,10 @@ export function HeroSection() {
                 }}
               >
                 {/* Before 9 AM. */}
-                With AI.
+                {/* With AI. */}
+                AI brief
               </span>
+              <span> you in one PDF.</span>
             </span>
           </h1>
           
