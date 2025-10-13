@@ -15,7 +15,7 @@ export function WhatsAppBotSection() {
 
   // Sample conversation
   const conversation = [
-    { id: 1, text: "Hi, I want to check HDFC Bank analysis", isBot: false },
+    { id: 1, text: "Hi, I want to check HDFC Bank.", isBot: false },
     { 
       id: 2, 
       text: "📊 *HDFC Bank Summary* 📊\n\n*Technical Indicators:*\n• Current Price: ₹1,642\n• 50 DMA: ₹1,610 (Above)\n• 200 DMA: ₹1,580 (Above)\n• RSI: 58 (Neutral)\n• MACD: Positive crossover\n\n*Key Support & Resistance:*\n• Support: ₹1,620, ₹1,595\n• Resistance: ₹1,665, ₹1,680\n\n*Recent News:*\nQ2 Results: Net profit up 35% YoY\nExpanding digital banking initiatives", 
@@ -149,7 +149,7 @@ export function WhatsAppBotSection() {
                 </div>
               </div>
               <div className="ml-4">
-                <h3 className="text-xl font-semibold text-white">Real-time Market Data                </h3>
+                <h3 className="text-xl font-semibold text-white">Market Data                </h3>
                 <p className="text-gray-300 mt-1">Access technical indicators, support and resistance levels in a simple, easy-to-read format.</p>
               </div>
             </div>
