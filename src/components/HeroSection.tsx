@@ -346,12 +346,20 @@ export function HeroSection() {
               <p className="text-sm text-gray-400">Data Points</p>
             </div>
           </div>
+
+          {/* Disclaimer */}
+          <div className="mt-8 max-w-2xl mx-auto text-center">
+            <p className="text-xs text-gray-400">
+              MarketMynds provides market information for educational purposes only and is not registered with SEBI to provide investment advice.
+            </p>
+          </div>
         </div>
       </div>
 
       {/* Add the keyframes as a global style */}
       <style dangerouslySetInnerHTML={{ __html: animations }} />
     </div>
+
   );
 }
 

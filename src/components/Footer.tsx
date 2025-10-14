@@ -76,7 +76,7 @@ export function Footer() {
         
         <div className="mt-8">
           <p className="text-xs text-gray-500 text-center">
-            Disclaimer: Market Mynds is not a tips provider. The report is for informational purposes only and not investment advice. Read *Terms of Service
+            Disclaimer: MarketMynds provides market information for educational purposes only and is not registered with SEBI to provide investment advice. Read *Terms of Service
           </p>
         </div>
       </div>

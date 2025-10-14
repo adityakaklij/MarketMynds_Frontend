@@ -26,7 +26,7 @@ const Index = () => {
       <TestimonialsSection />
       {/* <SubscriptionCTA /> */}
       <Pricing/>
-      <ReferEarnSection />
+      {/* <ReferEarnSection /> */}
       <Footer />
     </div>
   );

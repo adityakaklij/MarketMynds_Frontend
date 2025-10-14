@@ -183,7 +183,7 @@ export function ReportPreviewSection() {
             className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-gray-800 cursor-pointer hover:border-finance-green/50 transition-all"
             onClick={scrollToPreview}
           >
-            <h4 className="text-xl font-semibold text-white mb-4">Fear and Greed Index</h4>
+            <h4 className="text-xl font-semibold text-white mb-4">Fear and Greed Info</h4>
             <div className="flex flex-col items-center justify-center p-4 bg-gray-800/50 rounded-lg">
               <img 
                 src="/images/MMI.png" 
