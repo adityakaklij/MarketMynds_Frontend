@@ -13,6 +13,7 @@ export function Navbar() {
     { label: "Pricing", href: "#pricing", isAnchor: true },
     { label: "Contact", href: "/contact", isAnchor: false },
     { label: "Love ❤️", href: "#testimonials", isAnchor: true },
+    { label: "Disclaimer", href: "/disclaimer", isAnchor: false },
   ];
 
   const downloadSampleReport = () => {
