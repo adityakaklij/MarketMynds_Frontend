@@ -192,7 +192,13 @@ export default function Upgrade() {
         const newDiscountedPrice = response.data.data.final_amount || 0;
         setDiscountedPrice(newDiscountedPrice);
         setDiscountPercentage(response.data.data.discount_percentage);
-        setCouponSuccess(`Coupon applied successfully! (${response.data.data.discount_percentage}% off)`);
+        
+        if (response.data.data.discount_percentage === 100) {
+          // Special handling for 100% off coupons
+          setCouponSuccess(`Coupon applied successfully! (100% off - FREE)`);
+        } else {
+          setCouponSuccess(`Coupon applied successfully! (${response.data.data.discount_percentage}% off)`);
+        }
       } else {
         setCouponError(response.data.message || "Invalid coupon");
         setDiscountedPrice(0);
@@ -216,19 +222,78 @@ export default function Upgrade() {
     if (validateForm()) {
       setProcessingPayment(true);
 
+      // Get final price after any discounts
+      const finalPrice = discountedPrice > 0 ? discountedPrice : selectedPlan.price;
+      
+      // Check if this is a 100% discount (free)
+      const isFreeOrder = discountPercentage === 100 || finalPrice === 0;
+
       // Event Events.
       window.dataLayer.push({
         event: 'add_payment_info',
         ecommerce: {
-          payment_type: 'Online Payment',
+          payment_type: isFreeOrder ? 'Free (Coupon)' : 'Online Payment',
           items: [{
             item_name: selectedPlan.title,
             item_category: 'Subscription Plan',
-            price: discountedPrice > 0 ? discountedPrice : selectedPlan.price
+            price: finalPrice
           }]
         }
       });
     
+      // Handle 100% discount case separately
+      if (isFreeOrder) {
+        try {
+          const freeCouponResponse = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/process-free-coupon`, {
+            name: name,
+            email: email,
+            mobile: whatsappNumber,
+            coupon_code: couponCode,
+            plan: selectedPlan.planId,
+            state: "" // No state field in Upgrade form, send empty
+          }, {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          
+          if (freeCouponResponse.data.status === "success") {
+            // Free coupon successfully processed
+            const transactionId = freeCouponResponse.data.data.transaction_id;
+            const planName = freeCouponResponse.data.data.plan_name;
+            
+            // Construct URL params for success page
+            const successParams = new URLSearchParams({
+              payment_id: transactionId,
+              amount: "0",
+              plan: planName || selectedPlan.title || "Subscription"
+            }).toString();
+            
+            // Redirect to success page
+            window.location.href = `/payment-success?${successParams}`;
+          } else {
+            // Error in processing free coupon
+            throw new Error(freeCouponResponse.data.message || "Free coupon processing failed");
+          }
+        } catch (error) {
+          console.error("Free coupon processing error:", error);
+          
+          // Show specific error message from API if available
+          let errorMessage = "Free coupon processing failed. Please try again or contact support.";
+          if (error.response && error.response.data && error.response.data.message) {
+            errorMessage = error.response.data.message;
+          } else if (error.message) {
+            errorMessage = error.message;
+          }
+          
+          alert(errorMessage);
+        } finally {
+          setProcessingPayment(false);
+        }
+        return; // Exit early for free orders
+      }
+      
+      // Normal payment flow for non-free orders
       // Get referral code from state (which was populated from localStorage)
       const refCode = referralCode || '';
 
@@ -238,16 +303,16 @@ export default function Upgrade() {
           email: email,
           mobile: whatsappNumber,
           plan: selectedPlan.planId,
-          amount: discountedPrice > 0 ? discountedPrice : selectedPlan.price,
+          amount: finalPrice,
           referralCode: refCode, // Send referral code with payment data
-          couponCode: couponSuccess ? couponCode : "", // Send coupon code only if it was successfully applied
+          couponCode: couponSuccess ? couponCode : "" // Send coupon code only if it was successfully applied
         },
         {
           headers: {
             'Content-Type': 'application/json'
           }
         });
-
+        
         if (makePayment.data.data?.redirect_url) {
           window.location.href = makePayment.data.data.redirect_url;
         } else {
@@ -343,8 +408,12 @@ export default function Upgrade() {
                     <span className="text-2xl font-bold text-gray-400">₹{selectedPlan?.price}</span>
                     <span className="absolute top-1/2 left-0 right-0 h-0.5 bg-red-500 transform -rotate-12"></span>
                   </div>
-                  <span className="text-3xl font-extrabold text-finance-green">₹{discountedPrice}</span>
-                  <span className="text-xs font-medium bg-finance-green/10 text-finance-green py-0.5 px-2 rounded-full">
+                  {discountPercentage === 100 ? (
+                    <span className="text-3xl font-extrabold text-finance-green animate-pulse">FREE</span>
+                  ) : (
+                    <span className="text-3xl font-extrabold text-finance-green">₹{discountedPrice}</span>
+                  )}
+                  <span className={`text-xs font-medium ${discountPercentage === 100 ? 'bg-finance-green/20' : 'bg-finance-green/10'} text-finance-green py-0.5 px-2 rounded-full`}>
                     {discountPercentage}% OFF
                   </span>
                 </div>
@@ -479,9 +548,12 @@ export default function Upgrade() {
                     </div>
                   )}
                   {couponSuccess && (
-                    <div className="text-green-500 text-xs mt-1 flex items-center">
+                    <div className={`${discountPercentage === 100 ? "text-finance-green font-medium" : "text-green-500"} text-xs mt-1 flex items-center`}>
                       <Sparkles className="h-3 w-3 mr-1" />
-                      Coupon applied successfully!
+                      {discountPercentage === 100 
+                        ? "100% discount applied! You'll get free access." 
+                        : "Coupon applied successfully!"
+                      }
                     </div>
                   )}
                 </>
@@ -512,7 +584,7 @@ export default function Upgrade() {
                   Processing Payment...
                 </div>
               ) : (
-                `Make Payment${discountedPrice > 0 ? ` - ₹${discountedPrice}` : ''}`
+                discountPercentage === 100 ? "Get Free Access" : `Make Payment${discountedPrice > 0 && discountPercentage !== 100 ? ` - ₹${discountedPrice}` : ''}`
               )}
             </Button>
           </DialogFooter>

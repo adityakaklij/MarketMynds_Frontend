@@ -235,7 +235,13 @@ export default function PaymentPage() {
         const newDiscountedPrice = response.data.data.final_amount || 0;
         setDiscountedPrice(newDiscountedPrice);
         setDiscountPercentage(response.data.data.discount_percentage);
-        setCouponSuccess(`Coupon applied successfully! (${response.data.data.discount_percentage}% off)`);
+        
+        if (response.data.data.discount_percentage === 100) {
+          // Special handling for 100% off coupons
+          setCouponSuccess(`Coupon applied successfully! (100% off - FREE)`);
+        } else {
+          setCouponSuccess(`Coupon applied successfully! (${response.data.data.discount_percentage}% off)`);
+        }
       } else {
         setCouponError(response.data.message || "Invalid coupon");
         setDiscountedPrice(0);
@@ -269,20 +275,80 @@ export default function PaymentPage() {
     try {
       setProcessingPayment(true);
 
+      // Get final price after any discounts
+      const finalPrice = discountedPrice > 0 ? discountedPrice : planData?.price;
+      
+      // Check if this is a 100% discount (free)
+      const isFreeOrder = discountPercentage === 100 || finalPrice === 0;
+
       // Event tracking
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event: 'add_payment_info',
         ecommerce: {
-          payment_type: 'Online Payment',
+          payment_type: isFreeOrder ? 'Free (Coupon)' : 'Online Payment',
           items: [{
             item_name: planData?.title,
             item_category: 'Subscription Plan',
-            price: discountedPrice > 0 ? discountedPrice : planData?.price
+            price: finalPrice
           }]
         }
       });
-    
+
+      // Handle 100% discount case separately
+      if (isFreeOrder) {
+        // For 100% discount orders, call the free coupon API
+        try {
+          const freeCouponResponse = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/process-free-coupon`, {
+            name: name,
+            email: email,
+            mobile: whatsappNumber,
+            coupon_code: couponCode,
+            plan: planData?.planId,
+            state: state
+          }, {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          
+          if (freeCouponResponse.data.status === "success") {
+            // Free coupon successfully processed
+            const transactionId = freeCouponResponse.data.data.transaction_id;
+            const planName = freeCouponResponse.data.data.plan_name;
+            
+            // Construct URL params for success page
+            const successParams = new URLSearchParams({
+              payment_id: transactionId,
+              amount: "0",
+              plan: planName || planData?.title || "Subscription"
+            }).toString();
+            
+            // Redirect to success page
+            navigate(`/payment-success?${successParams}`);
+          } else {
+            // Error in processing free coupon
+            throw new Error(freeCouponResponse.data.message || "Free coupon processing failed");
+          }
+        } catch (error) {
+          console.error("Free coupon processing error:", error);
+          
+          // Show specific error message from API if available
+          let errorMessage = "Free coupon processing failed. Please try again or contact support.";
+          if (error.response && error.response.data && error.response.data.message) {
+            errorMessage = error.response.data.message;
+          } else if (error.message) {
+            errorMessage = error.message;
+          }
+          
+          alert(errorMessage);
+        }
+        
+        setProcessingPayment(false);
+        return; // Exit early for free orders
+      }
+      
+      // Normal payment flow for non-free orders
       // Get referral code from state
       const refCode = referralCode || '';
 
@@ -293,9 +359,9 @@ export default function PaymentPage() {
         mobile: whatsappNumber,
         state: state,
         plan: planData?.planId,
-        amount: discountedPrice > 0 ? discountedPrice : planData?.price,
+        amount: finalPrice,
         referralCode: refCode, 
-        couponCode: couponSuccess ? couponCode : "",
+        couponCode: couponSuccess ? couponCode : ""
       }, {
         headers: {
           'Content-Type': 'application/json'
@@ -388,8 +454,12 @@ export default function PaymentPage() {
                     <span className="text-xl font-bold text-gray-400">₹{planData.price}</span>
                     <span className="absolute top-1/2 left-0 right-0 h-0.5 bg-red-500 transform -rotate-12"></span>
                   </div>
-                  <span className="text-2xl font-extrabold text-finance-green">₹{discountedPrice}</span>
-                  <span className="text-xs font-medium bg-finance-green/10 text-finance-green py-0.5 px-2 rounded-full">
+                  {discountPercentage === 100 ? (
+                    <span className="text-2xl font-extrabold text-finance-green animate-pulse">FREE</span>
+                  ) : (
+                    <span className="text-2xl font-extrabold text-finance-green">₹{discountedPrice}</span>
+                  )}
+                  <span className={`text-xs font-medium ${discountPercentage === 100 ? 'bg-finance-green/20' : 'bg-finance-green/10'} text-finance-green py-0.5 px-2 rounded-full`}>
                     {discountPercentage}% OFF
                   </span>
                 </div>
@@ -602,9 +672,12 @@ export default function PaymentPage() {
                     </div>
                   )}
                   {couponSuccess && (
-                    <div className="text-green-500 text-xs mt-1 flex items-center">
+                    <div className={`${discountPercentage === 100 ? "text-finance-green font-medium" : "text-green-500"} text-xs mt-1 flex items-center`}>
                       <Sparkles className="h-3 w-3 mr-1" />
-                      Coupon applied successfully!
+                      {discountPercentage === 100 
+                        ? "100% discount applied! You'll get free access." 
+                        : "Coupon applied successfully!"
+                      }
                     </div>
                   )}
                 </>
@@ -661,10 +734,10 @@ export default function PaymentPage() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    Processing Payment...
+                    {discountPercentage === 100 ? "Processing Order..." : "Processing Payment..."}
                   </div>
                 ) : (
-                  `Pay ₹${discountedPrice > 0 ? discountedPrice : planData.price}`
+                  discountPercentage === 100 ? "Get Free Access" : `Pay ₹${discountedPrice > 0 ? discountedPrice : planData.price}`
                 )}
               </Button>
               
