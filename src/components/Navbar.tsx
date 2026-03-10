@@ -88,6 +88,18 @@ export function Navbar() {
                 Subscribe Now
               </Button>
             </a>
+            <a href="https://pro.marketmynds.com" target="_blank">
+              <Button
+                variant="default"
+                className="bg-finance-green text-black hover:bg-finance-green/90 font-medium ml-2"
+                // onClick={(e) => {
+                //     e.preventDefault();
+                //     window.location.href = 'https://pro.marketmynds.com';
+                // }}
+              >
+                Visit MarketMynds PRO
+              </Button>
+            </a>
           </div>
           <div className="md:hidden">
             <button
